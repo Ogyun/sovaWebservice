@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SovaApp", "SovaApp.csproj", "{6A63F61C-94A6-4616-AB8B-E4BBBA615686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServiceLayer", "WebServiceLayer.csproj", "{6A63F61C-94A6-4616-AB8B-E4BBBA615686}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\DataAccessLayer\DataAccessLayer.csproj", "{19BD767D-5D8D-490A-A115-E8CCFDAC6203}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6A63F61C-94A6-4616-AB8B-E4BBBA615686}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A63F61C-94A6-4616-AB8B-E4BBBA615686}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A63F61C-94A6-4616-AB8B-E4BBBA615686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BD767D-5D8D-490A-A115-E8CCFDAC6203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BD767D-5D8D-490A-A115-E8CCFDAC6203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BD767D-5D8D-490A-A115-E8CCFDAC6203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BD767D-5D8D-490A-A115-E8CCFDAC6203}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
