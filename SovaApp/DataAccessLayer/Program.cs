@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using System;
 
 namespace DataAccessLayer
 {
@@ -6,10 +8,15 @@ namespace DataAccessLayer
     {
         static void Main(string[] args)
         {
-            var context = new SovaDbContext();
+            using var context = new SovaDbContext();
 
-            var connectionTest = context.Database.CanConnect();
-            Console.WriteLine("Connected: " + connectionTest);
+            var searchService = new SearchService();
+            var result = searchService.SearchByKeyword("c#");
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+                 
         }
     }
 }
