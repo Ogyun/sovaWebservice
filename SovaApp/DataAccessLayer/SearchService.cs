@@ -35,12 +35,11 @@ namespace DataAccessLayer
             return ListResults(result);
         }
 
-        public List<SearchResult> SearchByAcceptedAnswer(Boolean accepted)
+        public List<Question> SearchByAcceptedAnswer(Boolean accepted)
         {
             using var db = new  SovaDbContext();
-            if(accepted) { var result = db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is not null"); }
-            else{ var result = db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null"); }
-            return ListQuestions(result);
+            if(accepted) { return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is not null")); }
+            return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null")); 
         }
 
         private List<SearchResult> ListResults(IQueryable<SearchResult> result)
