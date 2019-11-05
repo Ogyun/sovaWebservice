@@ -8,7 +8,7 @@ namespace WebServiceTests
     public class DataServiceTests
     {
         [Fact]
-        public void SearchFunctionTest()
+        public void SearchByKeywordTest()
         {
             var service = new SearchService();
             var search = service.SearchByKeyword("c#","constructors");
