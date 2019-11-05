@@ -38,5 +38,11 @@ namespace DataAccessLayer
             using var db = new SovaDbContext();
             return db.Questions.Find(questionId);    
         }
+
+        public Answer GetAnswerById(int answerId)
+        {
+            using var db = new SovaDbContext();
+            return db.Answers.Find(answerId);
+        }
     }
 }

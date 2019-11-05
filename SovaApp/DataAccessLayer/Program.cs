@@ -11,7 +11,7 @@ namespace DataAccessLayer
             using var context = new SovaDbContext();
 
             var searchService = new SearchService();
-            var result = searchService.GetQuestionById(18830964);
+            var result = searchService.GetAnswerById(71);
             Console.WriteLine(result.Body);
                  
         }

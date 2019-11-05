@@ -11,6 +11,7 @@ namespace DataAccessLayer
         public DbQuery<SearchResult> SearchResults { get; set; }
 
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -39,6 +40,15 @@ namespace DataAccessLayer
             modelBuilder.Entity<Question>().Property(m => m.ClosedDate).HasColumnName("closeddate");
             modelBuilder.Entity<Question>().Property(m => m.Title).HasColumnName("title");
             modelBuilder.Entity<Question>().Property(m => m.UserId).HasColumnName("userid");
+
+            modelBuilder.Entity<Answer>().ToTable("answers");
+            modelBuilder.Entity<Answer>().Property(m => m.Id).HasColumnName("id");
+            modelBuilder.Entity<Answer>().Property(m => m.QuestionId).HasColumnName("questionid");
+            modelBuilder.Entity<Answer>().Property(m => m.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Entity<Answer>().Property(m => m.Score).HasColumnName("score");
+            modelBuilder.Entity<Answer>().Property(m => m.Body).HasColumnName("body");
+            modelBuilder.Entity<Answer>().Property(m => m.UserId).HasColumnName("userid");
+
 
         }
 
