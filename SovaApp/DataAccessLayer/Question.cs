@@ -19,11 +19,13 @@ namespace DataAccessLayer
         public String Title { get; set; }
         
         public int UserId { get; set; }
+        
+        public String? Tag { get; set; }
 
         public override string ToString()
         {
             return "Id:" + Id + " Accepted Answer Id:" + AcceptedAnswerId + " Creation Date:" + CreationDate + " Score:" + Score + " Body:" + Body
-                + " Closed Date:" + ClosedDate + " Title:" + Title + " User Id:" + UserId;
+                + " Closed Date:" + ClosedDate + " Title:" + Title + " User Id:" + UserId + " Tag:" + Tag;
         }
     }
 }
