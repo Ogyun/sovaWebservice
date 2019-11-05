@@ -45,6 +45,20 @@ namespace DataAccessLayer
             return ListQuestions(result);
         }
 
+        public List<SearchResult> SearchByScore(int fromScore, int toScore)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
+            return ListResults(result);
+        }
+
+        public List<SearchResult> SearchByUsername(string username)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchResults.FromSqlRaw("select * from search_by_username(" + username + ")");
+            return ListResults(result);
+        }
+
         private List<SearchResult> ListResults(IQueryable<SearchResult> result)
         {
             var searchResultList = new List<SearchResult>();
@@ -56,7 +70,11 @@ namespace DataAccessLayer
                     PostId = item.PostId,
                     Type = item.Type,
                     Rank = item.Rank,
-                    Body = item.Body
+                    Body = item.Body,
+                    CreationDate = item.CreationDate,
+                    Score = item.Score,
+                    UserId = item.UserId,
+                    Username = item.Username
                 };
                 searchResultList.Add(searchResult);
             }
@@ -73,6 +91,16 @@ namespace DataAccessLayer
         {
             using var db = new SovaDbContext();
             return db.Answers.Find(answerId);
+        }
+
+        public void DeleteHistory(string search)
+        {
+            using var db = new SovaDbContext();
+            var searchHistory = new SearchHistory();
+            var email = searchHistory.Email;
+            if (search == email) { var result = db.SearchHistories.FromSqlRaw("select delete_history({0})",search); }
+            else { Console.WriteLine("no such email"); }
+            
         }
         
         private List<Question> ListQuestions(IQueryable<Question> result)

@@ -10,6 +10,7 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public AppUser User { get; set; }
+        public string Email { get => User.Email; }
         public DateTime SearchDate { get; set; }
         public string SearchText { get; set; }
     }
