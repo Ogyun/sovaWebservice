@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAcce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServiceLayer", "WebServiceLayer\WebServiceLayer.csproj", "{5578906C-9EA8-4999-88BC-6906189DBEA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceTests", "WebServiceTests\WebServiceTests.csproj", "{5B27BF10-8176-4566-B244-D9E059BB3044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "WebServiceTests\Tests.csproj", "{5B27BF10-8176-4566-B244-D9E059BB3044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
