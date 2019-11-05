@@ -13,12 +13,12 @@ namespace DataAccessLayer
         public DateTime? CreationDate { get; set; }
         public int? Score { get; set; }
         public int? UserId { get; set; }
-        
+        public String? Username  { get; set; }
 
         public override string ToString()
         {
             return "PostId:" + PostId + " Rank:" + Rank + " Type:" + Type + " Body:" + Body + " Creation Date: " + CreationDate + " Score: " + Score
-                + " User Id: " + UserId;
+                + " User Id: " + UserId + " Username: " + Username;
         }
     }
 }
