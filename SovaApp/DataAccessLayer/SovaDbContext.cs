@@ -12,7 +12,8 @@ namespace DataAccessLayer
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<SearchHistory> SearchHistories { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -51,6 +52,7 @@ namespace DataAccessLayer
             modelBuilder.Entity<Answer>().Property(m => m.UserId).HasColumnName("userid");
 
             modelBuilder.Entity<AppUser>().ToTable("app_users");
+            modelBuilder.Entity<AppUser>().HasKey(m => m.Email);
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("email");
             modelBuilder.Entity<AppUser>().Property(m => m.Password).HasColumnName("password");
             modelBuilder.Entity<AppUser>().Property(m => m.Name).HasColumnName("name");
@@ -58,14 +60,12 @@ namespace DataAccessLayer
             modelBuilder.Entity<AppUser>().Property(m => m.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("location");
 
-            modelBuilder.Entity<SearchHistory>().ToTable("search_history");
-            modelBuilder.Entity<SearchHistory>().Property(m => m.Id).HasColumnName("searchid");
-            modelBuilder.Entity<SearchHistory>().Property(m => m.Email).HasColumnName("useremail");
-            modelBuilder.Entity<SearchHistory>().Property(m => m.SearchDate).HasColumnName("searchdate");
-            modelBuilder.Entity<SearchHistory>().Property(m => m.SearchText).HasColumnName("searchtext");
 
-
-
+            modelBuilder.Entity<Note>().ToTable("notes");
+            modelBuilder.Entity<Note>().HasKey(m => new { m.UserEmail, m.QuestionId});
+            modelBuilder.Entity<Note>().Property(m => m.UserEmail).HasColumnName("useremail");
+            modelBuilder.Entity<Note>().Property(m => m.Notetext).HasColumnName("notetext");
+            modelBuilder.Entity<Note>().Property(m => m.QuestionId).HasColumnName("questionid");
         }
 
     }

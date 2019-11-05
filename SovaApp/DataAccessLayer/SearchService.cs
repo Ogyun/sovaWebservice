@@ -11,12 +11,7 @@ namespace DataAccessLayer
         public List<SearchResult> SearchByKeyword(params string[] keywords)
         {
             using var db = new SovaDbContext();
-            var s = "";
-            foreach (var elem in keywords)
-            {
-                s += "'" + elem + "',";
-            }
-            s = s.Remove(s.Length - 1);
+            var s = BuildStringFromParams(keywords);
             var result = db.SearchResults.FromSqlRaw("select * from best_match(" + s + ")");
 //            var searchResultList = new List<SearchResult>();
 //            SearchResult searchResult;
@@ -42,6 +37,28 @@ namespace DataAccessLayer
             return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null")); 
         }
 
+        public List<Question> SearchByTag(params string[] tags)
+        {
+            using var db = new SovaDbContext();
+            var s = BuildStringFromParams(tags);
+            var result = db.Questions.FromSqlRaw("select * from search_by_tags(" + s + ")");
+            return ListQuestions(result);
+        }
+
+        public List<SearchResult> SearchByScore(int fromScore, int toScore)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
+            return ListResults(result);
+        }
+
+        public List<SearchResult> SearchByUsername(string username)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchResults.FromSqlRaw("select * from search_by_username(" + username + ")");
+            return ListResults(result);
+        }
+
         private List<SearchResult> ListResults(IQueryable<SearchResult> result)
         {
             var searchResultList = new List<SearchResult>();
@@ -53,7 +70,11 @@ namespace DataAccessLayer
                     PostId = item.PostId,
                     Type = item.Type,
                     Rank = item.Rank,
-                    Body = item.Body
+                    Body = item.Body,
+                    CreationDate = item.CreationDate,
+                    Score = item.Score,
+                    UserId = item.UserId,
+                    Username = item.Username
                 };
                 searchResultList.Add(searchResult);
             }
@@ -96,11 +117,23 @@ namespace DataAccessLayer
                     Body = item.Body,
                     ClosedDate = item.ClosedDate,
                     Title = item.Title,
-                    UserId = item.UserId
+                    UserId = item.UserId,
+                    Tag = item.Tag
                 };
                 searchResultList.Add(searchResult);
             }
             return searchResultList;
+        }
+
+        private String BuildStringFromParams(string[] words)
+        {
+            var s = "";
+            foreach (var elem in words)
+            {
+                s += "'" + elem + "',";
+            }
+            s = s.Remove(s.Length - 1);
+            return s;
         }
     }
 }

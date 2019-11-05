@@ -8,7 +8,7 @@ namespace WebServiceTests
     public class DataServiceTests
     {
         [Fact]
-        public void SearchFunctionTest()
+        public void SearchByKeywordTest()
         {
             var service = new SearchService();
             var search = service.SearchByKeyword("c#","constructors");
@@ -36,6 +36,16 @@ namespace WebServiceTests
             Assert.Equal("2008-08-01 13:38:00", answer.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
             Assert.Equal(19, answer.QuestionId);         
 
+        }
+        [Fact]
+        public void CreateNoteTest()
+        {
+            var note = new Note() { UserEmail = "i@mail.com", Notetext = "testnote", QuestionId = 18830964 };
+            var service = new NoteService();
+            var result = service.CreateNote(note);
+            Assert.Equal("i@mail.com", result.UserEmail);
+            Assert.Equal("testnote", result.Notetext);
+            Assert.Equal(18830964, result.QuestionId);
         }
 
     }
