@@ -12,6 +12,7 @@ namespace DataAccessLayer
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<SearchHistory> SearchHistories { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -56,6 +57,14 @@ namespace DataAccessLayer
             modelBuilder.Entity<AppUser>().Property(m => m.DateOfBirth).HasColumnName("dateofbirth");
             modelBuilder.Entity<AppUser>().Property(m => m.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("location");
+
+            modelBuilder.Entity<SearchHistory>().ToTable("search_history");
+            modelBuilder.Entity<SearchHistory>().Property(m => m.Id).HasColumnName("searchid");
+            modelBuilder.Entity<SearchHistory>().Property(m => m.Email).HasColumnName("useremail");
+            modelBuilder.Entity<SearchHistory>().Property(m => m.SearchDate).HasColumnName("searchdate");
+            modelBuilder.Entity<SearchHistory>().Property(m => m.SearchText).HasColumnName("searchtext");
+
+
 
         }
 
