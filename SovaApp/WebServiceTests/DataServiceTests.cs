@@ -5,7 +5,7 @@ using Xunit;
 
 namespace WebServiceTests
 {
-    public class UnitTest1
+    public class DataServiceTests
     {
         [Fact]
         public void SearchFunctionTest()
