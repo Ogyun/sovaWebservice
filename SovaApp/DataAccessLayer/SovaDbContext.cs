@@ -14,6 +14,7 @@ namespace DataAccessLayer
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<Marking> Markings { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -66,6 +67,12 @@ namespace DataAccessLayer
             modelBuilder.Entity<Note>().Property(m => m.UserEmail).HasColumnName("useremail");
             modelBuilder.Entity<Note>().Property(m => m.Notetext).HasColumnName("notetext");
             modelBuilder.Entity<Note>().Property(m => m.QuestionId).HasColumnName("questionid");
+
+            modelBuilder.Entity<Marking>().ToTable("markings");
+            modelBuilder.Entity<Marking>().HasKey(m => new { m.UserEmail, m.QuestionId });
+            modelBuilder.Entity<Marking>().Property(m => m.UserEmail).HasColumnName("useremail");
+            modelBuilder.Entity<Marking>().Property(m => m.QuestionId).HasColumnName("qid");
+
         }
 
     }
