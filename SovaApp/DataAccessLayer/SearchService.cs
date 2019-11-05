@@ -45,6 +45,13 @@ namespace DataAccessLayer
             return ListQuestions(result);
         }
 
+        public List<SearchResult> SearchByScore(int fromScore, int toScore)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
+            return ListResults(result);
+        }
+
         private List<SearchResult> ListResults(IQueryable<SearchResult> result)
         {
             var searchResultList = new List<SearchResult>();
