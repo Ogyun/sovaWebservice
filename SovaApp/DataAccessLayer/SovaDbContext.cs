@@ -13,6 +13,7 @@ namespace DataAccessLayer
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
@@ -51,6 +52,7 @@ namespace DataAccessLayer
             modelBuilder.Entity<Answer>().Property(m => m.UserId).HasColumnName("userid");
 
             modelBuilder.Entity<AppUser>().ToTable("app_users");
+            modelBuilder.Entity<AppUser>().HasKey(m => m.Email);
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("email");
             modelBuilder.Entity<AppUser>().Property(m => m.Password).HasColumnName("password");
             modelBuilder.Entity<AppUser>().Property(m => m.Name).HasColumnName("name");
@@ -58,6 +60,12 @@ namespace DataAccessLayer
             modelBuilder.Entity<AppUser>().Property(m => m.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("location");
 
+
+            modelBuilder.Entity<Note>().ToTable("notes");
+            modelBuilder.Entity<Note>().HasKey(m => new { m.UserEmail, m.QuestionId});
+            modelBuilder.Entity<Note>().Property(m => m.UserEmail).HasColumnName("useremail");
+            modelBuilder.Entity<Note>().Property(m => m.Notetext).HasColumnName("notetext");
+            modelBuilder.Entity<Note>().Property(m => m.QuestionId).HasColumnName("questionid");
         }
 
     }
