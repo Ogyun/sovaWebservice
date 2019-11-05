@@ -10,7 +10,13 @@ namespace DataAccessLayer
         public List<SearchResult> SearchByKeyword(params string[] keywords)
         {
             using var db = new SovaDbContext();
-            var result = db.SearchResults.FromSqlRaw("select * from best_match({0})", keywords);
+            var s = "";
+            foreach (var elem in keywords)
+            {
+                s += "'" + elem + "',";
+            }
+            s = s.Remove(s.Length - 1);
+            var result = db.SearchResults.FromSqlRaw("select * from best_match(" + s + ")");
             var searchResultList = new List<SearchResult>();
             SearchResult searchResult;
             foreach (var item in result)

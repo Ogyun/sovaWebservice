@@ -11,10 +11,11 @@ namespace DataAccessLayer
             using var context = new SovaDbContext();
 
             var searchService = new SearchService();
-            var result = searchService.SearchByKeyword("c#");
+            var result = searchService.SearchByKeyword("c#", "constructors");
             foreach (var item in result)
             {
                 Console.WriteLine(item.ToString());
+                Console.WriteLine("");
             }
                  
         }
