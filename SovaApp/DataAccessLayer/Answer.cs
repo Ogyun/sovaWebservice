@@ -4,7 +4,14 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    class Answer
+    public class Answer
     {
+        public int Id { get; set; }
+        public int QuestionId { get; set; }
+        public DateTime CreationDate { get; set; }
+        public int Score { get; set; }
+        public string Body { get; set; }
+        public int UserId { get; set; }
+
     }
 }

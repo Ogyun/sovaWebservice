@@ -10,6 +10,8 @@ namespace DataAccessLayer
     {
         public DbQuery<SearchResult> SearchResults { get; set; }
 
+        public DbSet<Question> Questions { get; set; }
+
         public static readonly ILoggerFactory MyLoggerFactory
            = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
@@ -27,6 +29,17 @@ namespace DataAccessLayer
             modelBuilder.Query<SearchResult>().Property(x => x.Rank).HasColumnName("rank");
             modelBuilder.Query<SearchResult>().Property(x => x.Type).HasColumnName("type");
             modelBuilder.Query<SearchResult>().Property(x => x.Body).HasColumnName("body");
+
+            modelBuilder.Entity<Question>().ToTable("questions");
+            modelBuilder.Entity<Question>().Property(m => m.Id).HasColumnName("id");
+            modelBuilder.Entity<Question>().Property(m => m.AcceptedAnswerId).HasColumnName("acceptedanswerid");
+            modelBuilder.Entity<Question>().Property(m => m.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Entity<Question>().Property(m => m.Score).HasColumnName("score");
+            modelBuilder.Entity<Question>().Property(m => m.Body).HasColumnName("body");
+            modelBuilder.Entity<Question>().Property(m => m.ClosedDate).HasColumnName("closeddate");
+            modelBuilder.Entity<Question>().Property(m => m.Title).HasColumnName("title");
+            modelBuilder.Entity<Question>().Property(m => m.UserId).HasColumnName("userid");
+
         }
 
     }
