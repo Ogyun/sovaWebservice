@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{FEE9B83E-9FD0-4971-84FD-91C9F0FCD662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{FEE9B83E-9FD0-4971-84FD-91C9F0FCD662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceLayer", "WebServiceLayer\WebServiceLayer.csproj", "{5578906C-9EA8-4999-88BC-6906189DBEA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServiceLayer", "WebServiceLayer\WebServiceLayer.csproj", "{5578906C-9EA8-4999-88BC-6906189DBEA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "WebServiceTests\Tests.csproj", "{5B27BF10-8176-4566-B244-D9E059BB3044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5578906C-9EA8-4999-88BC-6906189DBEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5578906C-9EA8-4999-88BC-6906189DBEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5578906C-9EA8-4999-88BC-6906189DBEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B27BF10-8176-4566-B244-D9E059BB3044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B27BF10-8176-4566-B244-D9E059BB3044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B27BF10-8176-4566-B244-D9E059BB3044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B27BF10-8176-4566-B244-D9E059BB3044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
