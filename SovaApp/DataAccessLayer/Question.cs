@@ -6,7 +6,7 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         
-        public int AcceptedAnswerId { get; set; }
+        public int? AcceptedAnswerId { get; set; }
         
         public DateTime CreationDate { get; set; }
         
