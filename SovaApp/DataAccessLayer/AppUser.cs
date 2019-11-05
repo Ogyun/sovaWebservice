@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    class AppUser
+    public class AppUser
     {
        
         public string Email { get; set; }
