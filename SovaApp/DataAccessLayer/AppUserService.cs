@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 
@@ -17,6 +18,12 @@ namespace DataAccessLayer
 
                 return appuser;
             }
+        }
+
+        public List<AppUser> GetAllUsers()
+        {
+            using var db = new SovaDbContext();
+            return db.AppUsers.ToList();
         }
 
         
