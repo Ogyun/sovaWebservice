@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using DataAccessLayer.Repositories;
 using System;
 using System.Linq;
 using Xunit;
@@ -19,7 +20,7 @@ namespace WebServiceTests
         [Fact]
         public void GetQuestionByIdTest()
         {
-            var service = new SearchService();
+            var service = new QuestionService();
             var question = service.GetQuestionById(18830964);
             Assert.Equal(2, question.Score);
             Assert.Equal("2013-09-16 14:49:26",question.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -30,7 +31,7 @@ namespace WebServiceTests
         [Fact]
         public void GetAnswerByIdTest()
         {
-            var service = new SearchService();
+            var service = new AnswerService();
             var answer = service.GetAnswerById(71);
             Assert.Equal(43, answer.Score);
             Assert.Equal("2008-08-01 13:38:00", answer.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));

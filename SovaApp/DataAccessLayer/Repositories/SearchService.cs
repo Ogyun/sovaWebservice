@@ -81,19 +81,8 @@ namespace DataAccessLayer
             return searchResultList;
         }
 
-        public Question GetQuestionById(int questionId)
-        {
-            using var db = new SovaDbContext();
-            return db.Questions.Find(questionId);    
-        }
 
-        public Answer GetAnswerById(int answerId)
-        {
-            using var db = new SovaDbContext();
-            return db.Answers.Find(answerId);
-        }
-
-        public bool DeleteHistory(string email)
+        public bool DeleteSearchHistory(string email)
         {
             bool deleted = false;
             bool match = false;
