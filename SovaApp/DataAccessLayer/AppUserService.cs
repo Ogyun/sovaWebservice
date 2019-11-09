@@ -26,7 +26,15 @@ namespace DataAccessLayer
             return db.AppUsers.ToList();
         }
 
-        
+        public int GetCount()
+        {
+            using (var db = new SovaDbContext())
+            {
+                return db.AppUsers.Count();
+            }
+        }
+
+
 
 
     }
