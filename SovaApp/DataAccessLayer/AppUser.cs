@@ -13,7 +13,8 @@ namespace DataAccessLayer
         public DateTime DateOfBirth { get; set; }
         public DateTime CreationDate { get; set; }
         public string Location { get; set; }
-       
+        public List<SearchHistory> SearchHistories { get; set; }
+
 
     }
 }

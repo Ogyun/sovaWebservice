@@ -93,14 +93,10 @@ namespace DataAccessLayer
             return db.Answers.Find(answerId);
         }
 
-        public void DeleteHistory(string search)
+        public void DeleteHistory(string email)
         {
             using var db = new SovaDbContext();
-            var searchHistory = new SearchHistory();
-            var email = searchHistory.Email;
-            if (search == email) { var result = db.SearchHistories.FromSqlRaw("select delete_history({0})",search); }
-            else { Console.WriteLine("no such email"); }
-            
+            var result = db.SearchHistories.FromSqlRaw("select delete_history({0})",email);
         }
         
         private List<Question> ListQuestions(IQueryable<Question> result)
