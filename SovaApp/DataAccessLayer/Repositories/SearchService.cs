@@ -81,23 +81,36 @@ namespace DataAccessLayer
             return searchResultList;
         }
 
-        public Question GetQuestionById(int questionId)
+
+        public bool DeleteSearchHistory(string email)
         {
+            bool deleted = false;
+            bool match = false;
             using var db = new SovaDbContext();
-            return db.Questions.Find(questionId);    
+            var appUserService = new AppUserService();
+            var users = appUserService.GetAllUsers();
+            foreach (var item in users)
+            {
+                if (item.Email == email)
+                {
+                    match = true;
+                } 
+            }
+
+            if (match)
+            {
+                var result = db.SearchHistories.FromSqlRaw("select delete_history({0})", email);
+                Console.WriteLine(result.ToString());
+                return deleted = true;
+            }
+            else
+            {
+                return deleted = false;
+            }
+            
+
         }
 
-        public Answer GetAnswerById(int answerId)
-        {
-            using var db = new SovaDbContext();
-            return db.Answers.Find(answerId);
-        }
-
-        public void DeleteHistory(string email)
-        {
-            using var db = new SovaDbContext();
-            var result = db.SearchHistories.FromSqlRaw("select delete_history({0})",email);
-        }
         
         private List<Question> ListQuestions(IQueryable<Question> result)
         {

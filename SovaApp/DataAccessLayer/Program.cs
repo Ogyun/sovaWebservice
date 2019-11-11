@@ -10,7 +10,8 @@ namespace DataAccessLayer
         {
             using var context = new SovaDbContext();
             var searchService = new SearchService();
-            searchService.DeleteHistory("i@mail.com");
+            var result = searchService.DeleteSearchHistory("i@mail.com");
+            Console.WriteLine(result);
                  
         }
     }

@@ -60,7 +60,7 @@ namespace DataAccessLayer
             modelBuilder.Entity<AppUser>().Property(m => m.Name).HasColumnName("name");
             modelBuilder.Entity<AppUser>().Property(m => m.DateOfBirth).HasColumnName("dateofbirth");
             modelBuilder.Entity<AppUser>().Property(m => m.CreationDate).HasColumnName("creationdate");
-            modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("location");
+            modelBuilder.Entity<AppUser>().Property(m => m.Location).HasColumnName("location");
 
             modelBuilder.Entity<SearchHistory>().ToTable("search_history");
             modelBuilder.Entity<SearchHistory>().HasKey(m => m.Id);
@@ -69,6 +69,7 @@ namespace DataAccessLayer
             modelBuilder.Entity<SearchHistory>().Property(m => m.Email).HasColumnName("useremail");
             modelBuilder.Entity<SearchHistory>().Property(m => m.SearchDate).HasColumnName("searchdate");
             modelBuilder.Entity<SearchHistory>().Property(m => m.SearchText).HasColumnName("searchtext");
+
 
 
 
