@@ -1,6 +1,5 @@
-﻿using DataAccessLayer.DTOs;
+﻿
 using DataAccessLayer.Models;
-using DataAccessLayer.QueryResultObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,11 +11,11 @@ namespace DataAccessLayer
     public class SovaDbContext:DbContext
     {
         public DbQuery<SearchResult> SearchResults { get; set; }
-        public DbQuery<SearchByKeywordResult> SearchByKeywordResult { get; set; }
-        public DbQuery<SearchByScoreResult> SearchByScoreResult { get; set; }
-        public DbQuery<SearchByTagResult> SearchByTagResult { get; set; }
-        public DbQuery<SearchByUserNameResult> SearchByUserNameResult { get; set; }
-        public DbQuery<SearchByAcceptedAnswerResult> SearchByAcceptedAnswerResult { get; set; }
+        //public DbQuery<SearchByKeywordResult> SearchByKeywordResult { get; set; }
+        //public DbQuery<SearchByScoreResult> SearchByScoreResult { get; set; }
+        //public DbQuery<SearchByTagResult> SearchByTagResult { get; set; }
+        //public DbQuery<SearchByUserNameResult> SearchByUserNameResult { get; set; }
+        //public DbQuery<SearchByAcceptedAnswerResult> SearchByAcceptedAnswerResult { get; set; }
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -39,10 +38,16 @@ namespace DataAccessLayer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Query<SearchResult>().Property(x => x.PostId).HasColumnName("postid");
-            modelBuilder.Query<SearchResult>().Property(x => x.Rank).HasColumnName("rank");
+            modelBuilder.Query<SearchResult>().Property(x => x.QuestionId).HasColumnName("questionid");
+            modelBuilder.Query<SearchResult>().Property(x => x.AnswerId).HasColumnName("answerid");
             modelBuilder.Query<SearchResult>().Property(x => x.Type).HasColumnName("type");
             modelBuilder.Query<SearchResult>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Query<SearchResult>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Query<SearchResult>().Property(x => x.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Query<SearchResult>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Query<SearchResult>().Property(x => x.UserId).HasColumnName("userid");
+            modelBuilder.Query<SearchResult>().Property(x => x.Username).HasColumnName("username");
+            modelBuilder.Query<SearchResult>().Property(x => x.Tag).HasColumnName("tag");
 
             modelBuilder.Entity<Question>().ToTable("questions");
             modelBuilder.Entity<Question>().HasKey(m => m.Id);
@@ -104,9 +109,9 @@ namespace DataAccessLayer
             modelBuilder.Entity<Tag>().Property(m => m.QuestionId).HasColumnName("questionid");
             modelBuilder.Entity<Tag>().Property(m => m.TagBody).HasColumnName("tag");
 
-            modelBuilder.Entity<QuestionTag>().HasKey(t => new { t.QuestionId, a = new{t.TagQuestionId,t.TagBody } });
-            modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Question).WithMany(q => q.QuestionTags).HasForeignKey(qt => qt.QuestionId);
-            modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Tag).WithMany(t => t.QuestionTags).HasForeignKey(qt =>new { qt.TagQuestionId,qt.TagBody});
+            modelBuilder.Entity<QuestionTag>().HasKey(t => new { t.QuestionId,t.TagBody });
+            modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Question).WithMany(q => q.QuestionTags);
+            modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Tag).WithMany(t => t.QuestionTags);
         }
 
     }
