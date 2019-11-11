@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DataAccessLayer.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
-    public class QuestionService
+    public class QuestionService:IQuestionService
     {
         public Question GetQuestionById(int questionId)
         {

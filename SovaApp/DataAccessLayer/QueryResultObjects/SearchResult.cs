@@ -13,7 +13,7 @@ namespace DataAccessLayer
         public DateTime? CreationDate { get; set; }
         public int? Score { get; set; }
         public int? UserId { get; set; }
-        public String? Username  { get; set; }
+        public string? Username  { get; set; }
 
         public override string ToString()
         {

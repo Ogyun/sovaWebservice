@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,9 +10,10 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int QuestionId { get; set; }
         public DateTime CreationDate { get; set; }
-        public int Score { get; set; }
+        public int Score { get; set; } = 0;
         public string Body { get; set; }
-        public int UserId { get; set; }
-
+        // public int UserId { get; set; }
+        public User User { get; set; }
+        public Question Question { get; set; }
     }
 }

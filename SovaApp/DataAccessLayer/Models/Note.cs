@@ -6,9 +6,12 @@ namespace DataAccessLayer
 {
     public class Note
     {
+        public int Id { get; set; }
         public string UserEmail{ get; set; }
         public string Notetext { get; set; }
         public int QuestionId { get; set; }
+        public AppUser AppUser { get; set; }
+        public Question Question { get; set; }
 
     }
 }

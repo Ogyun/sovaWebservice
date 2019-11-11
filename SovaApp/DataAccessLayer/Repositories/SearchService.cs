@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccessLayer.DTOs;
+using DataAccessLayer.QueryResultObjects;
+using DataAccessLayer.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,78 +11,153 @@ namespace DataAccessLayer
 {
     public  class SearchService
     {
-        public List<SearchResult> SearchByKeyword(params string[] keywords)
+        public List<SearchByKeywordResult> SearchByKeyword(params string[] keywords)
         {
             using var db = new SovaDbContext();
             var s = BuildStringFromParams(keywords);
-            var result = db.SearchResults.FromSqlRaw("select * from best_match(" + s + ")");
-//            var searchResultList = new List<SearchResult>();
-//            SearchResult searchResult;
-//            foreach (var item in result)
-//            {
-//                searchResult = new SearchResult
-//                {
-//                    PostId = item.PostId,
-//                    Type = item.Type,
-//                    Rank = item.Rank,
-//                    Body = item.Body
-//                };
-//                searchResultList.Add(searchResult);
-//            }
-//            return searchResultList;
-            return ListResults(result);
+            return db.SearchByKeywordResult.FromSqlRaw("select * from best_match(" + s + ")").Select(x => new SearchByKeywordResult
+            {
+                PostId = x.PostId,
+                Type = x.Type,
+                Rank = x.Rank,
+                Body = x.Body
+            }).ToList();
+          
         }
 
-        public List<Question> SearchByAcceptedAnswer(Boolean accepted)
+        //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
+        //{
+        //    using var db = new  SovaDbContext();
+        //    if(accepted) { return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is not null")); }
+        //    return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null")); 
+        //}
+
+        public List<SearchByAcceptedAnswerResult> SearchByAcceptedAnswer(Boolean accepted)
         {
-            using var db = new  SovaDbContext();
-            if(accepted) { return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is not null")); }
-            return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null")); 
+            using var db = new SovaDbContext();
+            var searchResultList = new List<SearchByAcceptedAnswerResult>();
+            SearchByAcceptedAnswerResult searchResult;
+            
+            if (accepted)
+            {
+                return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is not null"));
+
+            }
+               return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is null"));
         }
 
-        public List<Question> SearchByTag(params string[] tags)
+        //public List<Question> SearchByTag(params string[] tags)
+        //{
+        //    using var db = new SovaDbContext();
+        //    var s = BuildStringFromParams(tags);
+        //    var result = db.Questions.FromSqlRaw("select * from search_by_tags(" + s + ")");
+        //    return ListQuestions(result);
+        //}
+        public List<SearchByTagResult> SearchByTag(params string[] tags)
         {
             using var db = new SovaDbContext();
             var s = BuildStringFromParams(tags);
-            var result = db.Questions.FromSqlRaw("select * from search_by_tags(" + s + ")");
-            return ListQuestions(result);
-        }
-
-        public List<SearchResult> SearchByScore(int fromScore, int toScore)
-        {
-            using var db = new SovaDbContext();
-            var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
-            return ListResults(result);
-        }
-
-        public List<SearchResult> SearchByUsername(string username)
-        {
-            using var db = new SovaDbContext();
-            var result = db.SearchResults.FromSqlRaw("select * from search_by_username(" + username + ")");
-            return ListResults(result);
-        }
-
-        private List<SearchResult> ListResults(IQueryable<SearchResult> result)
-        {
-            var searchResultList = new List<SearchResult>();
-            SearchResult searchResult;
+            var result = db.SearchByTagResult.FromSqlRaw("select * from search_by_tags(" + s + ")");
+            var searchResultList = new List<SearchByTagResult>();
+            SearchByTagResult searchResult;
             foreach (var item in result)
             {
-                searchResult = new SearchResult
+                searchResult = new SearchByTagResult
                 {
-                    PostId = item.PostId,
-                    Type = item.Type,
-                    Rank = item.Rank,
+                    Id = item.Id,
                     Body = item.Body,
+                    Score=item.Score,
+                    AcceptedAnswerId = item.AcceptedAnswerId,
+                    ClosedDate = item.ClosedDate,
                     CreationDate = item.CreationDate,
-                    Score = item.Score,
-                    UserId = item.UserId,
-                    Username = item.Username
+                    Tag = item.Tag,
+                    Title = item.Title,
+                    UserId = item.UserId
                 };
                 searchResultList.Add(searchResult);
             }
             return searchResultList;
         }
+        //public List<SearchResult> SearchByScore(int fromScore, int toScore)
+        //{
+        //    using var db = new SovaDbContext();
+        //    var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
+        //    return ListResults(result);
+        //}
+        public List<SearchByScoreResult> SearchByScore(int fromScore, int toScore)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchByScoreResult.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
+            var searchResultList = new List<SearchByScoreResult>();
+            SearchByScoreResult searchResult;
+            foreach (var item in result)
+            {
+                searchResult = new SearchByScoreResult
+                {
+                    PostId = item.PostId,
+                    Type = item.Type,
+                    CreationDate = item.CreationDate,
+                    Body = item.Body,
+                    Score = item.Score,
+                    UserId = item.UserId
+                    
+                };
+                searchResultList.Add(searchResult);
+            }
+            return searchResultList;
+        }
+
+        //public List<SearchResult> SearchByUsername(string username)
+        //{
+        //    using var db = new SovaDbContext();
+        //    var result = db.SearchResults.FromSqlRaw("select * from search_by_username(" + username + ")");
+        //    return ListResults(result);
+        //}
+
+        public List<SearchByUserNameResult> SearchByUsername(string username)
+        {
+            using var db = new SovaDbContext();
+            var result = db.SearchByUserNameResult.FromSqlRaw("select * from search_by_username(" + username + ")");
+            var searchResultList = new List<SearchByUserNameResult>();
+            SearchByUserNameResult searchResult;
+            foreach (var item in result)
+            {
+                searchResult = new SearchByUserNameResult
+                {
+                    PostId = item.PostId,
+                    Type = item.Type,
+                    Body = item.Body,
+                    CreationDate=item.CreationDate,
+                    Score = item.Score,
+                    UserId = item.UserId,
+                    User_Name = item.User_Name
+                };
+                searchResultList.Add(searchResult);
+            }
+            return searchResultList;
+        }
+
+        //private List<SearchResult> ListResults(IQueryable<SearchResult> result)
+        //{
+        //    var searchResultList = new List<SearchResult>();
+        //    SearchResult searchResult;
+        //    foreach (var item in result)
+        //    {
+        //        searchResult = new SearchResult
+        //        {
+        //            PostId = item.PostId,
+        //            Type = item.Type,
+        //            Rank = item.Rank,
+        //            Body = item.Body,
+        //            CreationDate = item.CreationDate,
+        //            Score = item.Score,
+        //            UserId = item.UserId,
+        //            Username = item.Username
+        //        };
+        //        searchResultList.Add(searchResult);
+        //    }
+        //    return searchResultList;
+        //}
 
 
         public bool DeleteSearchHistory(string email)
@@ -111,23 +189,37 @@ namespace DataAccessLayer
 
         }
 
-        
-        private List<Question> ListQuestions(IQueryable<Question> result)
+
+        //private List<Question> ListQuestions(IQueryable<Question> result)
+        //{
+        //    var searchResultList = new List<Question>();
+        //    foreach (var item in result)
+        //    {
+        //        var searchResult = new Question
+        //        {
+        //            Id = item.Id,
+        //            AcceptedAnswerId = item.AcceptedAnswerId,
+        //            CreationDate = item.CreationDate,
+        //            Score = item.Score,
+        //            Body = item.Body,
+        //            ClosedDate = item.ClosedDate,
+        //            Title = item.Title,
+        //            UserId = item.UserId,
+        //            //Tag = item.Tag
+        //        };
+        //        searchResultList.Add(searchResult);
+        //    }
+        //    return searchResultList;
+        //}
+
+
+        private List<SearchByAcceptedAnswerResult> ListResults(IQueryable<SearchByAcceptedAnswerResult> result)
         {
-            var searchResultList = new List<Question>();
+            var searchResultList = new List<SearchByAcceptedAnswerResult>();
             foreach (var item in result)
             {
-                var searchResult = new Question
+                var searchResult = new SearchByAcceptedAnswerResult
                 {
-                    Id = item.Id,
-                    AcceptedAnswerId = item.AcceptedAnswerId,
-                    CreationDate = item.CreationDate,
-                    Score = item.Score,
-                    Body = item.Body,
-                    ClosedDate = item.ClosedDate,
-                    Title = item.Title,
-                    UserId = item.UserId,
-                    Tag = item.Tag
                 };
                 searchResultList.Add(searchResult);
             }
