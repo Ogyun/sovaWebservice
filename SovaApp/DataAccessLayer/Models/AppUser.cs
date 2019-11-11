@@ -15,7 +15,7 @@ namespace DataAccessLayer
         public string Location { get; set; }
         public List<Note> Notes { get; set; }
         public List<Marking> Markings { get; set; }
-
+        public List<SearchHistory> SearchHistories { get; set; }
 
     }
 }
