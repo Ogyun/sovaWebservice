@@ -100,14 +100,13 @@ namespace WebServiceTests
             Assert.Equal(2, result.Count);
         }
 
-        // Not finished
-        //[Fact]
-        //public void DeleteSearchHistoryTest()
-        //{
-        //    var userEmail = "i@mail.com";
-        //    var service = new SearchService();
-        //    var result = service.DeleteSearchHistory(userEmail);
-        //    Assert.True(result);
-        //}
+        [Fact]
+        public void DeleteSearchHistoryByUserEmailTest()
+        {
+            var userEmail = "i@mail.com";
+            var service = new SearchService();
+            var result = service.DeleteSearchHistoryByUserEmail(userEmail);
+            Assert.True(result);
+        }
     }
 }

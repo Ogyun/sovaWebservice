@@ -47,15 +47,18 @@ namespace DataAccessLayer
             return db.SearchHistories.Where(n => n.Email == userEmail).ToList();
         }
 
-        //Not finished
-        //public bool DeleteSearchHistory(string userEmail)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var history = db.SearchHistories.Where(u =>u.Email == userEmail);
-        //    if (history == null) return false;
-        //    db.SearchHistories.Remove(history);
-        //    return db.SaveChanges() > 0;
-        //}
+       
+        public bool DeleteSearchHistoryByUserEmail(string userEmail)
+        {
+            using var db = new SovaDbContext();
+            var history = db.SearchHistories.Where(u => u.Email == userEmail);
+            if (history == null) return false;
+            foreach (var item in history)
+            {
+                db.SearchHistories.Remove(item);
+            }            
+            return db.SaveChanges() > 0;
+        }
 
 
         //To be implemented
