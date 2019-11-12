@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DataAccessLayer
 {
-    public  class SearchService:ISearchService
+    public class SearchService : ISearchService
     {
         public List<SearchResult> SearchByKeyword(params string[] keywords)
         {
