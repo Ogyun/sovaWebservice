@@ -79,5 +79,16 @@ namespace WebServiceTests
             Assert.Equal("i@mail.com", result.UserEmail);
             Assert.Equal(18830964, result.QuestionId);
         }
+        [Fact]
+        public void CreateSearchHistoryTest()
+        {
+            var date = DateTime.Now;
+            var history = new SearchHistory() { Email = "i@mail.com", SearchDate = date, SearchText = "SEARCH TEST" };
+            var service = new SearchService();
+            var result = service.CreateSearchHistory(history);
+            Assert.Equal("i@mail.com",result.Email);
+            Assert.Equal(date, result.SearchDate);
+            Assert.Equal("SEARCH TEST", result.SearchText);
+        }
     }
 }
