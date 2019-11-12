@@ -1,9 +1,4 @@
-﻿using DataAccessLayer.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataAccessLayer.Repositories
+﻿namespace DataAccessLayer.Repositories
 {
     public class QuestionService:IQuestionService
     {

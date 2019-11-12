@@ -1,10 +1,7 @@
-﻿using DataAccessLayer.Contracts;
-using DataAccessLayer.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccessLayer
 {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using DataAccessLayer.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
