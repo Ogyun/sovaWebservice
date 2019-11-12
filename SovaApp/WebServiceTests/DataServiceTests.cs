@@ -15,6 +15,8 @@ namespace WebServiceTests
             var search = service.SearchByKeyword("c#","constructors");
             Assert.Equal(92, search.Count);
             Assert.Equal(231767, search.First().QuestionId);
+            Assert.Equal("answer", search.First().Type);
+            Assert.Null(search.First().Tags);
         }
 
         [Fact]
