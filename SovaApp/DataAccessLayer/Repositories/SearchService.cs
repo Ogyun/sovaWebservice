@@ -26,6 +26,21 @@ namespace DataAccessLayer
           
         }
 
+        public SearchHistory CreateSearchHistory(SearchHistory history)
+        {
+            using var db = new SovaDbContext();
+            db.SearchHistories.Add(history);
+            int changes = db.SaveChanges();
+            if (changes > 0)
+            {
+                return history;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
         //{
         //    using var db = new  SovaDbContext();

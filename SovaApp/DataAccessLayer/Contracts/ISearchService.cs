@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace DataAccessLayer
 {
     public interface ISearchService
     {
-        System.Collections.Generic.List<SearchResult> SearchByKeyword(params string[] keywords);
+        List<SearchResult> SearchByKeyword(params string[] keywords);
     }
 }
