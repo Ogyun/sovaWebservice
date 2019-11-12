@@ -13,8 +13,7 @@ namespace DataAccessLayer.Repositories
             using (var db = new SovaDbContext())
             {
                 IQueryable<Answer> answers = db.Answers
-                    .Include(a => a.User)
-                    .OrderBy(an => an.Id);
+                    .OrderBy(an => an.Score);
                 return answers.ToList();
             }
         }
@@ -35,7 +34,7 @@ namespace DataAccessLayer.Repositories
                 IQueryable<Answer> answers = db.Answers
                     .Where(an => an.QuestionId == questionId)
                     .Include(q => q.Question)
-                    .OrderBy(an => an.Id);
+                    .OrderBy(an => an.Score);
                 return answers.ToList();
             }
         }
