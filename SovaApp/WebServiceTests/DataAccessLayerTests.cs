@@ -6,7 +6,7 @@ using Xunit;
 
 namespace WebServiceTests
 {
-    public class DataServiceTests
+    public class DataAccessLayerTests
     {
         //Search tests
         [Fact]
