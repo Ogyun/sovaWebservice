@@ -40,6 +40,22 @@ namespace WebServiceTests
             Assert.Equal(19, answer.QuestionId);         
 
         }
+        //[Fact]
+        //public void GetAllTest()
+        //{
+
+        //    var service = new AnswerService();
+        //    // When.
+        //    var answers = service.GetAll();
+        //    // Then.
+        //    Assert.Equal(11182, answers.Count());
+        //    Assert.Equal(71, answers.First().Id);
+        //    Assert.Equal("<p>Here's a general description of a technique for calculating pi that I learnt in high school.</p>&#xA;&#xA;<p>I only share this because I think it is simple enough that anyone can remember it, indef", answers.First().Body.Substring(0, 200));
+        //    Assert.Equal(1446, answers.First().Body.Length);
+        //    Assert.Equal(43, answers.First().Score);
+        //    Assert.Equal("2008-08-01 13:38:00", answers.First().CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
+        //    Assert.Equal(49, answers.First().User.UserId);
+        //}
         [Fact]
         public void CreateNoteTest()
         {
