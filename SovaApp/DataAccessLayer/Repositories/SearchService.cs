@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Repositories;
+﻿using DataAccessLayer.Contracts;
+using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    public  class SearchService
+    public  class SearchService:ISearchService
     {
         public List<SearchResult> SearchByKeyword(params string[] keywords)
         {
