@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories
             return db.Questions.Find(questionId);
         }
 
-
+        //To be implemented
         //public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail)
         //{
         //    using var db = new SovaDbContext();
