@@ -20,9 +20,10 @@ namespace WebServiceLayer.Controllers
             }
 
             [HttpGet("{keywords}")]
-            public ActionResult<IEnumerable<SearchResult>> GetSearchResult(params string[] keywords)
+            public ActionResult<IEnumerable<SearchResult>> GetSearchResult(string keywords)
             {
-                var result = _searchService.SearchByKeyword(keywords);
+                var res = keywords.Split(",");
+                var result = _searchService.SearchByKeyword(res);
                 return Ok(result);
             }
 
