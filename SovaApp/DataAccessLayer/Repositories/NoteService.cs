@@ -10,7 +10,6 @@ namespace DataAccessLayer
     {
         public Note CreateNote(Note note)
         {
-            Console.WriteLine(note);
             using var db = new SovaDbContext();
             db.Notes.Add(note);
             int changes = db.SaveChanges();
