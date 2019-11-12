@@ -1,10 +1,7 @@
-﻿using DataAccessLayer.Contracts;
-using DataAccessLayer.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccessLayer
 {
@@ -22,8 +19,6 @@ namespace DataAccessLayer
                 Body = x.Body,
                 Title = x.Title,
                 Score = x.Score,
-                UserId = x.UserId,
-                Username = x.Username,
                 CreationDate = x.CreationDate,
                 Tags = x.Tags
 
