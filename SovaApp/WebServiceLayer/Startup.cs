@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLayer;
 using DataAccessLayer.Contracts;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,7 @@ namespace WebServiceLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<ISearchService, SearchService>();
             services.AddSingleton<IQuestionService, QuestionService>();
         }
 

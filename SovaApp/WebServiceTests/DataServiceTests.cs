@@ -14,7 +14,9 @@ namespace WebServiceTests
             var service = new SearchService();
             var search = service.SearchByKeyword("c#","constructors");
             Assert.Equal(92, search.Count);
-            Assert.Equal(69718, search.First().QuestionId);
+            Assert.Equal(231767, search.First().QuestionId);
+            Assert.Equal("answer", search.First().Type);
+            Assert.Null(search.First().Tags);
         }
 
         [Fact]
@@ -25,7 +27,7 @@ namespace WebServiceTests
             Assert.Equal(2, question.Score);
             Assert.Equal("2013-09-16 14:49:26",question.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
             Assert.Equal(18831685, question.AcceptedAnswerId);
-            Assert.Equal(null, question.ClosedDate);
+            Assert.Null(question.ClosedDate);
           
         }
         [Fact]

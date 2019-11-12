@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer.Contracts
 {
-    interface ISearchService
+    public interface ISearchService
     {
         public List<SearchResult> SearchByKeyword(params string[] keywords);
 
