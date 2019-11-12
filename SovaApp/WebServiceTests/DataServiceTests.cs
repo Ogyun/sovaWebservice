@@ -108,5 +108,14 @@ namespace WebServiceTests
             var result = service.DeleteSearchHistoryByUserEmail(userEmail);
             Assert.True(result);
         }
+
+        [Fact]
+        public void DeleteSearchHistoryByIdTest()
+        {
+            var historyId = 30;
+            var service = new SearchService();
+            var result = service.DeleteSearchHistoryById(historyId);
+            Assert.True(result);
+        }
     }
 }

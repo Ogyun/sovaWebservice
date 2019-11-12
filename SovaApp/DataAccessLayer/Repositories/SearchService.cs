@@ -62,8 +62,13 @@ namespace DataAccessLayer
 
 
         //To be implemented
-        public void DeleteSearchHistoryById(int historyId)
+        public bool DeleteSearchHistoryById(int historyId)
         {
+            using var db = new SovaDbContext();
+            var history = db.SearchHistories.Find(historyId);
+            if (history == null) return false;
+            db.SearchHistories.Remove(history);
+            return db.SaveChanges() > 0;
 
         }
 
