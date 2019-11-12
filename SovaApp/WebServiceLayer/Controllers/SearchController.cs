@@ -15,19 +15,21 @@ namespace WebServiceLayer.Controllers
         public class CategoriesController : ControllerBase
         {
 
-            ISearchService _dataService;
+            ISearchService _searchService;
 
-            public CategoriesController(ISearchService dataService)
+            public CategoriesController(ISearchService searchService)
             {
-                _dataService = dataService;
+                _searchService = searchService;
             }
 
             [HttpGet("{keywords}")]
             public ActionResult<IEnumerable<SearchResult>> GetSearchResult(params string[] keywords)
             {
-                var result = _dataService.SearchByKeyword(keywords);
+                var result = _searchService.SearchByKeyword(keywords);
                 return Ok(result);
             }
+
+            
         }
     }
 }
