@@ -8,6 +8,7 @@ namespace WebServiceTests
 {
     public class DataServiceTests
     {
+        //Search tests
         [Fact]
         public void SearchByKeywordTest()
         {
@@ -19,6 +20,7 @@ namespace WebServiceTests
             Assert.Null(search.First().Tags);
         }
 
+        //Question tests
         [Fact]
         public void GetQuestionByIdTest()
         {
@@ -30,6 +32,8 @@ namespace WebServiceTests
             Assert.Null(question.ClosedDate);
 
         }
+
+        //Answer tests
         [Fact]
         public void GetAnswerByIdTest()
         {
@@ -40,6 +44,8 @@ namespace WebServiceTests
             Assert.Equal(19, answer.QuestionId);
 
         }
+
+        //Note tests
         [Fact]
         public void CreateNoteTest()
         {
@@ -70,6 +76,25 @@ namespace WebServiceTests
             Assert.Equal(3, result.Count);
 
         }
+
+        [Fact]
+        public void DeleteNoteByIdTest()
+        {
+            var noteId = 1;
+            var service = new NoteService();
+            var result = service.DeleteNoteById(noteId);
+            Assert.True(result);
+        }
+        [Fact]
+        public void UpdateNoteTest()
+        {          
+            var service = new NoteService();
+            var noteForUpdate = new Note() {Id=2, UserEmail = "i@mail.com", Notetext = "UpdatedNote", QuestionId = 18830964 };
+            var result = service.UpdateNote(noteForUpdate);
+            Assert.True(result);
+        }
+
+        //Marking tests
         [Fact]
         public void CreateMarkingTest()
         {
@@ -79,6 +104,8 @@ namespace WebServiceTests
             Assert.Equal("i@mail.com", result.UserEmail);
             Assert.Equal(18830964, result.QuestionId);
         }
+
+        //SearchHistory tests
         [Fact]
         public void CreateSearchHistoryTest()
         {
@@ -117,5 +144,7 @@ namespace WebServiceTests
             var result = service.DeleteSearchHistoryById(historyId);
             Assert.True(result);
         }
+
+
     }
 }

@@ -33,5 +33,22 @@ namespace DataAccessLayer
             using var db = new SovaDbContext();
             return db.Notes.Where(n => n.QuestionId == questionId).ToList();
         }
+
+        public bool UpdateNote(Note note)
+        {
+            using var db = new SovaDbContext();
+            db.Notes.Update(note);
+            return db.SaveChanges() > 0;
+        }
+
+        public bool DeleteNoteById(int noteId)
+        {
+            using var db = new SovaDbContext();
+            var note = db.Notes.Find(noteId);
+            if (note == null) return false;
+            db.Notes.Remove(note);
+            return db.SaveChanges() > 0;
+
+        }
     }
 }
