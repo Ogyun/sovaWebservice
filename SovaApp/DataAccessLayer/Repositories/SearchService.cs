@@ -22,8 +22,6 @@ namespace DataAccessLayer
                 Body = x.Body,
                 Title = x.Title,
                 Score = x.Score,
-                UserId = x.UserId,
-                Username = x.Username,
                 CreationDate = x.CreationDate,
                 Tags = x.Tags
 
