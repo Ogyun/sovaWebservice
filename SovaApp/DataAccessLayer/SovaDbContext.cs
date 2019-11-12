@@ -1,4 +1,4 @@
-﻿
+
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -45,8 +45,6 @@ namespace DataAccessLayer
             modelBuilder.Query<SearchResult>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Query<SearchResult>().Property(x => x.CreationDate).HasColumnName("creationdate");
             modelBuilder.Query<SearchResult>().Property(x => x.Score).HasColumnName("score");
-            modelBuilder.Query<SearchResult>().Property(x => x.UserId).HasColumnName("userid");
-            modelBuilder.Query<SearchResult>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Query<SearchResult>().Property(x => x.Tag).HasColumnName("tag");
 
             modelBuilder.Entity<Question>().ToTable("questions");
