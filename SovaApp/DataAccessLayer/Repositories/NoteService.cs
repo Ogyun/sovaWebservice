@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DataAccessLayer.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace DataAccessLayer
 {
-    public class NoteService
+    public class NoteService:INoteService
     {
         public Note CreateNote(Note note)
         {
@@ -22,10 +23,16 @@ namespace DataAccessLayer
                 return null;
             }
         }
-        public List<Note> GetNotes(string userEmail)
+        public List<Note> GetNotesByUserEmail(string userEmail)
         {
             using var db = new SovaDbContext();
             return db.Notes.Where(n => n.UserEmail == userEmail).ToList();
+        }
+
+        public List<Note> GetNotesByQuestionId(int questionId)
+        {
+            using var db = new SovaDbContext();
+            return db.Notes.Where(n => n.QuestionId == questionId).ToList();
         }
     }
 }
