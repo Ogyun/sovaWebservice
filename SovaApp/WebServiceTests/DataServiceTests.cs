@@ -98,11 +98,20 @@ namespace WebServiceTests
         [Fact]
         public void CreateMarkingTest()
         {
-            var marking = new Marking() { UserEmail = "i@mail.com", QuestionId = 18830964 };
+            var marking = new Marking() { UserEmail = "i@mail.com", QuestionId = 10405320 };
             var service = new MarkingService();
             var result = service.CreateMarking(marking);
             Assert.Equal("i@mail.com", result.UserEmail);
-            Assert.Equal(18830964, result.QuestionId);
+            Assert.Equal(10405320, result.QuestionId);
+        }
+        
+        [Fact]
+        public void DeleteMarkingTest()
+        {
+            var marking = new Marking() { UserEmail = "i@mail.com", QuestionId = 10405320 };
+            var service = new MarkingService();
+            var result = service.DeleteMarking(marking);
+            Assert.True(result);
         }
 
         //SearchHistory tests
