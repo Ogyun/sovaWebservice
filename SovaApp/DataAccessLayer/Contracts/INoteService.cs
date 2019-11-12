@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer.Contracts
 {
-    interface INoteService
+    public interface INoteService
     {
         public Note CreateNote(Note note);
         public List<Note> GetNotesByUserEmail(string userEmail);

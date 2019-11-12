@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    public class NoteService:INoteService
+    public class NoteService : INoteService
     {
         public Note CreateNote(Note note)
         {

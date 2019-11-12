@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using DataAccessLayer.Contracts;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +17,7 @@ namespace WebServiceLayer
             services.AddControllers();
             services.AddSingleton<ISearchService, SearchService>();
             services.AddSingleton<IQuestionService, QuestionService>();
+            services.AddSingleton<INoteService, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
