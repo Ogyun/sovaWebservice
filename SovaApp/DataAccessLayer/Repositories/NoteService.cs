@@ -20,5 +20,9 @@ namespace DataAccessLayer
                 return null;
             }
         }
+        //public List<Note> GetNotes (string userEmail)
+        //{
+
+        //}
     }
 }

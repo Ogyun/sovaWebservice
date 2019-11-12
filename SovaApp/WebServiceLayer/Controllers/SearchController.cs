@@ -8,16 +8,13 @@ using DataAccessLayer;
 
 namespace WebServiceLayer.Controllers
 {
-    public class SearchController
+    [ApiController]
+    [Route("api/search")]
+    public class SearchController:ControllerBase
     {
-        [ApiController]
-        [Route("api/search")]
-        public class CategoriesController : ControllerBase
-        {
-
-            ISearchService _searchService;
-
-            public CategoriesController(ISearchService searchService)
+           private ISearchService _searchService;
+        
+            public SearchController(ISearchService searchService)
             {
                 _searchService = searchService;
             }
@@ -30,6 +27,6 @@ namespace WebServiceLayer.Controllers
             }
 
             
-        }
     }
 }
+
