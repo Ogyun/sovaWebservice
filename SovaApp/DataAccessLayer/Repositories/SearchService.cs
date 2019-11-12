@@ -47,6 +47,16 @@ namespace DataAccessLayer
             return db.SearchHistories.Where(n => n.Email == userEmail).ToList();
         }
 
+        //Not finished
+        //public bool DeleteSearchHistory(string userEmail)
+        //{
+        //    using var db = new SovaDbContext();
+        //    var history = db.SearchHistories.Where(u =>u.Email == userEmail);
+        //    if (history == null) return false;
+        //    db.SearchHistories.Remove(history);
+        //    return db.SaveChanges() > 0;
+        //}
+
         //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
         //{
         //    using var db = new  SovaDbContext();
@@ -59,7 +69,7 @@ namespace DataAccessLayer
         //    using var db = new SovaDbContext();
         //    var searchResultList = new List<SearchByAcceptedAnswerResult>();
         //    SearchByAcceptedAnswerResult searchResult;
-            
+
         //    if (accepted)
         //    {
         //        return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is not null"));
@@ -122,7 +132,7 @@ namespace DataAccessLayer
         //            Body = item.Body,
         //            Score = item.Score,
         //            UserId = item.UserId
-                    
+
         //        };
         //        searchResultList.Add(searchResult);
         //    }
@@ -207,7 +217,7 @@ namespace DataAccessLayer
         //    {
         //        return deleted = false;
         //    }
-            
+
 
         //}
 

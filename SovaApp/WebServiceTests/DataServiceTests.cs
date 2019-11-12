@@ -99,5 +99,15 @@ namespace WebServiceTests
             var result = service.GetSearchHistoryByUserEmail(userEmail);
             Assert.Equal(2, result.Count);
         }
+
+        // Not finished
+        //[Fact]
+        //public void DeleteSearchHistoryTest()
+        //{
+        //    var userEmail = "i@mail.com";
+        //    var service = new SearchService();
+        //    var result = service.DeleteSearchHistory(userEmail);
+        //    Assert.True(result);
+        //}
     }
 }
