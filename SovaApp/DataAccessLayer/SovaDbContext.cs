@@ -47,7 +47,7 @@ namespace DataAccessLayer
             modelBuilder.Query<SearchResult>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Query<SearchResult>().Property(x => x.UserId).HasColumnName("userid");
             modelBuilder.Query<SearchResult>().Property(x => x.Username).HasColumnName("username");
-            modelBuilder.Query<SearchResult>().Property(x => x.Tag).HasColumnName("tag");
+            modelBuilder.Query<SearchResult>().Property(x => x.Tags).HasColumnName("tags");
 
             modelBuilder.Entity<Question>().ToTable("questions");
             modelBuilder.Entity<Question>().HasKey(m => m.Id);

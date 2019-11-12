@@ -25,7 +25,7 @@ namespace DataAccessLayer
                 UserId = x.UserId,
                 Username = x.Username,
                 CreationDate = x.CreationDate,
-                Tag = x.Tag
+                Tags = x.Tags
 
             }).ToList();
           
