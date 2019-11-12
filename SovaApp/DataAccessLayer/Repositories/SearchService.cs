@@ -41,6 +41,12 @@ namespace DataAccessLayer
             }
         }
 
+        public List<SearchHistory>GetSearchHistoryByUserEmail(string userEmail)
+        {
+            using var db = new SovaDbContext();
+            return db.SearchHistories.Where(n => n.Email == userEmail).ToList();
+        }
+
         //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
         //{
         //    using var db = new  SovaDbContext();
