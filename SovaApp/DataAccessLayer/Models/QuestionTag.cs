@@ -7,7 +7,7 @@ namespace DataAccessLayer.Models
     public class QuestionTag
     {
         public int QuestionId { get; set; }
-        public Question Question { get; set; }
+      //  public Question Question { get; set; }
 
        // public int TagQuestionId { get; set; }
         public string TagBody { get; set; }

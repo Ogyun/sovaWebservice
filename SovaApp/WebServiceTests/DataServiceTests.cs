@@ -12,7 +12,7 @@ namespace WebServiceTests
         public void SearchByKeywordTest()
         {
             var service = new SearchService();
-            var search = service.SearchByKeyword("c#","constructors");
+            var search = service.SearchByKeyword("c#", "constructors");
             Assert.Equal(92, search.Count);
             Assert.Equal(231767, search.First().QuestionId);
             Assert.Equal("answer", search.First().Type);
@@ -25,10 +25,10 @@ namespace WebServiceTests
             var service = new QuestionService();
             var question = service.GetQuestionById(18830964);
             Assert.Equal(2, question.Score);
-            Assert.Equal("2013-09-16 14:49:26",question.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            Assert.Equal("2013-09-16 14:49:26", question.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
             Assert.Equal(18831685, question.AcceptedAnswerId);
             Assert.Null(question.ClosedDate);
-          
+
         }
         [Fact]
         public void GetAnswerByIdTest()
@@ -37,7 +37,7 @@ namespace WebServiceTests
             var answer = service.GetAnswerById(71);
             Assert.Equal(43, answer.Score);
             Assert.Equal("2008-08-01 13:38:00", answer.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
-            Assert.Equal(19, answer.QuestionId);         
+            Assert.Equal(19, answer.QuestionId);
 
         }
         [Fact]
@@ -51,5 +51,14 @@ namespace WebServiceTests
             Assert.Equal(18830964, result.QuestionId);
         }
 
+        [Fact]
+        public void GetNotesByUserEmailTest()
+        {
+            var userEmail = "i@mail.com";
+            var service = new NoteService();
+            var result = service.GetNotes(userEmail);
+            Assert.Equal(3, result.Count);
+
+        }
     }
 }
