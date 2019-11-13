@@ -14,6 +14,7 @@ namespace DataAccessLayer.Contracts
         public bool DeleteNoteById(int noteId);
         public int NumberOfNotesPerUser(string userEmail);
         public int NumberOfNotesPerQuestion(int questionId);
+        public Note GetNoteById(int noteId);
 
     }
 }

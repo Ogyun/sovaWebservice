@@ -98,6 +98,14 @@ namespace WebServiceTests
             Assert.True(result);
         }
         [Fact]
+        public void GetNoteByIdTest()
+        {
+            var service = new NoteService();
+            int noteId = 2;
+            var result = service.GetNoteById(noteId);
+            Assert.Equal("UpdatedNote", result.Notetext);
+        }
+        [Fact]
         public void UpdateNoteTest()
         {          
             var service = new NoteService();
