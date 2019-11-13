@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataAccessLayer.Models
 {
-    class PagingAttributes
+    public class PagingAttributes
     {
         public const int MaxPageSize = 10;
         private int _pageSize = MaxPageSize;

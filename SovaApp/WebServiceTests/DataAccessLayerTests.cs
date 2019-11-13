@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using System;
 using System.Linq;
@@ -71,8 +72,9 @@ namespace WebServiceTests
         {
             var userEmail = "i@mail.com";
             var service = new NoteService();
-            var result = service.GetNotesByUserEmail(userEmail);
-            Assert.Equal(3, result.Count);
+            var pagingAttributes = new PagingAttributes();
+            var result = service.GetNotesByUserEmail(userEmail,pagingAttributes);
+            Assert.Equal(2, result.Count);
 
         }
 
