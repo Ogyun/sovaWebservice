@@ -35,6 +35,17 @@ namespace WebServiceLayer.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{userEmail}/{noteId}", Name = nameof(GetNote))]
+        public ActionResult GetNote(int noteId)
+        {
+            var note = _noteService.GetNoteById(noteId);
+            if (note == null)
+            {
+                return NotFound();
+            }
+            return Ok(CreateNoteDto(note));
+        }
+
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail)
         {
             var totalItems = _noteService.NumberOfNotesPerUser(userEmail);
@@ -66,9 +77,10 @@ namespace WebServiceLayer.Controllers
         {
             var dto = _mapper.Map<NoteDto>(note);
             dto.Link = Url.Link(
-                    nameof(GetNotesByUserEmail),
-                    new { noteId = note.Id });
+                    nameof(GetNote),
+                    new { userEmail = note.UserEmail,noteId = note.Id });
             return dto;
         }
     }
 }
+//"link": "http://localhost:5001/api/notes/i@mail.com?noteId=2",
