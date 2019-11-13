@@ -79,12 +79,13 @@ namespace WebServiceTests
         }
 
         [Fact]
-        public void GetNotesByQuestionIdTest()
+        public void GetAllNotesForQuestionTest()
         {
             var questionId = 18830964;
+            var userEmail = "i@mail.com";
             var service = new NoteService();
-            var result = service.GetNotesByQuestionId(questionId);
-            Assert.Equal(3, result.Count);
+            var result = service.GetAllNotesForQuestion(userEmail,questionId);
+            Assert.Equal(2, result.Count);
 
         }
 

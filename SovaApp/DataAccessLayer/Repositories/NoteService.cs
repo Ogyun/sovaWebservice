@@ -31,10 +31,10 @@ namespace DataAccessLayer
                 .Take(pagingAttributes.PageSize).ToList();
         }
 
-        public List<Note> GetNotesByQuestionId(int questionId)
+        public List<Note> GetAllNotesForQuestion(string userEmail,int questionId)
         {
             using var db = new SovaDbContext();
-            return db.Notes.Where(n => n.QuestionId == questionId).ToList();
+            return db.Notes.Where(n => n.QuestionId == questionId && n.UserEmail == userEmail).ToList();
         }
 
         public bool UpdateNote(Note note)
