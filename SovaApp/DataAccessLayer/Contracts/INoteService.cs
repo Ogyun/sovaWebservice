@@ -9,7 +9,7 @@ namespace DataAccessLayer.Contracts
     {
         public Note CreateNote(Note note);
         public List<Note> GetNotesByUserEmail(string userEmail, PagingAttributes pagingAttributes);
-        public List<Note> GetAllNotesForQuestion(string userEmail, int questionId);
+        public List<Note> GetAllNotesForQuestion(string userEmail, int questionId, PagingAttributes pagingAttributes);
         public bool UpdateNote(Note note);
         public bool DeleteNoteById(int noteId);
         public int NumberOfNotesPerUser(string userEmail);
