@@ -53,10 +53,19 @@ namespace Tests
         public void ApiNotes_DeleteWithValidId_Ok()
         {
 
-            int noteId = 11;
+            int noteId = 12;
             var statusCode = DeleteData($"{NotesApi}/{noteId}");
 
             Assert.Equal(HttpStatusCode.OK, statusCode);
+        }
+        [Fact]
+        public void ApiNotes_DeleteWithInvalidId_NotFound()
+        {
+
+            int noteId = 11;
+            var statusCode = DeleteData($"{NotesApi}/{noteId}");
+
+            Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
 

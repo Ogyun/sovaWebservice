@@ -73,9 +73,13 @@ namespace WebServiceLayer.Controllers
         {
             if (_noteService.DeleteNoteById(noteId))
             {
-                return NoContent();
+               return Ok();
             }
-            return Ok();
+            else
+            {
+                return NotFound();
+            }
+           
         }
 
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail ="", int questionId=0)
