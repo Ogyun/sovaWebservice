@@ -28,13 +28,17 @@ namespace DataAccessLayer
             using var db = new SovaDbContext();
             return db.Notes.Where(n => n.UserEmail == userEmail)
                 .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
-                .Take(pagingAttributes.PageSize).ToList();
+                .Take(pagingAttributes.PageSize)
+                .ToList();
         }
 
-        public List<Note> GetAllNotesForQuestion(string userEmail,int questionId)
+        public List<Note> GetAllNotesForQuestion(string userEmail,int questionId, PagingAttributes pagingAttributes)
         {
             using var db = new SovaDbContext();
-            return db.Notes.Where(n => n.QuestionId == questionId && n.UserEmail == userEmail).ToList();
+            return db.Notes.Where(n => n.QuestionId == questionId && n.UserEmail == userEmail)
+                .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
+                .Take(pagingAttributes.PageSize)
+                .ToList();
         }
 
         public bool UpdateNote(Note note)

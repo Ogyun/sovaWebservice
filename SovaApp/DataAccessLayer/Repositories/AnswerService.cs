@@ -27,16 +27,16 @@ namespace DataAccessLayer.Repositories
             return db.Answers.Find(answerId);
         }
 
-        //public IEnumerable<Answer> GetAnswersForQuestion(int questionId)
-        //{
-        //    using (var db = new SovaDbContext())
-        //    {
-        //        IQueryable<Answer> answers = db.Answers
-        //            .Where(an => an.QuestionId == questionId)
-        //            .Include(q => q.Question)
-        //            .OrderBy(an => an.Score);
-        //        return answers.ToList();
-        //    }
-        //}
+        public IEnumerable<Answer> GetAnswersForQuestion(int questionId)
+        {
+            using (var db = new SovaDbContext())
+            {
+                IQueryable<Answer> answers = db.Answers
+                    .Where(an => an.QuestionId == questionId)
+                    .Include(q => q.Question)
+                    .OrderBy(an => an.Score);
+                return answers.ToList();
+            }
+        }
     }
 }

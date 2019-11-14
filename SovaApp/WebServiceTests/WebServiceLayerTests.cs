@@ -20,14 +20,27 @@ namespace Tests
         [Fact]
         public void ApiNotes_GetNotesByUserEmail_OkAndAllNotes()
         {
-            var userEmail = "i@mail.com";
-            var (data, statusCode) = GetArray(NotesApi+"/"+userEmail);
-
+            string userEmail = "i@mail.com";
+            var (data, statusCode) = GetObject(NotesApi+"/"+userEmail);
             Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal(2, data.Count);
+            Assert.Equal(5, data.Count);
            // Assert.Equal("UpdatedNote", data.First()["notetext"]);
            // Assert.Equal("Apples", data.Last()["notetext"]);
         }
+        [Fact]
+        public void ApiNotes_CreateNote_Created()
+        {
+            var newNote = new
+            {             
+                UserEmail = "i@mail.com",
+                Notetext="testnoteFromWebServiceTest",
+                QuestionId = "10405320"
+                };
+            var (note, statusCode) = PostData(NotesApi, newNote);
+            Assert.Equal(HttpStatusCode.Created, statusCode);
+        }
+
+
         //Helpers
         (JArray, HttpStatusCode) GetArray(string url)
         {
@@ -35,6 +48,45 @@ namespace Tests
             var response = client.GetAsync(url).Result;
             var data = response.Content.ReadAsStringAsync().Result;
             return ((JArray)JsonConvert.DeserializeObject(data), response.StatusCode);
+        }
+
+        (JObject, HttpStatusCode) GetObject(string url)
+        {
+            var client = new HttpClient();
+            var response = client.GetAsync(url).Result;
+            var data = response.Content.ReadAsStringAsync().Result;
+            return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
+        }
+
+        (JObject, HttpStatusCode) PostData(string url, object content)
+        {
+            var client = new HttpClient();
+            var requestContent = new StringContent(
+                JsonConvert.SerializeObject(content),
+                Encoding.UTF8,
+                "application/json");
+            var response = client.PostAsync(url, requestContent).Result;
+            var data = response.Content.ReadAsStringAsync().Result;
+            return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
+        }
+
+        HttpStatusCode PutData(string url, object content)
+        {
+            var client = new HttpClient();
+            var response = client.PutAsync(
+                url,
+                new StringContent(
+                    JsonConvert.SerializeObject(content),
+                    Encoding.UTF8,
+                    "application/json")).Result;
+            return response.StatusCode;
+        }
+
+        HttpStatusCode DeleteData(string url)
+        {
+            var client = new HttpClient();
+            var response = client.DeleteAsync(url).Result;
+            return response.StatusCode;
         }
     }
 }
