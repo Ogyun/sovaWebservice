@@ -72,5 +72,10 @@ namespace DataAccessLayer
             using var db = new SovaDbContext();
             return db.Notes.Where(n => n.QuestionId == questionId).Count();
         }
+
+        public bool NoteExcist(int noteId)
+        {
+            return GetNoteById(noteId) != null;
+        }
     }
 }
