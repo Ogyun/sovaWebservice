@@ -174,6 +174,25 @@ namespace WebServiceTests
             Assert.True(result);
         }
 
+        [Fact]
+
+        public void GetAnsers_NoArgument_ReturnsAllAnsers()
+        {
+            var service = new AnswerService();
+
+            var answers = service.GetAll();
+
+            Assert.Equal(11392, answers.Count());
+        }
+        [Fact]
+        public void GetAnsersForQuestion_CorrectQuestionIdProvided_ReturnsListOfAnswers()
+        {
+            var service = new AnswerService();
+
+            var answer = service.GetAnswersForQuestion(19);
+
+            Assert.Equal(21, answer.Count());
+        }
 
     }
 }
