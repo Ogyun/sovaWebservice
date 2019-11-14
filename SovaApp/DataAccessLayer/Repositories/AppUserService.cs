@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    class AppUserService
+    public class AppUserService
     {
         public AppUser Create(AppUser appuser)
         {

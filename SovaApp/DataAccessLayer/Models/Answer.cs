@@ -13,7 +13,7 @@ namespace DataAccessLayer
         public int Score { get; set; } = 0;
         public string Body { get; set; }
         // public int UserId { get; set; }
-        public User User { get; set; }
-        public Question Question { get; set; }
+       // public User User { get; set; }
+       // public Question Question { get; set; }
     }
 }

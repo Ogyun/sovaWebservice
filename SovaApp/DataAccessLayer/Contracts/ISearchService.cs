@@ -1,12 +1,13 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DataAccessLayer.Contracts
+namespace DataAccessLayer
 {
     public interface ISearchService
     {
-        public List<SearchResult> SearchByKeyword(params string[] keywords);
-
+        List<SearchResult> SearchByKeyword(params string[] keywords);
+        public SearchHistory CreateSearchHistory(SearchHistory history);
+        public List<SearchHistory> GetSearchHistoryByUserEmail(string userEmail);
+        public bool DeleteSearchHistoryByUserEmail(string userEmail);
+        public bool DeleteSearchHistoryById(int historyId);
     }
 }

@@ -21,12 +21,12 @@ namespace DataAccessLayer
         
         public String Title { get; set; }
         
-        public User User{ get; set; }
+      //  public User User{ get; set; }
 
-        public List<Answer> Answers { get; set; }
-        public List<Note> Notes { get; set; }
-        public List<Marking> Markings { get; set; }
-        public List<QuestionTag> QuestionTags{ get; set; }
+        //public List<Answer> Answers { get; set; }
+        //public List<Note> Notes { get; set; }
+        //public List<Marking> Markings { get; set; }
+        //public List<QuestionTag> QuestionTags{ get; set; }
 
         public override string ToString()
         {

@@ -1,11 +1,10 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DataAccessLayer.Contracts
+namespace DataAccessLayer.Repositories
 {
     public interface IQuestionService
     {
-        public Question GetQuestionById(int questionId);
+        Question GetQuestionById(int questionId);
+        public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail);
     }
 }

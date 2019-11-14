@@ -1,14 +1,11 @@
-﻿using DataAccessLayer.Contracts;
-using DataAccessLayer.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DataAccessLayer
 {
-    public  class SearchService:ISearchService
+    public class SearchService : ISearchService
     {
         public List<SearchResult> SearchByKeyword(params string[] keywords)
         {
@@ -22,13 +19,55 @@ namespace DataAccessLayer
                 Body = x.Body,
                 Title = x.Title,
                 Score = x.Score,
-                UserId = x.UserId,
-                Username = x.Username,
                 CreationDate = x.CreationDate,
                 Tags = x.Tags
 
             }).ToList();
           
+        }
+
+        public SearchHistory CreateSearchHistory(SearchHistory history)
+        {
+            using var db = new SovaDbContext();
+            db.SearchHistories.Add(history);
+            int changes = db.SaveChanges();
+            if (changes > 0)
+            {
+                return history;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<SearchHistory>GetSearchHistoryByUserEmail(string userEmail)
+        {
+            using var db = new SovaDbContext();
+            return db.SearchHistories.Where(n => n.Email == userEmail).ToList();
+        }
+
+       
+        public bool DeleteSearchHistoryByUserEmail(string userEmail)
+        {
+            using var db = new SovaDbContext();
+            var history = db.SearchHistories.Where(u => u.Email == userEmail);
+            if (history == null) return false;
+            foreach (var item in history)
+            {
+                db.SearchHistories.Remove(item);
+            }            
+            return db.SaveChanges() > 0;
+        }
+
+        public bool DeleteSearchHistoryById(int historyId)
+        {
+            using var db = new SovaDbContext();
+            var history = db.SearchHistories.Find(historyId);
+            if (history == null) return false;
+            db.SearchHistories.Remove(history);
+            return db.SaveChanges() > 0;
+
         }
 
         //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
@@ -43,7 +82,7 @@ namespace DataAccessLayer
         //    using var db = new SovaDbContext();
         //    var searchResultList = new List<SearchByAcceptedAnswerResult>();
         //    SearchByAcceptedAnswerResult searchResult;
-            
+
         //    if (accepted)
         //    {
         //        return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is not null"));
@@ -106,7 +145,7 @@ namespace DataAccessLayer
         //            Body = item.Body,
         //            Score = item.Score,
         //            UserId = item.UserId
-                    
+
         //        };
         //        searchResultList.Add(searchResult);
         //    }
@@ -191,7 +230,7 @@ namespace DataAccessLayer
         //    {
         //        return deleted = false;
         //    }
-            
+
 
         //}
 
