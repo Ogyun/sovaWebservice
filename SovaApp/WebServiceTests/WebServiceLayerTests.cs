@@ -27,6 +27,17 @@ namespace Tests
            // Assert.Equal("UpdatedNote", data.First()["notetext"]);
            // Assert.Equal("Apples", data.Last()["notetext"]);
         }
+
+        [Fact]
+        public void ApiNotes_GetAllNotesForQuestion_OkAndAllNotes()
+        {
+            string userEmail = "i@mail.com";
+            int questionId = 18830964;
+            var (data, statusCode) = GetObject(NotesApi + "/" + userEmail+"/question/"+questionId);
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+            Assert.Equal(5, data.Count);
+            Assert.Equal(7, data["items"].Count());
+        }
         [Fact]
         public void ApiNotes_CreateNote_Created()
         {
