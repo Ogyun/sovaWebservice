@@ -83,13 +83,13 @@ namespace WebServiceLayer.Controllers
         }
 
         [HttpPut("{noteId}")]
-        public ActionResult UpdateNote(
-        int noteId, Note note)
+        public ActionResult UpdateNote(int noteId,[FromBody] Note note)
         {
             if (!_noteService.NoteExcist(noteId))
             {
                 return NotFound();
             }
+            Console.WriteLine("comes here");
             note.Id = noteId;
             _noteService.UpdateNote(note);
             return Ok();

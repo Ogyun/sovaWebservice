@@ -68,6 +68,21 @@ namespace Tests
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
+        [Fact]
+        public void ApiNotes_PutWithValidNoteId_Ok()
+        {
+            var update = new
+            {
+                Id = 3,
+                UserEmail = "i@mail.com",
+                Notetext = "testnoteFromWebServiceTest",
+                QuestionId = "10405320"
+            };
+            var statusCode = PutData($"{NotesApi}/{update.Id}", update);
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+        }
+
 
         //Helpers
         (JArray, HttpStatusCode) GetArray(string url)
