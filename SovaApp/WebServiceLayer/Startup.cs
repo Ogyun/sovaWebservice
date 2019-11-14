@@ -1,9 +1,12 @@
 using DataAccessLayer;
+using DataAccessLayer.Contracts;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using System;
 
 namespace WebServiceLayer
 {
@@ -13,9 +16,11 @@ namespace WebServiceLayer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSingleton<ISearchService, SearchService>();
             services.AddSingleton<IQuestionService, QuestionService>();
+            services.AddSingleton<INoteService, NoteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

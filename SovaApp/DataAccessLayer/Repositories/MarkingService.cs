@@ -21,5 +21,15 @@ namespace DataAccessLayer.Repositories
             }
         }
 
+        public bool DeleteMarking(Marking marking)
+        {
+            using var db = new SovaDbContext();
+            var result = db.Markings.Find(marking.UserEmail,marking.QuestionId);
+            if (result == null) return false;
+            db.Markings.Remove(result);
+            return db.SaveChanges() > 0;
+
+        }
+
     }
 }
