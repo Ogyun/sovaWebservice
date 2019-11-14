@@ -214,6 +214,15 @@ namespace WebServiceTests
             var answers = service.GetAnswersForQuestion(3650125);
             Assert.Empty(answers);
         }
+        [Fact]
+        public void GetUserByEmail()
+        {
+
+            var service = new AppUserService();
+            var answers = service.GetUserByEmail("i@mail.com");
+            Assert.NotNull(answers);
+            Assert.Equal("pass", answers.Password);
+        }
 
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {
@@ -29,6 +31,21 @@ namespace DataAccessLayer.Repositories
             db.Markings.Remove(result);
             return db.SaveChanges() > 0;
 
+        }
+
+        public List<Marking> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes)
+        {
+            using var db = new SovaDbContext();
+            return db.Markings.Where(n => n.UserEmail == userEmail)
+                .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
+                .Take(pagingAttributes.PageSize)
+                .ToList();
+        }
+        
+        public int NumberOfMarkingsPerUser(string userEmail)
+        {
+            using var db = new SovaDbContext();
+            return db.Markings.Where(n => n.UserEmail == userEmail).Count();
         }
 
     }

@@ -7,18 +7,28 @@ using System.Text;
 
 namespace DataAccessLayer
 {
-    public class AppUserService
+    public class AppUserService : IAppUserService
     {
-        public AppUser Create(AppUser appuser)
+        public AppUser CreateUser(string name, string email, string password, string salt)
         {
-            using (var db = new SovaDbContext())
+            using var db = new SovaDbContext();
+            var user = new AppUser()
             {
-                db.AppUsers.Add(appuser);
-                db.SaveChanges();
-
-                return appuser;
-            }
+                Name = name,
+                Email = email,
+                Password = password,
+                Salt = salt
+            };
+            db.AppUsers.Add(user);
+            return user;
         }
+
+        public AppUser GetUserByEmail(string email)
+        {
+                using var db = new SovaDbContext();
+                return db.AppUsers.Find(email);
+        }
+
 
         public List<AppUser> GetAllUsers()
         {
@@ -33,9 +43,5 @@ namespace DataAccessLayer
                 return db.AppUsers.Count();
             }
         }
-
-
-
-
     }
 }
