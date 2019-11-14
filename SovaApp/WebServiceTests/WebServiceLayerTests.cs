@@ -20,11 +20,10 @@ namespace Tests
         [Fact]
         public void ApiNotes_GetNotesByUserEmail_OkAndAllNotes()
         {
-            var userEmail = "i@mail.com";
-            var (data, statusCode) = GetArray(NotesApi+"/"+userEmail);
-
+            string userEmail = "i@mail.com";
+            var (data, statusCode) = GetObject(NotesApi+"/"+userEmail);
             Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal(2, data.Count);
+            Assert.Equal(5, data.Count);
            // Assert.Equal("UpdatedNote", data.First()["notetext"]);
            // Assert.Equal("Apples", data.Last()["notetext"]);
         }
@@ -36,5 +35,14 @@ namespace Tests
             var data = response.Content.ReadAsStringAsync().Result;
             return ((JArray)JsonConvert.DeserializeObject(data), response.StatusCode);
         }
+
+        (JObject, HttpStatusCode) GetObject(string url)
+        {
+            var client = new HttpClient();
+            var response = client.GetAsync(url).Result;
+            var data = response.Content.ReadAsStringAsync().Result;
+            return ((JObject)JsonConvert.DeserializeObject(data), response.StatusCode);
+        }
+
     }
 }

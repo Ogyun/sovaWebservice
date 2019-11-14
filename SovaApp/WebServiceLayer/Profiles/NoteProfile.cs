@@ -13,6 +13,8 @@ namespace WebServiceLayer.Profiles
         public NoteProfile()
         {
             CreateMap<Note, NoteDto>();
+            CreateMap<NoteForCreation, Note>();
+
         }
     }
 }

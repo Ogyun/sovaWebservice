@@ -45,6 +45,16 @@ namespace WebServiceLayer.Controllers
             }
             return Ok(CreateNoteDto(note));
         }
+        [HttpPost]
+        public ActionResult CreateNote(NoteForCreation noteDto)
+        {
+            var note = _mapper.Map<Note>(noteDto);
+            _noteService.CreateNote(note);
+            return CreatedAtRoute(
+                nameof(GetNote),
+                new { userEmail = note.UserEmail, noteId = note.Id },
+                CreateNoteDto(note));
+        }
 
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail)
         {
