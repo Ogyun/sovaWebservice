@@ -15,6 +15,7 @@ namespace DataAccessLayer.Contracts
         public int NumberOfNotesPerUser(string userEmail);
         public int NumberOfNotesPerQuestion(int questionId);
         public Note GetNoteById(int noteId);
+        public bool NoteExcist(int noteId);
 
     }
 }
