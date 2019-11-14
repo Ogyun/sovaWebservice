@@ -75,7 +75,7 @@ namespace WebServiceLayer.Controllers
             {
                 return NoContent();
             }
-            return NotFound();
+            return Ok();
         }
 
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail ="", int questionId=0)
