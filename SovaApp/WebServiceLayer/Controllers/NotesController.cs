@@ -82,6 +82,19 @@ namespace WebServiceLayer.Controllers
            
         }
 
+        [HttpPut("{noteId}")]
+        public ActionResult UpdateNote(
+        int noteId, Note note)
+        {
+            if (!_noteService.NoteExcist(noteId))
+            {
+                return NotFound();
+            }
+            note.Id = noteId;
+            _noteService.UpdateNote(note);
+            return Ok();
+        }
+
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail ="", int questionId=0)
         {
             int totalItems = 0;
