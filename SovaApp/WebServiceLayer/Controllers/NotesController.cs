@@ -68,6 +68,16 @@ namespace WebServiceLayer.Controllers
                 CreateNoteDto(note));
         }
 
+        [HttpDelete("{noteId}")]
+        public ActionResult DeleteNote(int noteId)
+        {
+            if (_noteService.DeleteNoteById(noteId))
+            {
+                return NoContent();
+            }
+            return NotFound();
+        }
+
         private object CreateResult(IEnumerable<Note> notes, PagingAttributes attr, string userEmail ="", int questionId=0)
         {
             int totalItems = 0;

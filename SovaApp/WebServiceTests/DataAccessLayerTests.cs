@@ -73,7 +73,8 @@ namespace WebServiceTests
             var questionId = 18830964;
             var userEmail = "i@mail.com";
             var service = new NoteService();
-            var result = service.GetAllNotesForQuestion(userEmail,questionId);
+            var pagingAttributes = new PagingAttributes();
+            var result = service.GetAllNotesForQuestion(userEmail,questionId,pagingAttributes);
             Assert.Equal(2, result.Count);
 
         }
