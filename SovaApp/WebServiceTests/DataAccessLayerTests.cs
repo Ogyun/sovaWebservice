@@ -43,17 +43,6 @@ namespace WebServiceTests
             Assert.Equal(2, questions.Count);
         }
 
-        //Answer tests
-        [Fact]
-        public void GetAnswerByIdTest()
-        {
-            var service = new AnswerService();
-            var answer = service.GetAnswerById(71);
-            Assert.Equal(43, answer.Score);
-            Assert.Equal("2008-08-01 13:38:00", answer.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
-            Assert.Equal(19, answer.QuestionId);
-
-        }
 
         //Note tests
         [Fact]
@@ -174,6 +163,28 @@ namespace WebServiceTests
             Assert.True(result);
         }
 
+        //Answer tests
+        [Fact]
+        public void GetAnswerByIdTest()
+        {
+            var service = new AnswerService();
+            var answer = service.GetAnswerById(71);
+            Assert.Equal(43, answer.Score);
+            Assert.Equal("2008-08-01 13:38:00", answer.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            Assert.Equal(19, answer.QuestionId);
+
+        }
+
+        [Fact]
+        public void GetAnswer_InvalidIdProvided_ReturnsNull()
+        {
+          
+            var service = new AnswerService();
+            var answer = service.GetAnswerById(70);
+            Assert.Null(answer);
+        }
+
+
         [Fact]
 
         public void GetAnsers_NoArgument_ReturnsAllAnsers()
@@ -185,13 +196,22 @@ namespace WebServiceTests
             Assert.Equal(11392, answers.Count());
         }
         [Fact]
-        public void GetAnsersForQuestion_CorrectQuestionIdProvided_ReturnsListOfAnswers()
+        public void GetAnsersForQuestion_CorrectQuestionId()
         {
             var service = new AnswerService();
 
             var answer = service.GetAnswersForQuestion(19);
 
             Assert.Equal(21, answer.Count());
+        }
+
+        [Fact]
+        public void GetAnswersForQuestion_InvalidQuestionId()
+        {
+            
+            var service = new AnswerService();
+            var answers = service.GetAnswersForQuestion(3650125);
+            Assert.Empty(answers);
         }
 
     }
