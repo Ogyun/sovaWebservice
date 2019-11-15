@@ -115,15 +115,16 @@ namespace WebServiceLayer.Controllers
                 var next = attr.Page < numberOfPages - 1
                     ? CreatePagingLink(attr.Page + 1, attr.PageSize, userEmail, questionId)
                     : null;
-
-                return new
-                {
-                    totalItems,
-                    numberOfPages,
-                    prev,
-                    next,
-                    items = questions.Select( q=> new {title = q.Title, id = q.Id}, markings.Select(CreateMarkingDto));
-            }
+            var titles = questions.Select(q => q.Title);
+            var links = markings.Select(CreateMarkingDto);
+            return new
+            {
+                totalItems,
+                numberOfPages,
+                prev,
+                next,
+                items = new { titles = titles, links = links }
+            };
             }
             
             private MarkingDto CreateMarkingDto(Marking marking)
