@@ -99,7 +99,7 @@ namespace WebServiceTests
         public void UpdateNoteTest()
         {          
             var service = new NoteService();
-            var noteForUpdate = new Note() {Id=2, UserEmail = "i@mail.com", Notetext = "UpdatedNote", QuestionId = 18830964 };
+            var noteForUpdate = new Note() {Id=8, UserEmail = "i@mail.com", Notetext = "UpdatedNote", QuestionId = 18830964 };
             var result = service.UpdateNote(noteForUpdate);
             Assert.True(result);
         }
