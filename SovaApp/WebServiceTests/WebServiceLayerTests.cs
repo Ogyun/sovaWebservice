@@ -82,7 +82,14 @@ namespace Tests
 
             Assert.Equal(HttpStatusCode.OK, statusCode);
         }
-
+        [Fact]
+        public void ApiSearch_GetSearchByKeywords()
+        {
+            string search = "constructors,regions,blocks";
+            var (data, statusCode) = GetArray($"{SearchApi}/keywords/" + search);
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+            Assert.Equal(220, data.Count);
+        }
 
         //Helpers
         (JArray, HttpStatusCode) GetArray(string url)
