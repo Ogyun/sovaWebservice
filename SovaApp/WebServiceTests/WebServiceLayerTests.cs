@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using DataAccessLayer;
 using Xunit;
 
 namespace Tests
@@ -15,6 +16,7 @@ namespace Tests
         private const string NotesApi = "http://localhost:5001/api/notes";
         private const string SearchApi = "http://localhost:5001/api/search";
         private const string QuestionsApi = "http://localhost:5001/api/questions";
+        private const string MarkingsApi = "http://localhost:5001/api/markings";
 
         /*/api/notes*/
         [Fact]
@@ -82,13 +84,47 @@ namespace Tests
 
             Assert.Equal(HttpStatusCode.OK, statusCode);
         }
+
         [Fact]
-        public void ApiSearch_GetSearchByKeywords()
+        public void ApiMarkings_GetMarkingsByUserEmail_OkAndAllMarkings()
         {
-            string search = "constructors,regions,blocks";
-            var (data, statusCode) = GetArray($"{SearchApi}/keywords/" + search);
+            string userEmail = "i@mail.com";
+            var (data, statusCode) = GetObject(MarkingsApi + "/" + userEmail);
+            Assert.Equal(HttpStatusCode.OK,statusCode);
+            Assert.Equal(1,data.Count);
+        }
+
+        [Fact]
+        public void ApiMarkings_CreateMarking_Created()
+        {
+            var newMarking = new Marking
+            {
+                UserEmail = "i@mail.com",
+                QuestionId = 10405320
+            };
+            var (marking, statusCode) = PostData(MarkingsApi, newMarking);
+            Assert.Equal(HttpStatusCode.Created,statusCode);
+        }
+        
+        [Fact]
+        public void ApiMarkings_DeleteWithValidId_Ok()
+        {
+
+            string userEmail = "i@mail.com";
+            int questionId = 10405320;
+            var statusCode = DeleteData($"{MarkingsApi}/{userEmail}/{questionId}");
+
             Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal(220, data.Count);
+        }
+        [Fact]
+        public void ApiMarkings_DeleteWithInvalidId_NotFound()
+        {
+
+            string userEmail = "i@mail.com";
+            int questionId = 19;
+            var statusCode = DeleteData($"{MarkingsApi}/{userEmail}/{questionId}");
+
+            Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
         //Helpers
