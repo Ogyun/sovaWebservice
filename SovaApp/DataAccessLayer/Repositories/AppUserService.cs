@@ -38,18 +38,5 @@ namespace DataAccessLayer
         }
 
 
-        public List<AppUser> GetAllUsers()
-        {
-            using var db = new SovaDbContext();
-            return db.AppUsers.ToList();
-        }
-
-        public int GetCount()
-        {
-            using (var db = new SovaDbContext())
-            {
-                return db.AppUsers.Count();
-            }
-        }
     }
 }

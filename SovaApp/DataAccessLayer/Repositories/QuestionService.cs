@@ -11,19 +11,8 @@ namespace DataAccessLayer.Repositories
             using var db = new SovaDbContext();
             return db.Questions.Find(questionId);
         }
-        public IEnumerable<Question> GetAll()
-        {
-            using (var db = new SovaDbContext())
-            {
-                IQueryable<Question> questions = db.Questions
-                    .Include(q => q.AcceptedAnswerId)
-                    .OrderBy(q => q.Id);
-                return questions.ToList();
-            }
 
-        }
             
-
         public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail)
         {
             using var db = new SovaDbContext();

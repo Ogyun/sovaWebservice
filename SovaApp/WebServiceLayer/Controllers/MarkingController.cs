@@ -123,7 +123,7 @@ namespace WebServiceLayer.Controllers
                     prev,
                     next,
                     items = questions.Select( q=> new {title = q.Title, id = q.Id}, markings.Select(CreateMarkingDto));
-            };
+            }
             }
             
             private MarkingDto CreateMarkingDto(Marking marking)
