@@ -20,22 +20,26 @@ namespace WebServiceLayer.Controllers
                 _searchService = searchService;
                 _mapper = mapper;
             }
-
-            [HttpGet("{keywords}")]
-            public ActionResult<IEnumerable<SimpleSearchResult>> GetSearchResult(string keywords)
+        [HttpGet("keywords/{query}")]
+       // [HttpGet("{keywords}")]
+            public ActionResult<IEnumerable<SimpleSearchResult>> GetSearchResult(string query)
             {
-                var res = keywords.Split(",");
+                var res = query.Split(",");
                 var result = _searchService.SearchByKeyword(res);
-                return Ok(result);
-            }
-            
-        [HttpPost]
-        public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
-        {
-            var history = _mapper.Map<SearchHistory>(searchHistoryDto);
-            _searchService.CreateSearchHistory(history);
-            return Ok();
+
+            //get the user email from token and search text from keywords 
+            //if user is authorized call searchService.CreateSearchHistory()
+            return Ok(result);
         }
+            
+         //we might not need this route
+        //[HttpPost]
+        //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
+        //{
+        //    var history = _mapper.Map<SearchHistory>(searchHistoryDto);
+        //    _searchService.CreateSearchHistory(history);
+        //    return Ok();
+        //}
 
 
 
