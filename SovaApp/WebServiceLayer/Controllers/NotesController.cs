@@ -57,6 +57,7 @@ namespace WebServiceLayer.Controllers
             }
             return Ok(CreateNoteDto(note));
         }
+
         [HttpPost]
         public ActionResult CreateNote(NoteForCreation noteDto)
         {

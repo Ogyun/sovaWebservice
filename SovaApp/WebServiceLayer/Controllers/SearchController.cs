@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer;
+using WebServiceLayer.Models;
+using AutoMapper;
 
 namespace WebServiceLayer.Controllers
 {
@@ -11,11 +13,12 @@ namespace WebServiceLayer.Controllers
     [Route("api/search")]
     public class SearchController:ControllerBase
     {
-           private ISearchService _searchService;
-        
-            public SearchController(ISearchService searchService)
+         private ISearchService _searchService;
+         private IMapper _mapper;
+         public SearchController(ISearchService searchService, IMapper mapper)
             {
                 _searchService = searchService;
+                _mapper = mapper;
             }
 
             [HttpGet("{keywords}")]
@@ -25,8 +28,19 @@ namespace WebServiceLayer.Controllers
                 var result = _searchService.SearchByKeyword(res);
                 return Ok(result);
             }
-
             
+        [HttpPost]
+        public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
+        {
+            var history = _mapper.Map<SearchHistory>(searchHistoryDto);
+            _searchService.CreateSearchHistory(history);
+            return Ok();
+        }
+
+
+
+
+
     }
 }
 
