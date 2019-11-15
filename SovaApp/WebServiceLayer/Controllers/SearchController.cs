@@ -45,6 +45,20 @@ namespace WebServiceLayer.Controllers
 
         }
 
+        [HttpDelete("history/user/{userEmail}")]
+        public ActionResult DeleteAllHistoryByUserEmail(string userEmail)
+        {
+            if (_searchService.DeleteSearchHistoryByUserEmail(userEmail))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
         //we might not need this route
         //[HttpPost]
         //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
