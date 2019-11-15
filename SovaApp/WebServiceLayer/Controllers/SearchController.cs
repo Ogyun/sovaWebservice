@@ -31,8 +31,21 @@ namespace WebServiceLayer.Controllers
             //if user is authorized call searchService.CreateSearchHistory()
             return Ok(result);
         }
-            
-         //we might not need this route
+        [HttpDelete("history/{historyId}")]
+        public ActionResult DeleteHistoryById(int historyId)
+        {
+            if (_searchService.DeleteSearchHistoryById(historyId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
+        //we might not need this route
         //[HttpPost]
         //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
         //{
