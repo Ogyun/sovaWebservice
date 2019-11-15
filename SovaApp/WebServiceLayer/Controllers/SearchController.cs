@@ -22,7 +22,7 @@ namespace WebServiceLayer.Controllers
             }
         [HttpGet("keywords/{query}")]
        // [HttpGet("{keywords}")]
-            public ActionResult<IEnumerable<SimpleSearchResult>> GetSearchResult(string query)
+            public ActionResult<IEnumerable<SearchResult>> GetSearchResult(string query)
             {
                 var res = query.Split(",");
                 var result = _searchService.SearchByKeyword(res);
