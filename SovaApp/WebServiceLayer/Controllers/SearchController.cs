@@ -59,6 +59,23 @@ namespace WebServiceLayer.Controllers
 
         }
 
+        [HttpGet("history/user/{userEmail}")]
+        public ActionResult GetSearchHistoryByUserEmail(string userEmail)
+        {
+            var historyList = _searchService.GetSearchHistoryByUserEmail(userEmail);
+            Console.WriteLine("This is the list" + historyList);
+            if (historyList!=null)
+            {
+                return CreatedAtAction(
+                 nameof(GetSearchHistoryByUserEmail),historyList);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
         //we might not need this route
         //[HttpPost]
         //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
