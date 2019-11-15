@@ -7,20 +7,18 @@ namespace DataAccessLayer
 {
     public class SearchService : ISearchService
     {
-        public List<SearchResult> SearchByKeyword(params string[] keywords)
+        public List<SimpleSearchResult> SearchByKeyword(params string[] keywords)
         {
             using var db = new SovaDbContext();
             var s = BuildStringFromParams(keywords);
-            return db.SearchResults.FromSqlRaw("select * from new_best_match(" + s + ")").Select(x => new SearchResult
+            return db.SearchResults.FromSqlRaw("select * from new_best_match(" + s + ")").Select(x => new SimpleSearchResult
             {
                 QuestionId = x.QuestionId,
                 AnswerId = x.AnswerId,
                 Type = x.Type,
                 Body = x.Body,
                 Title = x.Title,
-                Score = x.Score,
-                CreationDate = x.CreationDate,
-                Tags = x.Tags
+                Score = x.Score
 
             }).ToList();
           

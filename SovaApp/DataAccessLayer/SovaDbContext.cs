@@ -75,9 +75,6 @@ namespace DataAccessLayer
             modelBuilder.Entity<AppUser>().Property(m => m.Email).HasColumnName("email");
             modelBuilder.Entity<AppUser>().Property(m => m.Password).HasColumnName("password");
             modelBuilder.Entity<AppUser>().Property(m => m.Name).HasColumnName("name");
-            modelBuilder.Entity<AppUser>().Property(m => m.DateOfBirth).HasColumnName("dateofbirth");
-            modelBuilder.Entity<AppUser>().Property(m => m.CreationDate).HasColumnName("creationdate");
-            modelBuilder.Entity<AppUser>().Property(m => m.Location).HasColumnName("location");
             modelBuilder.Entity<AppUser>().Property(m => m.Salt).HasColumnName("salt");
 
             modelBuilder.Entity<SearchHistory>().ToTable("search_history");

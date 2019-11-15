@@ -87,7 +87,7 @@ namespace WebServiceLayer.Controllers
                 {
                     new Claim(ClaimTypes.Name, user.Email.ToString()),
                 }),
-                Expires = DateTime.Now.AddSeconds(20),
+                Expires = DateTime.Now.AddSeconds(90),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
