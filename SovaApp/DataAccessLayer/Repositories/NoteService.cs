@@ -44,8 +44,12 @@ namespace DataAccessLayer
         public bool UpdateNote(Note note)
         {
             using var db = new SovaDbContext();
-            db.Notes.Update(note);
-            return db.SaveChanges() > 0;
+            if (NoteExcist(note.Id))
+            {
+                db.Notes.Update(note);
+                return db.SaveChanges() > 0;
+            }
+            return false;
         }
         public Note GetNoteById(int noteId)
         {

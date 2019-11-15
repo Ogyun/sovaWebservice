@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer;
+using WebServiceLayer.Models;
+using AutoMapper;
 
 namespace WebServiceLayer.Controllers
 {
@@ -11,22 +13,65 @@ namespace WebServiceLayer.Controllers
     [Route("api/search")]
     public class SearchController:ControllerBase
     {
-           private ISearchService _searchService;
-        
-            public SearchController(ISearchService searchService)
+         private ISearchService _searchService;
+         private IMapper _mapper;
+         public SearchController(ISearchService searchService, IMapper mapper)
             {
                 _searchService = searchService;
+                _mapper = mapper;
             }
-
-            [HttpGet("{keywords}")]
-            public ActionResult<IEnumerable<SearchResult>> GetSearchResult(string keywords)
+        [HttpGet("keywords/{query}")]
+       // [HttpGet("{keywords}")]
+            public ActionResult<IEnumerable<SimpleSearchResult>> GetSearchResult(string query)
             {
-                var res = keywords.Split(",");
+                var res = query.Split(",");
                 var result = _searchService.SearchByKeyword(res);
-                return Ok(result);
+
+            //get the user email from token and search text from keywords 
+            //if user is authorized call searchService.CreateSearchHistory()
+            return Ok(result);
+        }
+        [HttpDelete("history/{historyId}")]
+        public ActionResult DeleteHistoryById(int historyId)
+        {
+            if (_searchService.DeleteSearchHistoryById(historyId))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
             }
 
-            
+        }
+
+        [HttpDelete("history/user/{userEmail}")]
+        public ActionResult DeleteAllHistoryByUserEmail(string userEmail)
+        {
+            if (_searchService.DeleteSearchHistoryByUserEmail(userEmail))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
+        //we might not need this route
+        //[HttpPost]
+        //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
+        //{
+        //    var history = _mapper.Map<SearchHistory>(searchHistoryDto);
+        //    _searchService.CreateSearchHistory(history);
+        //    return Ok();
+        //}
+
+
+
+
+
     }
 }
 
