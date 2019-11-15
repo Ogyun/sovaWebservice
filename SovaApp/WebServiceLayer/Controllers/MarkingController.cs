@@ -74,57 +74,57 @@ namespace WebServiceLayer.Controllers
             }
         }
 
-        [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
-            public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
-            {
-                var markings = _markingService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
+        //[HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
+        //    public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
+        //    {
+        //        var markings = _markingService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
 
-                List<Question> questions = new List<Question>();
-                foreach (var marking in markings)
-                {
-                    questions.Add(_questionService.GetQuestionById(marking.QuestionId));
-                }
-                var result = CreateResult(questions, markings, pagingAttributes, userEmail);
+        //        List<Question> questions = new List<Question>();
+        //        foreach (var marking in markings)
+        //        {
+        //            questions.Add(_questionService.GetQuestionById(marking.QuestionId));
+        //        }
+        //        var result = CreateResult(questions, markings, pagingAttributes, userEmail);
 
-                return Ok(result);
-            }
+        //        return Ok(result);
+        //    }
             
-            private string CreatePagingLink(int page, int pageSize,string userEmail, int questionId)
-            {
-                string pageLink = "";
-                if (userEmail!="")
-                {
-                    pageLink = Url.Link(nameof(GetMarkingsByUserEmail), new { page, pageSize });
-                }
+            //private string CreatePagingLink(int page, int pageSize,string userEmail, int questionId)
+            //{
+            //    string pageLink = "";
+            //    if (userEmail!="")
+            //    {
+            //        pageLink = Url.Link(nameof(GetMarkingsByUserEmail), new { page, pageSize });
+            //    }
             
-                return pageLink;
+            //    return pageLink;
             
-            }
+            //}
             
-            private object CreateResult(IEnumerable<Question> questions, IEnumerable<Marking> markings,PagingAttributes attr, string userEmail ="", int questionId=0)
-            {
-                int totalItems = 0;
+            //private object CreateResult(IEnumerable<Question> questions, IEnumerable<Marking> markings,PagingAttributes attr, string userEmail ="", int questionId=0)
+            //{
+            //    int totalItems = 0;
                 
-                totalItems = _markingService.NumberOfMarkingsPerUser(userEmail);
+            //    totalItems = _markingService.NumberOfMarkingsPerUser(userEmail);
                 
-                var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
+            //    var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
 
-                var prev = attr.Page > 0
-                    ? CreatePagingLink(attr.Page - 1, attr.PageSize, userEmail,questionId)
-                    : null;
-                var next = attr.Page < numberOfPages - 1
-                    ? CreatePagingLink(attr.Page + 1, attr.PageSize, userEmail, questionId)
-                    : null;
+            //    var prev = attr.Page > 0
+            //        ? CreatePagingLink(attr.Page - 1, attr.PageSize, userEmail,questionId)
+            //        : null;
+            //    var next = attr.Page < numberOfPages - 1
+            //        ? CreatePagingLink(attr.Page + 1, attr.PageSize, userEmail, questionId)
+            //        : null;
 
-                return new
-                {
-                    totalItems,
-                    numberOfPages,
-                    prev,
-                    next,
-                    items = questions.Select( q=> new {title = q.Title, id = q.Id}, markings.Select(CreateMarkingDto));
-            };
-            }
+            //    return new
+            //    {
+            //        totalItems,
+            //        numberOfPages,
+            //        prev,
+            //        next,
+            //        items = questions.Select( q=> new {title = q.Title, id = q.Id}, markings.Select(CreateMarkingDto))
+            //};
+            //}
             
             private MarkingDto CreateMarkingDto(Marking marking)
             {

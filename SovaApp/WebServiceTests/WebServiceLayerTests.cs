@@ -127,8 +127,18 @@ namespace Tests
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
-        //Helpers
-        (JArray, HttpStatusCode) GetArray(string url)
+        [Fact]
+        public void ApiSearch_GetSearchByKeywords()
+        {
+            string search = "constructors,regions,blocks";
+            var (data, statusCode) = GetArray($"{SearchApi}/keywords/" + search);
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+            Assert.Equal(220, data.Count);
+        }
+
+
+            //Helpers
+            (JArray, HttpStatusCode) GetArray(string url)
         {
             var client = new HttpClient();
             var response = client.GetAsync(url).Result;
