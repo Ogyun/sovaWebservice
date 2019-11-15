@@ -32,6 +32,7 @@ namespace WebServiceLayer
             services.AddSingleton<IQuestionService, QuestionService>();
             services.AddSingleton<INoteService, NoteService>();
             services.AddSingleton<IAppUserService, AppUserService>();
+            services.AddSingleton<IMarkingService, MarkingService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 var key = Encoding.UTF8.GetBytes(Configuration.GetSection("Auth:Key").Value);

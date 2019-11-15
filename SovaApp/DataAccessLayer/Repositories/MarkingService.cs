@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DataAccessLayer.Contracts;
 using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {
-    public class MarkingService
+    public class MarkingService:IMarkingService
     {
         public Marking CreateMarking(Marking marking)
         {

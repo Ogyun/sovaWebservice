@@ -8,6 +8,8 @@ using DataAccessLayer.Contracts;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.VisualBasic.CompilerServices;
 using WebServiceLayer.Models;
 
 namespace WebServiceLayer.Controllers
@@ -26,12 +28,51 @@ namespace WebServiceLayer.Controllers
             _questionService = questionService;
             _mapper = mapper;
         }
-
-/*        [HttpPost]
-        public ActionResult CreateMarking(Marking marking)
+        
+        [HttpGet("{userEmail}/{questionId}", Name = nameof(GetMarking))]
+        public ActionResult GetMarking(int questionId)
         {
-            
-        }*/
+            var marking = _questionService.GetQuestionById(questionId);
+            if (marking == null)
+            {
+                return NotFound();
+            }
+            return Ok(marking);
+        }
+
+        [HttpPost]
+        public ActionResult CreateMarking(string userEmail, int questionId)
+        {
+            var marking = new Marking
+            {
+                UserEmail = userEmail,
+                QuestionId = questionId
+            };
+            _markingService.CreateMarking(marking);
+            return CreatedAtRoute(
+                nameof(GetMarking),
+                new {userEmail = marking.UserEmail, questionId = marking.QuestionId},
+                CreateMarkingDto(marking));
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteMarking(string userEmail, int questionId)
+        {
+            var marking = new Marking
+            {
+                UserEmail = userEmail,
+                QuestionId = questionId
+
+            };
+            if (_markingService.DeleteMarking(marking))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
             public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
@@ -43,7 +84,7 @@ namespace WebServiceLayer.Controllers
                 {
                     questions.Add(_questionService.GetQuestionById(marking.QuestionId));
                 }
-                var result = CreateResult(questions, pagingAttributes, userEmail);
+                var result = CreateResult(questions, markings, pagingAttributes, userEmail);
 
                 return Ok(result);
             }
@@ -60,7 +101,7 @@ namespace WebServiceLayer.Controllers
             
             }
             
-            private object CreateResult(IEnumerable<Question> questions, PagingAttributes attr, string userEmail ="", int questionId=0)
+            private object CreateResult(IEnumerable<Question> questions, IEnumerable<Marking> markings,PagingAttributes attr, string userEmail ="", int questionId=0)
             {
                 int totalItems = 0;
                 
@@ -81,18 +122,18 @@ namespace WebServiceLayer.Controllers
                     numberOfPages,
                     prev,
                     next,
-                    items = questions
-                };
+                    items = questions.Select( q=> new {title = q.Title, id = q.Id}, markings.Select(CreateMarkingDto));
+            };
             }
             
-            /*private MarkingDto CreateMarkingDto(Marking marking)
+            private MarkingDto CreateMarkingDto(Marking marking)
             {
                 var dto = _mapper.Map<MarkingDto>(marking);
                 dto.Link = Url.Link(
                     nameof(GetMarking),
                     new { userEmail = marking.UserEmail,questionId = marking.QuestionId });
                 return dto;
-            }*/
+            }
         
       
     }
