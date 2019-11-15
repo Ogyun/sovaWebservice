@@ -20,7 +20,15 @@ namespace DataAccessLayer
                 Salt = salt
             };
             db.AppUsers.Add(user);
-            return user;
+            int changes = db.SaveChanges();
+            if (changes > 0)
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public AppUser GetUserByEmail(string email)

@@ -7,6 +7,6 @@ namespace DataAccessLayer
         List<AppUser> GetAllUsers();
         int GetCount();
         AppUser GetUserByEmail(string email);
-        AppUser CreateUser(string name, string username, string password, string salt);
+        AppUser CreateUser(string name, string email, string password, string salt);
     }
 }
