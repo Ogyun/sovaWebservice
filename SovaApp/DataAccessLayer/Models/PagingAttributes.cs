@@ -15,4 +15,5 @@ namespace DataAccessLayer.Models
             set => _pageSize = Math.Min(value, MaxPageSize);
         }
     }
+
 }
