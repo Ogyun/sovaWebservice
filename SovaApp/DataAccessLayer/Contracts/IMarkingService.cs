@@ -9,7 +9,6 @@ namespace DataAccessLayer.Contracts
     {
         Marking CreateMarking(Marking marking);
         bool DeleteMarking(Marking marking);
-        List<Marking> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes);
         int NumberOfMarkingsPerUser(string userEmail);
     }
 }

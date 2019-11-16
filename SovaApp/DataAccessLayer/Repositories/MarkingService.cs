@@ -35,15 +35,6 @@ namespace DataAccessLayer.Repositories
         }
 
 
-
-        public List<Marking> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes)
-        {
-            using var db = new SovaDbContext();
-            return db.Markings.Where(n => n.UserEmail == userEmail)
-                .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
-                .Take(pagingAttributes.PageSize)
-                .ToList();
-        }
         
         public int NumberOfMarkingsPerUser(string userEmail)
         {
