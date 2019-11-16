@@ -53,10 +53,11 @@ namespace WebServiceLayer.Controllers
             if (_appUserService.AppUserExcist(userEmail) && _questionService.QuestionExcist(questionId))
             {
                 _markingService.CreateMarking(marking);
+              var question = _questionService.GetMarkedQuestion(marking.QuestionId,marking.UserEmail);
                 return CreatedAtRoute(
                     nameof(GetMarking),
                     new { userEmail = marking.UserEmail, questionId = marking.QuestionId },
-                    CreateMarkingDto(marking));
+                    CreateQuestionDto(question));
             }
             return NotFound();
            
@@ -84,65 +85,47 @@ namespace WebServiceLayer.Controllers
         [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
             public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
             {
-                var markings = _questionService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
+                var markedQuestions = _questionService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
 
-                List<Question> questions = new List<Question>();
-                foreach (var marking in markings)
-                {
-                    questions.Add(_questionService.GetQuestionById(marking.QuestionId));
-                }
-                var result = CreateResult(questions, markings, pagingAttributes, userEmail);
+                var result = CreateResult(markedQuestions,pagingAttributes,userEmail);
 
                 return Ok(result);
             }
-            
-            private string CreatePagingLink(int page, int pageSize,string userEmail, int questionId)
-            {
-                string pageLink = "";
-                if (userEmail!="")
-                {
-                    pageLink = Url.Link(nameof(GetMarkingsByUserEmail), new { page, pageSize });
-                }
-            
-                return pageLink;
-            
-            }
-            
-            private object CreateResult(IEnumerable<Question> questions, IEnumerable<Marking> markings,PagingAttributes attr, string userEmail ="", int questionId=0)
-            {
-                int totalItems = 0;
-                
-                totalItems = _markingService.NumberOfMarkingsPerUser(userEmail);
-                
-                var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
 
-                var prev = attr.Page > 0
-                    ? CreatePagingLink(attr.Page - 1, attr.PageSize, userEmail,questionId)
-                    : null;
-                var next = attr.Page < numberOfPages - 1
-                    ? CreatePagingLink(attr.Page + 1, attr.PageSize, userEmail, questionId)
-                    : null;
-            var titles = questions.Select(q => q.Title);
-            var links = markings.Select(CreateMarkingDto);
+        private string CreatePagingLink(int page, int pageSize)
+        {
+            return Url.Link(nameof(GetMarking), new { page, pageSize });
+        }
+
+        private object CreateResult(IEnumerable<MarkedQuestion> markedQuestions, PagingAttributes attr,string userEmail)
+        {
+            var totalItems = _markingService.NumberOfMarkingsPerUser(userEmail);
+            var numberOfPages = Math.Ceiling((double)totalItems / attr.PageSize);
+
+            var prev = attr.Page > 0
+                ? CreatePagingLink(attr.Page - 1, attr.PageSize)
+                : null;
+            var next = attr.Page < numberOfPages - 1
+                ? CreatePagingLink(attr.Page + 1, attr.PageSize)
+                : null;
+
             return new
             {
                 totalItems,
                 numberOfPages,
                 prev,
                 next,
-                items = new { titles = titles, links = links }
+                items = markedQuestions.Select(CreateQuestionDto)
             };
-            }
-            
-            private MarkingDto CreateMarkingDto(Marking marking)
-            {
-                var dto = _mapper.Map<MarkingDto>(marking);
+        }
+        private MarkedQuestionDto CreateQuestionDto(MarkedQuestion question)
+        {
+                var dto = _mapper.Map<MarkedQuestionDto>(question);
                 dto.Link = Url.Link(
                     nameof(GetMarking),
-                    new { userEmail = marking.UserEmail,questionId = marking.QuestionId });
+                    new { userEmail = question.UserEmail,questionId = question.Id });
                 return dto;
-            }
-        
-      
+        }
+
     }
 }

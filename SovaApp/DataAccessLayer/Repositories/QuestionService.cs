@@ -13,15 +13,16 @@ namespace DataAccessLayer.Repositories
             using var db = new SovaDbContext();
             return db.Questions.Find(questionId);
         }
-        public Question GetMarkedQuestion(int questionId, string userEmail)
+        public MarkedQuestion GetMarkedQuestion(int questionId, string userEmail)
         {
             using var db = new SovaDbContext();
             try
             {
-                return (from m in db.Markings
-                              join q in db.Questions on m.QuestionId equals q.Id
-                              where q.Id == questionId && m.UserEmail == userEmail
-                              select q).Single();
+                var result = (from m in db.Markings
+                         join q in db.Questions on m.QuestionId equals q.Id
+                         where q.Id == questionId && m.UserEmail == userEmail
+                         select new MarkedQuestion { Id = q.Id, Title = q.Title, UserEmail = m.UserEmail }).Single();
+                return result;
             }
             catch (Exception e)
             {
@@ -31,13 +32,13 @@ namespace DataAccessLayer.Repositories
  
         }
 
-        public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail,PagingAttributes pagingAttributes)
+        public List<MarkedQuestion> GetAllMarkedQuestionsByUserEmail(string userEmail,PagingAttributes pagingAttributes)
         {
             using var db = new SovaDbContext();
             var result = (from m in db.Markings
                           join q in db.Questions on m.QuestionId equals q.Id
                           where m.UserEmail == userEmail
-                          select q)
+                          select new MarkedQuestion{Id = q.Id,Title = q.Title, UserEmail = m.UserEmail })
                           .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
                           .Take(pagingAttributes.PageSize)
                           .ToList();
