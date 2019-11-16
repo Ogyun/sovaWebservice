@@ -30,14 +30,14 @@ namespace WebServiceLayer.Controllers
         }
         
         [HttpGet("{userEmail}/{questionId}", Name = nameof(GetMarking))]
-        public ActionResult GetMarking(int questionId)
+        public ActionResult GetMarking(int questionId, string userEmail)
         {
-            var marking = _questionService.GetQuestionById(questionId);
-            if (marking == null)
+            var markedQuestion= _questionService.GetMarkedQuestion(questionId,userEmail);
+            if (markedQuestion == null)
             {
                 return NotFound();
             }
-            return Ok(marking);
+            return Ok(markedQuestion);
         }
 
         [HttpPost]
