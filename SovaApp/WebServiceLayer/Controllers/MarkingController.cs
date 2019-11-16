@@ -20,12 +20,14 @@ namespace WebServiceLayer.Controllers
     {
         private IMarkingService _markingService;
         private IQuestionService _questionService;
+        private IAppUserService _appUserService;
         private IMapper _mapper;
 
-        public MarkingController(IMarkingService markingService, IQuestionService questionService, IMapper mapper)
+        public MarkingController(IMarkingService markingService, IQuestionService questionService, IAppUserService appUserService, IMapper mapper)
         {
             _markingService = markingService;
             _questionService = questionService;
+            _appUserService = appUserService;
             _mapper = mapper;
         }
         
@@ -48,11 +50,16 @@ namespace WebServiceLayer.Controllers
                 UserEmail = userEmail,
                 QuestionId = questionId
             };
-            _markingService.CreateMarking(marking);
-            return CreatedAtRoute(
-                nameof(GetMarking),
-                new {userEmail = marking.UserEmail, questionId = marking.QuestionId},
-                CreateMarkingDto(marking));
+            if (_appUserService.AppUserExcist(userEmail) && _questionService.QuestionExcist(questionId))
+            {
+                _markingService.CreateMarking(marking);
+                return CreatedAtRoute(
+                    nameof(GetMarking),
+                    new { userEmail = marking.UserEmail, questionId = marking.QuestionId },
+                    CreateMarkingDto(marking));
+            }
+            return NotFound();
+           
         }
 
         [HttpDelete]

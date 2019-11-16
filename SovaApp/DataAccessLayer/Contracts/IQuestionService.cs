@@ -6,6 +6,6 @@ namespace DataAccessLayer.Repositories
     {
         Question GetQuestionById(int questionId);
         Question GetMarkedQuestion(int questionId, string userEmail);
-
+        public bool QuestionExcist(int questionId);
     }
 }
