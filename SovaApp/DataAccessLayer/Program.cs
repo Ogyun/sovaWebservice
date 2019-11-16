@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccessLayer.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using System;
 
@@ -8,7 +9,7 @@ namespace DataAccessLayer
     {
         static void Main(string[] args)
         {
-
+            
         }
     }
 }
