@@ -36,7 +36,10 @@ namespace DataAccessLayer
                 using var db = new SovaDbContext();
                 return db.AppUsers.Find(email);
         }
-
+        public bool AppUserExcist(string email)
+        {
+            return GetUserByEmail(email) != null;
+        }
 
     }
 }

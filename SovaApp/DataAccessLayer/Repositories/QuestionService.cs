@@ -40,5 +40,9 @@ namespace DataAccessLayer.Repositories
             return result;
                 
         }
+        public bool QuestionExcist(int questionId)
+        {
+            return GetQuestionById(questionId) != null;
+        }
     }
 }
