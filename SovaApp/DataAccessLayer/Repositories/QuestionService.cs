@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,13 +31,16 @@ namespace DataAccessLayer.Repositories
  
         }
 
-        public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail)
+        public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail,PagingAttributes pagingAttributes)
         {
             using var db = new SovaDbContext();
             var result = (from m in db.Markings
                           join q in db.Questions on m.QuestionId equals q.Id
                           where m.UserEmail == userEmail
-                          select q).ToList();
+                          select q)
+                          .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
+                          .Take(pagingAttributes.PageSize)
+                          .ToList();
             return result;
                 
         }

@@ -84,7 +84,7 @@ namespace WebServiceLayer.Controllers
         [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
             public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
             {
-                var markings = _markingService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
+                var markings = _questionService.GetAllMarkedQuestionsByUserEmail(userEmail, pagingAttributes);
 
                 List<Question> questions = new List<Question>();
                 foreach (var marking in markings)
