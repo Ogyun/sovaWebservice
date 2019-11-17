@@ -23,6 +23,17 @@ namespace WebServiceLayer.Controllers
             }
             return Ok(question);
         }
+        
+        [HttpGet("{questionId}/answers", Name = nameof(GetAnswers))]
+        public ActionResult GetAnswers(int questionId)
+        {
+            var question = _questionService.GetAnswers(questionId);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return Ok(question);
+        }
 
 
     }

@@ -1,5 +1,5 @@
-using DataAccessLayer.Models;
 using System.Collections.Generic;
+using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {
@@ -9,5 +9,6 @@ namespace DataAccessLayer.Repositories
         MarkedQuestion GetMarkedQuestion(int questionId, string userEmail);
         public bool QuestionExcist(int questionId);
         public List<MarkedQuestion> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes);
+        List<Answer> GetAnswers(int questionId);
     }
 }

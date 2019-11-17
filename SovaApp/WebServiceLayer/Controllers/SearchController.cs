@@ -84,9 +84,32 @@ namespace WebServiceLayer.Controllers
         //    return Ok();
         //}
 
+        [HttpGet("score/{query}")]
+        public ActionResult<IEnumerable<SearchResult>> SearchByScore(string query)
+        {
+            var res = query.Split(",");
+            var result = _searchService.SearchByScore(res[0], res[1]);
+            return Ok(result);
+        }
+        
+        [HttpGet("tags/{query}")]
+        public ActionResult<IEnumerable<SearchResult>> SearchByTag(string query)
+        {
+            var res = query.Split(",");
+            var result = _searchService.SearchByTag(res);
 
+            //get the user email from token and search text from keywords 
+            //if user is authorized call searchService.CreateSearchHistory()
+            return Ok(result);
+        }
 
-
+        [HttpGet("accepted/{query}")]
+        public ActionResult<IEnumerable<SearchResult>> SearchByAcceptedAnswer(string query)
+        {
+            bool accepted = query.Equals("yes");
+            var result = _searchService.SearchByAcceptedAnswer(accepted);
+            return Ok(result);
+        }
 
     }
 }
