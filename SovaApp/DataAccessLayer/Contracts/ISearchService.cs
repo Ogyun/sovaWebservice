@@ -5,9 +5,12 @@ namespace DataAccessLayer
     public interface ISearchService
     {
         List<SearchResult> SearchByKeyword(params string[] keywords);
-        public SearchHistory CreateSearchHistory(SearchHistory history);
-        public List<SearchHistory> GetSearchHistoryByUserEmail(string userEmail);
-        public bool DeleteSearchHistoryByUserEmail(string userEmail);
-        public bool DeleteSearchHistoryById(int historyId);
+        SearchHistory CreateSearchHistory(SearchHistory history);
+        List<SearchHistory> GetSearchHistoryByUserEmail(string userEmail);
+        bool DeleteSearchHistoryByUserEmail(string userEmail);
+        bool DeleteSearchHistoryById(int historyId);
+        List<SearchResult> SearchByScore(string fromScore, string toScore);
+        List<SearchResult> SearchByTag(params string[] keywords);
+        List<SearchResult> SearchByAcceptedAnswer(bool accepted);
     }
 }

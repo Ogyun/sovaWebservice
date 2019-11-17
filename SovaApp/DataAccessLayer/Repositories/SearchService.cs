@@ -69,117 +69,66 @@ namespace DataAccessLayer
 
         }
 
-        //public List<Question> SearchByAcceptedAnswer(Boolean accepted)
-        //{
-        //    using var db = new  SovaDbContext();
-        //    if(accepted) { return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is not null")); }
-        //    return ListQuestions(db.Questions.FromSqlRaw("select * from questions where acceptedanswerid is null")); 
-        //}
+        public List<SearchResult> SearchByAcceptedAnswer(Boolean accepted)
+        {
+            using var db = new  SovaDbContext();
+            if(accepted) { return db.SearchResults.FromSqlRaw("select * from questions where acceptedanswerid is not null order by score").Select(x => new SearchResult
+            {
+                QuestionId = x.QuestionId,
+                AnswerId = x.AnswerId,
+                Type = "question",
+                Body = x.Body,
+                Title = x.Title,
+                Score = x.Score,
+                Tags = x.Tags,
+                CreationDate = x.CreationDate
+            }).ToList(); }
+            return db.SearchResults.FromSqlRaw("select * from questions where acceptedanswerid is null order by score").Select(x => new SearchResult
+            {
+                QuestionId = x.QuestionId,
+                AnswerId = x.AnswerId,
+                Type = "question",
+                Body = x.Body,
+                Title = x.Title,
+                Score = x.Score,
+                Tags = x.Tags,
+                CreationDate = x.CreationDate
+            }).ToList(); 
+        }
 
-        //public List<SearchByAcceptedAnswerResult> SearchByAcceptedAnswer(Boolean accepted)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var searchResultList = new List<SearchByAcceptedAnswerResult>();
-        //    SearchByAcceptedAnswerResult searchResult;
-
-        //    if (accepted)
-        //    {
-        //        return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is not null"));
-
-        //    }
-        //       return ListResults(db.SearchByAcceptedAnswerResult.FromSqlRaw("select * from questions where acceptedanswerid is null"));
-        //}
-
-        //public List<Question> SearchByTag(params string[] tags)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var s = BuildStringFromParams(tags);
-        //    var result = db.Questions.FromSqlRaw("select * from search_by_tags(" + s + ")");
-        //    return ListQuestions(result);
-        //}
-        //public List<SearchByTagResult> SearchByTag(params string[] tags)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var s = BuildStringFromParams(tags);
-        //    var result = db.SearchByTagResult.FromSqlRaw("select * from search_by_tags(" + s + ")");
-        //    var searchResultList = new List<SearchByTagResult>();
-        //    SearchByTagResult searchResult;
-        //    foreach (var item in result)
-        //    {
-        //        searchResult = new SearchByTagResult
-        //        {
-        //            Id = item.Id,
-        //            Body = item.Body,
-        //            Score=item.Score,
-        //            AcceptedAnswerId = item.AcceptedAnswerId,
-        //            ClosedDate = item.ClosedDate,
-        //            CreationDate = item.CreationDate,
-        //            Tag = item.Tag,
-        //            Title = item.Title,
-        //            UserId = item.UserId
-        //        };
-        //        searchResultList.Add(searchResult);
-        //    }
-        //    return searchResultList;
-        //}
-        //public List<SearchResult> SearchByScore(int fromScore, int toScore)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var result = db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
-        //    return ListResults(result);
-        //}
-        //public List<SearchByScoreResult> SearchByScore(int fromScore, int toScore)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var result = db.SearchByScoreResult.FromSqlRaw("select * from search_by_score(" + fromScore + ", " + toScore + ")");
-        //    var searchResultList = new List<SearchByScoreResult>();
-        //    SearchByScoreResult searchResult;
-        //    foreach (var item in result)
-        //    {
-        //        searchResult = new SearchByScoreResult
-        //        {
-        //            PostId = item.PostId,
-        //            Type = item.Type,
-        //            CreationDate = item.CreationDate,
-        //            Body = item.Body,
-        //            Score = item.Score,
-        //            UserId = item.UserId
-
-        //        };
-        //        searchResultList.Add(searchResult);
-        //    }
-        //    return searchResultList;
-        //}
-
-        //public List<SearchResult> SearchByUsername(string username)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var result = db.SearchResults.FromSqlRaw("select * from search_by_username(" + username + ")");
-        //    return ListResults(result);
-        //}
-
-        //public List<SearchByUserNameResult> SearchByUsername(string username)
-        //{
-        //    using var db = new SovaDbContext();
-        //    var result = db.SearchByUserNameResult.FromSqlRaw("select * from search_by_username(" + username + ")");
-        //    var searchResultList = new List<SearchByUserNameResult>();
-        //    SearchByUserNameResult searchResult;
-        //    foreach (var item in result)
-        //    {
-        //        searchResult = new SearchByUserNameResult
-        //        {
-        //            PostId = item.PostId,
-        //            Type = item.Type,
-        //            Body = item.Body,
-        //            CreationDate=item.CreationDate,
-        //            Score = item.Score,
-        //            UserId = item.UserId,
-        //            User_Name = item.User_Name
-        //        };
-        //        searchResultList.Add(searchResult);
-        //    }
-        //    return searchResultList;
-        //}
+        public List<SearchResult> SearchByTag(params string[] tags)
+        {
+            using var db = new SovaDbContext();
+            var s = BuildStringFromParams(tags); 
+            return db.SearchResults.FromSqlRaw("select * from search_by_tags(" + s + ")").Select(x => new SearchResult
+            {
+                QuestionId = x.QuestionId,
+                AnswerId = x.AnswerId,
+                Type = x.Type,
+                Body = x.Body,
+                Title = x.Title,
+                Score = x.Score,
+                Tags = x.Tags,
+                CreationDate = x.CreationDate
+            }).ToList();
+        }
+     
+        public List<SearchResult> SearchByScore(string fromScore, string toScore)
+        {
+            using var db = new SovaDbContext();
+            return db.SearchResults.FromSqlRaw("select * from search_by_score(" + fromScore + "," + toScore  + ")").Select(x => new SearchResult
+            {
+                QuestionId = x.QuestionId,
+                AnswerId = x.AnswerId,
+                Type = x.Type,
+                Body = x.Body,
+                Title = x.Title,
+                Score = x.Score,
+                Tags = x.Tags,
+                CreationDate = x.CreationDate
+            }).ToList();
+        }
+       
 
         //private List<SearchResult> ListResults(IQueryable<SearchResult> result)
         //{
