@@ -63,7 +63,6 @@ namespace WebServiceLayer.Controllers
         public ActionResult GetSearchHistoryByUserEmail(string userEmail)
         {
             var historyList = _searchService.GetSearchHistoryByUserEmail(userEmail);
-            Console.WriteLine("This is the list" + historyList);
             if (historyList!=null)
             {
                 return CreatedAtAction(

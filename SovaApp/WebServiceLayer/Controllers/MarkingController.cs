@@ -59,6 +59,7 @@ namespace WebServiceLayer.Controllers
                 return Content("The question is already marked");
               
             }
+            //User or question doesn't exist
             return NotFound();
            
         }
