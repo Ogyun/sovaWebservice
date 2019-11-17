@@ -43,21 +43,25 @@ namespace WebServiceLayer.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateMarking(string userEmail, int questionId)
+        public ActionResult CreateMarking(Marking marking)
         {
-            var marking = new Marking
+        //    var marking = new Marking
+        //    {
+        //        UserEmail = userEmail,
+        //        QuestionId = questionId
+        //    };
+            if (_appUserService.AppUserExcist(marking.UserEmail) && _questionService.QuestionExcist(marking.QuestionId))
             {
-                UserEmail = userEmail,
-                QuestionId = questionId
-            };
-            if (_appUserService.AppUserExcist(userEmail) && _questionService.QuestionExcist(questionId))
-            {
-                _markingService.CreateMarking(marking);
-              var question = _questionService.GetMarkedQuestion(marking.QuestionId,marking.UserEmail);
-                return CreatedAtRoute(
-                    nameof(GetMarking),
-                    new { userEmail = marking.UserEmail, questionId = marking.QuestionId },
-                    CreateQuestionDto(question));
+                if (_markingService.CreateMarking(marking) != null)
+                {
+                    var question = _questionService.GetMarkedQuestion(marking.QuestionId, marking.UserEmail);
+                    return CreatedAtRoute(
+                        nameof(GetMarking),
+                        new { userEmail = marking.UserEmail, questionId = marking.QuestionId },
+                        CreateQuestionDto(question));
+                }
+                return Content("The question is already marked");
+              
             }
             return NotFound();
            

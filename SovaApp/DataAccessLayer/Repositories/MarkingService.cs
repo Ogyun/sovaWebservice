@@ -12,16 +12,19 @@ namespace DataAccessLayer.Repositories
         public Marking CreateMarking(Marking marking)
         {
             using var db = new SovaDbContext();
-            db.Markings.Add(marking);
-            int changes = db.SaveChanges();
-            if (changes > 0)
+            try
             {
+                db.Markings.Add(marking);
+                db.SaveChanges();
                 return marking;
             }
-            else
+            catch (Exception e)
             {
+
                 return null;
             }
+  
+
         }
 
         public bool DeleteMarking(Marking marking)

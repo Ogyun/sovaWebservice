@@ -14,7 +14,6 @@ namespace WebServiceLayer.Profiles
         public MarkingProfile()
         {
             CreateMap<MarkedQuestion, MarkedQuestionDto>();
-            CreateMap<MarkingForCreation, Marking>();
 
         }
     }
