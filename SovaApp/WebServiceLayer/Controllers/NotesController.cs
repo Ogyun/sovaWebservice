@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DataAccessLayer.Contracts;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace WebServiceLayer.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet("{userEmail}",Name = nameof(GetNotesByUserEmail))]
         public ActionResult GetNotesByUserEmail(string userEmail,[FromQuery] PagingAttributes pagingAttributes)
         {
@@ -35,6 +37,7 @@ namespace WebServiceLayer.Controllers
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("{userEmail}/question/{questionId}", Name = nameof(GetAllNotesForQuestion))]
         public ActionResult GetAllNotesForQuestion(string userEmail,int questionId, [FromQuery] PagingAttributes pagingAttributes)
         {
@@ -45,8 +48,7 @@ namespace WebServiceLayer.Controllers
             return Ok(result);
         }
 
-
-
+        [Authorize]
         [HttpGet("{userEmail}/{noteId}", Name = nameof(GetNote))]
         public ActionResult GetNote(int noteId)
         {
@@ -58,6 +60,7 @@ namespace WebServiceLayer.Controllers
             return Ok(CreateNoteDto(note));
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult CreateNote(NoteForCreation noteDto)
         {
@@ -69,6 +72,7 @@ namespace WebServiceLayer.Controllers
                 CreateNoteDto(note));
         }
 
+        [Authorize]
         [HttpDelete("{noteId}")]
         public ActionResult DeleteNote(int noteId)
         {
@@ -83,6 +87,7 @@ namespace WebServiceLayer.Controllers
            
         }
 
+        [Authorize]
         [HttpPut("{noteId}")]
         public ActionResult UpdateNote(int noteId,[FromBody] Note note)
         {
