@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace DataAccessLayer.Repositories
 {
@@ -22,6 +24,16 @@ namespace DataAccessLayer.Repositories
                           select q).ToList();
             return result;
                 
+        }
+
+        public List<Answer> GetAnswers(int questionid)
+        {
+            using var db = new SovaDbContext();
+            var result = (from a in db.Answers
+                join q in db.Questions on a.QuestionId equals q.Id
+                where q.Id == questionid
+                select a).ToList();
+            return result;
         }
     }
 }
