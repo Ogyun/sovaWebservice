@@ -5,7 +5,8 @@ namespace DataAccessLayer.Repositories
     public interface IQuestionService
     {
         Question GetQuestionById(int questionId);
-        List<Answer> GetAnswers(int questionId);
-
+        MarkedQuestion GetMarkedQuestion(int questionId, string userEmail);
+        public bool QuestionExcist(int questionId);
+        public List<MarkedQuestion> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes);
     }
 }

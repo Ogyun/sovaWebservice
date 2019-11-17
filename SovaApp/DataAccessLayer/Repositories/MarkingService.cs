@@ -12,16 +12,19 @@ namespace DataAccessLayer.Repositories
         public Marking CreateMarking(Marking marking)
         {
             using var db = new SovaDbContext();
-            db.Markings.Add(marking);
-            int changes = db.SaveChanges();
-            if (changes > 0)
+            try
             {
+                db.Markings.Add(marking);
+                db.SaveChanges();
                 return marking;
             }
-            else
+            catch (Exception e)
             {
+
                 return null;
             }
+  
+
         }
 
         public bool DeleteMarking(Marking marking)
@@ -34,20 +37,15 @@ namespace DataAccessLayer.Repositories
 
         }
 
-        public List<Marking> GetAllMarkedQuestionsByUserEmail(string userEmail, PagingAttributes pagingAttributes)
-        {
-            using var db = new SovaDbContext();
-            return db.Markings.Where(n => n.UserEmail == userEmail)
-                .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
-                .Take(pagingAttributes.PageSize)
-                .ToList();
-        }
+
         
         public int NumberOfMarkingsPerUser(string userEmail)
         {
             using var db = new SovaDbContext();
             return db.Markings.Where(n => n.UserEmail == userEmail).Count();
         }
+
+
 
     }
 }

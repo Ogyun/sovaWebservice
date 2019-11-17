@@ -1,5 +1,6 @@
 using AutoMapper;
 using DataAccessLayer;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,7 @@ namespace WebServiceLayer.Profiles
     {
         public MarkingProfile()
         {
-            CreateMap<Marking, MarkingDto>();
-            CreateMap<MarkingForCreation, Marking>();
+            CreateMap<MarkedQuestion, MarkedQuestionDto>();
 
         }
     }

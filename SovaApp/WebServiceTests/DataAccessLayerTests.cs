@@ -33,14 +33,14 @@ namespace WebServiceTests
 
         }
 
-        [Fact]
-        public void GetAllMarkedQuestionsByUserEmailTest()
-        {
-            var service = new QuestionService();
-            var userEmail = "i@mail.com";
-            var questions = service.GetAllMarkedQuestionsByUserEmail(userEmail);
-            Assert.Equal(2, questions.Count);
-        }
+        //[Fact]
+        //public void GetAllMarkedQuestionsByUserEmailTest()
+        //{
+        //    var service = new QuestionService();
+        //    var userEmail = "i@mail.com";
+        //    var questions = service.GetAllMarkedQuestionsByUserEmail(userEmail);
+        //    Assert.Equal(2, questions.Count);
+        //}
 
 
         //Note tests

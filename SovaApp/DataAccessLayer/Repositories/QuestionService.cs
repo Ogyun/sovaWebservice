@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using DataAccessLayer.Models;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace DataAccessLayer.Repositories
 {
@@ -13,15 +11,35 @@ namespace DataAccessLayer.Repositories
             using var db = new SovaDbContext();
             return db.Questions.Find(questionId);
         }
+        public MarkedQuestion GetMarkedQuestion(int questionId, string userEmail)
+        {
+            using var db = new SovaDbContext();
+            try
+            {
+                var result = (from m in db.Markings
+                         join q in db.Questions on m.QuestionId equals q.Id
+                         where q.Id == questionId && m.UserEmail == userEmail
+                         select new MarkedQuestion { Id = q.Id, Title = q.Title, UserEmail = m.UserEmail }).Single();
+                return result;
+            }
+            catch (Exception e)
+            {
 
-            
-        public List<Question> GetAllMarkedQuestionsByUserEmail(string userEmail)
+                return null;
+            }
+ 
+        }
+
+        public List<MarkedQuestion> GetAllMarkedQuestionsByUserEmail(string userEmail,PagingAttributes pagingAttributes)
         {
             using var db = new SovaDbContext();
             var result = (from m in db.Markings
                           join q in db.Questions on m.QuestionId equals q.Id
                           where m.UserEmail == userEmail
-                          select q).ToList();
+                          select new MarkedQuestion{Id = q.Id,Title = q.Title, UserEmail = m.UserEmail })
+                          .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
+                          .Take(pagingAttributes.PageSize)
+                          .ToList();
             return result;
                 
         }
@@ -34,6 +52,10 @@ namespace DataAccessLayer.Repositories
                 where q.Id == questionid
                 select a).ToList();
             return result;
+        }
+        public bool QuestionExcist(int questionId)
+        {
+            return GetQuestionById(questionId) != null;
         }
     }
 }
