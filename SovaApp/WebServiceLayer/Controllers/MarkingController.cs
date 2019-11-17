@@ -45,11 +45,7 @@ namespace WebServiceLayer.Controllers
         [HttpPost]
         public ActionResult CreateMarking(Marking marking)
         {
-        //    var marking = new Marking
-        //    {
-        //        UserEmail = userEmail,
-        //        QuestionId = questionId
-        //    };
+
             if (_appUserService.AppUserExcist(marking.UserEmail) && _questionService.QuestionExcist(marking.QuestionId))
             {
                 if (_markingService.CreateMarking(marking) != null)
