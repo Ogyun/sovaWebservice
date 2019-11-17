@@ -9,7 +9,6 @@ namespace DataAccessLayer
     public class SearchHistory
     {
         public int Id { get; set; }
-       // public AppUser AppUser { get; set; }
         public string Email { get; set; }
         public DateTime SearchDate { get; set; }
         public string SearchText { get; set; }

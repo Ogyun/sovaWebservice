@@ -80,16 +80,6 @@ namespace WebServiceLayer.Controllers
                 }
             }
 
-
-            //we might not need this route
-            //[HttpPost]
-            //public ActionResult CreateSearchHistory(SearchHistoryForCreation searchHistoryDto)
-            //{
-            //    var history = _mapper.Map<SearchHistory>(searchHistoryDto);
-            //    _searchService.CreateSearchHistory(history);
-            //    return Ok();
-            //}
-
             [Authorize]
             [HttpGet("score/{query}")]
             public ActionResult<IEnumerable<SearchResult>> SearchByScore(string query)

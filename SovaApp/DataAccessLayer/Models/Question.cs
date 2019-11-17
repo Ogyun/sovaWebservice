@@ -20,18 +20,7 @@ namespace DataAccessLayer
         public DateTime? ClosedDate { get; set; }
         
         public String Title { get; set; }
-        
-      //  public User User{ get; set; }
 
-        //public List<Answer> Answers { get; set; }
-        //public List<Note> Notes { get; set; }
-        //public List<Marking> Markings { get; set; }
-        //public List<QuestionTag> QuestionTags{ get; set; }
 
-        public override string ToString()
-        {
-            return "Id:" + Id + " Accepted Answer Id:" + AcceptedAnswerId + " Creation Date:" + CreationDate + " Score:" + Score + " Body:" + Body
-                + " Closed Date:" + ClosedDate + " Title:" + Title;// + " User Id:" + UserId;// + " Tag:" + Tag;
-        }
     }
 }

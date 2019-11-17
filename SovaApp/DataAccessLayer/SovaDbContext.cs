@@ -11,11 +11,6 @@ namespace DataAccessLayer
     public class SovaDbContext:DbContext
     {
         public DbQuery<SearchResult> SearchResults { get; set; }
-        //public DbQuery<SearchByKeywordResult> SearchByKeywordResult { get; set; }
-        //public DbQuery<SearchByScoreResult> SearchByScoreResult { get; set; }
-        //public DbQuery<SearchByTagResult> SearchByTagResult { get; set; }
-        //public DbQuery<SearchByUserNameResult> SearchByUserNameResult { get; set; }
-        //public DbQuery<SearchByAcceptedAnswerResult> SearchByAcceptedAnswerResult { get; set; }
 
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -49,7 +44,6 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Question>().ToTable("questions");
             modelBuilder.Entity<Question>().HasKey(m => m.Id);
-            //modelBuilder.Entity<Question>().HasOne(q => q.User).WithMany(u => u.Questions);
             modelBuilder.Entity<Question>().Property(m => m.Id).HasColumnName("id");
             modelBuilder.Entity<Question>().Property(m => m.AcceptedAnswerId).HasColumnName("acceptedanswerid");
             modelBuilder.Entity<Question>().Property(m => m.CreationDate).HasColumnName("creationdate");
@@ -57,18 +51,14 @@ namespace DataAccessLayer
             modelBuilder.Entity<Question>().Property(m => m.Body).HasColumnName("body");
             modelBuilder.Entity<Question>().Property(m => m.ClosedDate).HasColumnName("closeddate");
             modelBuilder.Entity<Question>().Property(m => m.Title).HasColumnName("title");
-          //  modelBuilder.Entity<Question>().Property(m => m.UserId).HasColumnName("userid");
 
             modelBuilder.Entity<Answer>().ToTable("answers");
             modelBuilder.Entity<Answer>().HasKey(m => m.Id);
-            //modelBuilder.Entity<Answer>().HasOne(a => a.User).WithMany(u => u.Answers);
-            //modelBuilder.Entity<Answer>().HasOne(a => a.Question).WithMany(q => q.Answers);
             modelBuilder.Entity<Answer>().Property(m => m.Id).HasColumnName("id");
             modelBuilder.Entity<Answer>().Property(m => m.QuestionId).HasColumnName("questionid");
             modelBuilder.Entity<Answer>().Property(m => m.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<Answer>().Property(m => m.Score).HasColumnName("score");
             modelBuilder.Entity<Answer>().Property(m => m.Body).HasColumnName("body");
-           // modelBuilder.Entity<Answer>().Property(m => m.UserId).HasColumnName("userid");
 
             modelBuilder.Entity<AppUser>().ToTable("app_users");
             modelBuilder.Entity<AppUser>().HasKey(m => m.Email);
@@ -79,7 +69,6 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<SearchHistory>().ToTable("search_history");
             modelBuilder.Entity<SearchHistory>().HasKey(m => m.Id);
-           // modelBuilder.Entity<SearchHistory>().HasOne(m => m.AppUser).WithMany(u => u.SearchHistories);
             modelBuilder.Entity<SearchHistory>().Property(m => m.Id).HasColumnName("searchid");
             modelBuilder.Entity<SearchHistory>().Property(m => m.Email).HasColumnName("useremail");
             modelBuilder.Entity<SearchHistory>().Property(m => m.SearchDate).HasColumnName("searchdate");
@@ -87,8 +76,6 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Note>().ToTable("notes");
             modelBuilder.Entity<Note>().HasKey(m => m.Id);
-            //modelBuilder.Entity<Note>().HasOne(n => n.AppUser).WithMany(u => u.Notes);
-            //modelBuilder.Entity<Note>().HasOne(n => n.Question).WithMany(q => q.Notes);
             modelBuilder.Entity<Note>().Property(m => m.UserEmail).HasColumnName("useremail");
             modelBuilder.Entity<Note>().Property(m => m.Notetext).HasColumnName("notetext");
             modelBuilder.Entity<Note>().Property(m => m.QuestionId).HasColumnName("questionid");
@@ -97,8 +84,6 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Marking>().ToTable("markings");
             modelBuilder.Entity<Marking>().HasKey(m => new { m.UserEmail, m.QuestionId });
-           // modelBuilder.Entity<Marking>().HasOne(m => m.AppUser).WithMany(u => u.Markings);
-           // modelBuilder.Entity<Marking>().HasOne(m => m.Question).WithMany(q => q.Markings);
             modelBuilder.Entity<Marking>().Property(m => m.UserEmail).HasColumnName("useremail");
             modelBuilder.Entity<Marking>().Property(m => m.QuestionId).HasColumnName("qid");
 
@@ -107,9 +92,6 @@ namespace DataAccessLayer
             modelBuilder.Entity<Tag>().Property(m => m.QuestionId).HasColumnName("questionid");
             modelBuilder.Entity<Tag>().Property(m => m.TagBody).HasColumnName("tag");
 
-            modelBuilder.Entity<QuestionTag>().HasKey(t => new { t.QuestionId,t.TagBody });
-           // modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Question).WithMany(q => q.QuestionTags);
-            //modelBuilder.Entity<QuestionTag>().HasOne(qt => qt.Tag).WithMany(t => t.QuestionTags);
         }
 
     }

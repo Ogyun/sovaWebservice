@@ -8,7 +8,6 @@ namespace DataAccessLayer
     {
         public string UserEmail { get; set; }
         public int QuestionId { get; set; }
-       // public AppUser AppUser { get; set; }
-       // public Question Question { get; set; }
+
     }
 }

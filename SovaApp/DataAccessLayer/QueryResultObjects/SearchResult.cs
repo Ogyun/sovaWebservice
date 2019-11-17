@@ -15,10 +15,5 @@ namespace DataAccessLayer
         public string Title { get; set; }
         public string Tags { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return "PostId:" + PostId + " Rank:" + Rank + " Type:" + Type + " Body:" + Body + " Creation Date: " + CreationDate + " Score: " + Score
-        //        + " User Id: " + UserId + " Username: " + Username;
-        //}
     }
 }

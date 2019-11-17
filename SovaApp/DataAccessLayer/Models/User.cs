@@ -11,7 +11,6 @@ namespace DataAccessLayer.Models
         public DateTime UserCreationDate { get; set; }
         public string? UserLocation { get; set; }
         public int? UserAge { get; set; }
-       // public List<Question> Questions { get; set; }
-       /// public List<Answer> Answers { get; set; }
+
     }
 }

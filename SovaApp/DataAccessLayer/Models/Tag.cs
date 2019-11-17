@@ -8,6 +8,5 @@ namespace DataAccessLayer.Models
     {
         public int QuestionId { get; set; }
         public string TagBody { get; set; }
-        //public List<QuestionTag> QuestionTags { get; set; }
     }
 }
