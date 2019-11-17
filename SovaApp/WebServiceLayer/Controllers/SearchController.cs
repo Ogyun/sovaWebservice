@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using DataAccessLayer;
 using WebServiceLayer.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace WebServiceLayer.Controllers
 {
@@ -20,16 +23,14 @@ namespace WebServiceLayer.Controllers
                 _searchService = searchService;
                 _mapper = mapper;
             }
+        [Authorize]
         [HttpGet("keywords/{query}")]
-       // [HttpGet("{keywords}")]
             public ActionResult<IEnumerable<SearchResult>> GetSearchResult(string query)
             {
                 var res = query.Split(",");
                 var result = _searchService.SearchByKeyword(res);
-
-            //get the user email from token and search text from keywords 
-            //if user is authorized call searchService.CreateSearchHistory()
-            return Ok(result);
+                SaveSearchHistory(query);
+                return Ok(result);
         }
         [HttpDelete("history/{historyId}")]
         public ActionResult DeleteHistoryById(int historyId)
@@ -110,6 +111,19 @@ namespace WebServiceLayer.Controllers
             var result = _searchService.SearchByAcceptedAnswer(accepted);
             return Ok(result);
         }
+
+        private void SaveSearchHistory(string query)
+        {
+            var userEmail = HttpContext.User.Identity.Name;
+            var dto = new SearchHistoryForCreation { Email = userEmail, SearchText = query };
+            var history = _mapper.Map<SearchHistory>(dto);
+            _searchService.CreateSearchHistory(history);
+        }
+
+        //Another way to get the token and decode it
+        // HttpContext.Request.Headers.TryGetValue("Authorization",out var jwt);
+        //var handler = new JwtSecurityTokenHandler();
+        // var token = handler.ReadJwtToken(jwt);
 
     }
 }
