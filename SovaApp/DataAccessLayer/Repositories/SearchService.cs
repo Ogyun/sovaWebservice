@@ -69,31 +69,22 @@ namespace DataAccessLayer
 
         }
 
-        public List<SearchResult> SearchByAcceptedAnswer(Boolean accepted)
+        public List<SearchResult> SearchByAcceptedAnswer(bool accepted, params string[] keywords)
         {
             using var db = new  SovaDbContext();
-            if(accepted) { return db.SearchResults.FromSqlRaw("select * from questions where acceptedanswerid is not null order by score").Select(x => new SearchResult
+            var s = BuildStringFromParams(keywords);
+            var acc = accepted ? "'yes'" : "'no'";
+            return db.SearchResults.FromSqlRaw("select * from search_by_acceptedanswer(" + acc + "," +  s + ")").Select(x => new SearchResult
             {
                 QuestionId = x.QuestionId,
                 AnswerId = x.AnswerId,
-                Type = "question",
+                Type = x.Type,
                 Body = x.Body,
                 Title = x.Title,
                 Score = x.Score,
                 Tags = x.Tags,
                 CreationDate = x.CreationDate
-            }).ToList(); }
-            return db.SearchResults.FromSqlRaw("select * from questions where acceptedanswerid is null order by score").Select(x => new SearchResult
-            {
-                QuestionId = x.QuestionId,
-                AnswerId = x.AnswerId,
-                Type = "question",
-                Body = x.Body,
-                Title = x.Title,
-                Score = x.Score,
-                Tags = x.Tags,
-                CreationDate = x.CreationDate
-            }).ToList(); 
+            }).ToList();
         }
 
         public List<SearchResult> SearchByTag(params string[] tags)
