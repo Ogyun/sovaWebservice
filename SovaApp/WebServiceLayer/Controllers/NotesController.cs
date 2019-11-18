@@ -95,7 +95,6 @@ namespace WebServiceLayer.Controllers
             {
                 return NotFound();
             }
-            Console.WriteLine("comes here");
             note.Id = noteId;
             _noteService.UpdateNote(note);
             return Ok();
