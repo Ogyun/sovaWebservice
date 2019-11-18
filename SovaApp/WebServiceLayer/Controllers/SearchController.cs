@@ -101,7 +101,7 @@ namespace WebServiceLayer.Controllers
             }
 
             [Authorize]
-            [HttpGet("accepted/{isAccepted}/{keywords}")]
+            [HttpGet("answer/{isAccepted}/{keywords}")]
             public ActionResult<IEnumerable<SearchResult>> SearchByAcceptedAnswer(string isAccepted, string keywords)
             {
                 bool accepted = isAccepted.Equals("yes");
