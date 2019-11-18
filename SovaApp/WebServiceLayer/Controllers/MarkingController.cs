@@ -7,6 +7,7 @@ using DataAccessLayer;
 using DataAccessLayer.Contracts;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.VisualBasic.CompilerServices;
@@ -30,7 +31,7 @@ namespace WebServiceLayer.Controllers
             _appUserService = appUserService;
             _mapper = mapper;
         }
-        
+        [Authorize]
         [HttpGet("{userEmail}/{questionId}", Name = nameof(GetMarking))]
         public ActionResult GetMarking(int questionId, string userEmail)
         {
@@ -41,7 +42,7 @@ namespace WebServiceLayer.Controllers
             }
             return Ok(markedQuestion);
         }
-
+        [Authorize]
         [HttpPost]
         public ActionResult CreateMarking(Marking marking)
         {
@@ -63,7 +64,7 @@ namespace WebServiceLayer.Controllers
             return NotFound();
            
         }
-
+        [Authorize]
         [HttpDelete]
         public ActionResult DeleteMarking(string userEmail, int questionId)
         {
@@ -83,6 +84,7 @@ namespace WebServiceLayer.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
             public ActionResult GetMarkingsByUserEmail(string userEmail, [FromQuery] PagingAttributes pagingAttributes)
             {
