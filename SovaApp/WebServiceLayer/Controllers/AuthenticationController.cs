@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using DataAccessLayer.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -98,6 +99,21 @@ namespace WebServiceLayer.Controllers
             var token = tokenHandler.WriteToken(securityToken);
 
             return Ok(new { user.Email, token });
+
+        }
+        [Authorize]
+        [HttpDelete]
+        public ActionResult DeleteUser()
+        {
+            var userEmail = HttpContext.User.Identity.Name;
+            if (_appUserService.DeleteUserByEmail(userEmail))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
 
         }
 
