@@ -41,5 +41,14 @@ namespace DataAccessLayer
             return GetUserByEmail(email) != null;
         }
 
+        public bool DeleteUserByEmail(string useremail)
+        {
+            using var db = new SovaDbContext();
+            var email = db.AppUsers.Find(useremail);
+            if (email == null) return false;
+            db.AppUsers.Remove(email);
+            return db.SaveChanges() > 0;
+        }
+
     }
 }
