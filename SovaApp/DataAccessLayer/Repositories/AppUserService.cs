@@ -49,6 +49,20 @@ namespace DataAccessLayer
             db.AppUsers.Remove(email);
             return db.SaveChanges() > 0;
         }
+        public bool UpdateUser(AppUser user)
+        {
+            using var db = new SovaDbContext();
+            if (UserExcist(user.Email))
+            {
+                db.AppUsers.Update(user);
+                return db.SaveChanges() > 0;
+            }
+            return false;
+        }
+        public bool UserExcist(string email)
+        {
+            return GetUserByEmail(email) != null;
+        }
 
     }
 }
