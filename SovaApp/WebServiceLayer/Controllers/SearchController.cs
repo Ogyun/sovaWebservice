@@ -101,12 +101,12 @@ namespace WebServiceLayer.Controllers
             }
 
             [Authorize]
-            [HttpGet("accepted/{query}")]
-            public ActionResult<IEnumerable<SearchResult>> SearchByAcceptedAnswer(string query)
+            [HttpGet("accepted/{isAccepted}/{keywords}")]
+            public ActionResult<IEnumerable<SearchResult>> SearchByAcceptedAnswer(string isAccepted, string keywords)
             {
-                bool accepted = query.Equals("yes");
-                var result = _searchService.SearchByAcceptedAnswer(accepted);
-                SaveSearchHistory(query);
+                bool accepted = isAccepted.Equals("yes");
+                var result = _searchService.SearchByAcceptedAnswer(accepted, keywords);
+                SaveSearchHistory(keywords);
                 return Ok(result);
             }
 
