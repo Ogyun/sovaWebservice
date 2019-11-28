@@ -59,6 +59,7 @@ namespace WebServiceLayer
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseFileServer();
 
             app.UseEndpoints(endpoints =>
             {
