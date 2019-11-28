@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "require.js@1.0.0",
+      "destination": "wwwroot/lib/require.js/",
+      "files": [
+        "require.js"
+      ]
+    },
+    {
+      "library": "requirejs-text@2.0.15",
+      "destination": "wwwroot/lib/requirejs-text/",
+      "files": [
+        "text.js"
+      ]
+    },
+    {
+      "library": "knockout@3.5.1",
+      "destination": "wwwroot/lib/knockout/",
+      "files": [
+        "build/output/knockout-latest.debug.js",
+        "build/output/knockout-latest.js",
+        "build/types/knockout.d.ts"
+      ]
+    },
+    {
+      "library": "bootstrap@4.4.0",
+      "destination": "wwwroot/lib/bootstrap/"
+    }
+  ]
+}
