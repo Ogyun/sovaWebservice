@@ -30,33 +30,7 @@ namespace WebServiceLayer.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("users")]
-        public ActionResult CreateUser([FromBody] UserForCreationDto dto)
-        {
-            if (_appUserService.GetUserByEmail(dto.Email) != null)
-            {
-                return BadRequest();
-            }
-
-            int.TryParse(
-                _configuration.GetSection("Auth:PwdSize").Value,
-                out var size);
-
-            if (size == 0)
-            {
-                throw new ArgumentException();
-            }
-
-            var salt = PasswordService.GenerateSalt(size);
-
-            var pwd = PasswordService.HashPassword(dto.Password, salt, size);
-
-            _appUserService.CreateUser(dto.Name, dto.Email, pwd, salt);
-
-            return CreatedAtRoute(null,"Hello,"+ dto.Name+"!");
-        }
-
-        [HttpPost("tokens")]
+        [HttpPost]
         public ActionResult Login([FromBody] UserForLoginDto dto)
         {
             var user = _appUserService.GetUserByEmail(dto.Email);
@@ -104,54 +78,5 @@ namespace WebServiceLayer.Controllers
             return Ok(new { user.Email, token });
 
         }
-        [Authorize]
-        [HttpDelete]
-        public ActionResult DeleteUser()
-        {
-            var userEmail = HttpContext.User.Identity.Name;
-            if (_appUserService.DeleteUserByEmail(userEmail))
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
-
-        }
-        [Authorize]
-        [HttpPut]
-        public ActionResult UpdateUser(AppUser appUser)
-        {
-            var email = HttpContext.User.Identity.Name;
-            if (_appUserService.GetUserByEmail(appUser.Email) == null)
-            {
-                return BadRequest();
-            }
-
-            if (email != appUser.Email)
-            {
-                return BadRequest();
-            }
-            int.TryParse(
-                _configuration.GetSection("Auth:PwdSize").Value,
-                out var size);
-
-            if (size == 0)
-            {
-                throw new ArgumentException();
-            }
-
-            var salt = PasswordService.GenerateSalt(size);
-            var pwd = PasswordService.HashPassword(appUser.Password, salt, size);
-            var updatedUser = new AppUser { Email = appUser.Email, Password = pwd, Salt = salt, Name = appUser.Name };
-            _appUserService.UpdateUser(updatedUser);
-            return Ok(CreateAppUserDto(updatedUser));
-        }
-        private UserForUpdateDto CreateAppUserDto(AppUser user)
-        {
-            var dto = _mapper.Map<UserForUpdateDto>(user);
-            return dto;
-        }
-    }
+    } 
 }

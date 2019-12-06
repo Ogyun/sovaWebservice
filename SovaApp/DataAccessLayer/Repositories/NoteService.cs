@@ -27,6 +27,7 @@ namespace DataAccessLayer
         {
             using var db = new SovaDbContext();
             return db.Notes.Where(n => n.UserEmail == userEmail)
+                .OrderBy(n => n.QuestionId)
                 .Skip(pagingAttributes.Page * pagingAttributes.PageSize)
                 .Take(pagingAttributes.PageSize)
                 .ToList();
