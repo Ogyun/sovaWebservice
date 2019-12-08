@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\js\components\" />
-    <Folder Include="wwwroot\js\services\" />
     <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
