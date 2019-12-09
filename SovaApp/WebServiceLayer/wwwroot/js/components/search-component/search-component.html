@@ -1,2 +1,37 @@
-﻿<input id="searchInput" />
+﻿<h1>Search for posts</h1>
+<input id="searchInput" />
 &nbsp;<button class="btn-primary" data-bind="click: searchClick">Search</button>
+
+
+      <div class="container-fluid">
+          <div class="row">
+              <h3> Posts</h3>
+           </div>
+          <div class="row">
+              <div class="list-group col-lg-3">
+                  Title
+                  <ul data-bind="foreach: posts">
+                      <li data-bind="text: $data.title, click: $parent.onUserClick" style="cursor: pointer"></li>
+                  </ul>
+
+              </div>
+              <div class="list-group col-lg-3">
+                  Type
+                  <ul data-bind="foreach: posts">
+                      <li data-bind="text: $data.type, click: $parent.onUserClick" style="cursor: pointer"></li>
+                  </ul>
+              </div>
+              <div class="list-group col-lg-3">
+                  Score
+                  <ul data-bind="foreach: posts">
+                      <li data-bind="text: $data.score, click: $parent.onUserClick" style="cursor: pointer"></li>
+                  </ul>
+              </div>
+              <div class="list-group col-lg-3">
+                  Tags
+                  <ul data-bind="foreach: posts">
+                      <li data-bind="text: $data.tags, click: $parent.onUserClick" style="cursor: pointer"></li>
+                  </ul>
+              </div>
+          </div>
+          </div>
