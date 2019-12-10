@@ -10,9 +10,13 @@
 
     return function () {
      
-        var deleteSpecificHistory = function (historyId) {
-            ss.deleteSearchHistoryById(historyId, function (response) {
-                console.log(response);
+        var deleteSpecificHistory = function (history) {
+            ss.deleteSearchHistoryById(history.id, function (response) {
+                if (response.status == 200) {
+                    historyList.remove(history)
+                } else {
+                    alert("something went wrong");
+                }
             });
         }
 

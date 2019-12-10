@@ -13,7 +13,7 @@
                 <ul data-bind="foreach: historyList">
                     <li>
                         <span data-bind="text: $data.searchText, click: $parent.onHistoryClick" style="cursor: pointer"></span>
-                        <button class="btn-danger" data-bind="click: $parent.deleteSpecificHistory.bind($data, $data.id)">Delete</button>
+                        <button class="btn-danger" data-bind="click: $parent.deleteSpecificHistory.bind($data)">Delete</button>
                     </li>
                 </ul>
             </div>
