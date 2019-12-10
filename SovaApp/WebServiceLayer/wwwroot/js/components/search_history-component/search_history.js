@@ -6,10 +6,8 @@
         var userEmail = localStorage.getItem('email');
 
         var getHistoryList = function () {      
-            console.log(userEmail);
             ss.getSearchHistory(userEmail, function (response) {
                 historyList(response);
-                    console.log(response);
                 });
         }
 
@@ -20,7 +18,7 @@
         }
 
         var deleteAllHistory = function () {
-            ss.deleteAllSearchHistory(email, function (response) {
+            ss.deleteAllSearchHistory(userEmail, function (response) {
                 console.log(response);
             });
         }

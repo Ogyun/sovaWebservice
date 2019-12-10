@@ -59,7 +59,7 @@
     }
 
     var deleteAllSearchHistory = async function (email, callback) {
-        var response = await fetch("http://localhost:5001/api/search/history/user" + email, {
+        var response = await fetch("http://localhost:5001/api/search/history/user/" + email, {
             method: 'DELETE',
             headers: headers
         });
