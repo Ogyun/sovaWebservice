@@ -53,15 +53,7 @@
         var response = await fetch("http://localhost:5001/api/search/history/" + historyId, {
             method: 'DELETE',
             headers: headers
-        });//.then(function (response) {
-        //    if (response.status == 200) {
-        //        console.log("status 200");
-        //    }
-        //    else {
-        //        console.log("something went wrong");
-        //    }
-        //    return response;
-        //});
+        });
         var data = await response;
         callback(data);
     }
@@ -71,7 +63,7 @@
             method: 'DELETE',
             headers: headers
         });
-        var data = await response.json();
+        var data = await response;
         callback(data);
     }
 

@@ -22,7 +22,11 @@
 
         var deleteAllHistory = function () {
             ss.deleteAllSearchHistory(userEmail, function (response) {
-                console.log(response);
+                if (response.status == 200) {
+                    historyList.removeAll();
+                } else {
+                    alert("something went wrong");
+                }
             });
         }
 
