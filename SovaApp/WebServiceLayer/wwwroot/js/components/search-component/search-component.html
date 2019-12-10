@@ -11,26 +11,26 @@
               <div class="list-group col-lg-3">
                   Title
                   <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.title, click: $parent.onUserClick" style="cursor: pointer"></li>
+                      <li data-bind="text: $data.title, click: $parent.onPostClick.bind($data)" ></li>
                   </ul>
 
               </div>
               <div class="list-group col-lg-3">
                   Type
                   <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.type, click: $parent.onUserClick" style="cursor: pointer"></li>
+                      <li data-bind="text: $data.type" ></li>
                   </ul>
               </div>
               <div class="list-group col-lg-3">
                   Score
                   <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.score, click: $parent.onUserClick" style="cursor: pointer"></li>
+                      <li data-bind="text: $data.score" ></li>
                   </ul>
               </div>
               <div class="list-group col-lg-3">
                   Tags
                   <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.tags, click: $parent.onUserClick" style="cursor: pointer"></li>
+                      <li data-bind="text: $data.tags" ></li>
                   </ul>
               </div>
           </div>

@@ -40,14 +40,20 @@
         else {
             ss.searchByKeyword(query, function (response) {
                 posts(response);
-                console.log(response[0])
+                //console.log(response[0])
             });
         }
-    }
+        }
+
+        var onPostClick = function (data) {
+            //redirect to question component
+            console.log(data.type, data.questionId);
+        }
 
     return {
         searchClick,
-        posts
+        posts,
+        onPostClick
     };
    };
 });
