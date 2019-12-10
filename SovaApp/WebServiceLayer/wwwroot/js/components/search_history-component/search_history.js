@@ -3,12 +3,10 @@
 
     return function () {
         var historyList = ko.observableArray([]);
-        //get email from token
-       
+        var userEmail = localStorage.getItem('email');
 
-        var getHistoryList = function () {
-            var userEmail = localStorage.getItem('email');
-
+        var getHistoryList = function () {      
+            console.log(userEmail);
             ss.getSearchHistory(userEmail, function (response) {
                 historyList(response);
                     console.log(response);

@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im9neXVuQGdtYWlsLmNvbSIsIm5iZiI6MTU3NTk3NzkxMCwiZXhwIjoxNTc1OTg4NzEwLCJpYXQiOjE1NzU5Nzc5MTB9.h6abxYh0oIz8PsXWspOcnVXhep-js6cA1kzYU-eS-LM";
+    var token = localStorage.getItem('token');
     var headers = new Headers();
     headers.append('Authorization','Bearer ' + token);
 
