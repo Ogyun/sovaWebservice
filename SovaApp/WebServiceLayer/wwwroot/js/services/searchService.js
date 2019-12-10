@@ -1,6 +1,6 @@
 ﻿define([], function () {
 
-    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im9neXVuQGdtYWlsLmNvbSIsIm5iZiI6MTU3NTg5NjUyMiwiZXhwIjoxNTc1OTA3MzIyLCJpYXQiOjE1NzU4OTY1MjJ9._NO9PX2yiGc4G7SCySETFKHZ0OjxyEDuTwY6lt3Q5zo";
+    var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im9neXVuQGdtYWlsLmNvbSIsIm5iZiI6MTU3NTk3NzkxMCwiZXhwIjoxNTc1OTg4NzEwLCJpYXQiOjE1NzU5Nzc5MTB9.h6abxYh0oIz8PsXWspOcnVXhep-js6cA1kzYU-eS-LM";
     var headers = new Headers();
     headers.append('Authorization','Bearer ' + token);
 
@@ -41,7 +41,7 @@
     }
 
     var getSearchHistory = async function (email, callback) {
-        var response = await fetch("http://localhost:5001/api/search/history/" + email, {
+        var response = await fetch("http://localhost:5001/api/search/history/user/" + email, {
             method: 'GET',
             headers: headers
         });

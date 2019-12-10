@@ -23,6 +23,10 @@ require(["knockout"], function (ko) {
         viewModel: { require: "components/signup-component/signup-component" },
         template: { require: "text!components/signup-component/signup-component.html" }
     });
+    ko.components.register('search_history-component', {
+        viewModel: { require: "components/search_history-component/search_history" },
+        template: { require: "text!components/search_history-component/search_history.html" }
+    });
 });
 
 require(["knockout", "app"], function (ko, app) {
