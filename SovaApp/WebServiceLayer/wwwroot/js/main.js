@@ -9,7 +9,8 @@
         markingService: "services/markingService",
         noteService: "services/noteService",
         questionService:"servicess/questionService",
-        updateService: "services/updateService"
+        updateService: "services/updateService",
+        store: "services/store"
 
     }
 });
@@ -49,8 +50,8 @@ require(["knockout"], function (ko) {
     });
 });
 
-require(["knockout", "app"], function (ko, app) {
+require(["knockout","store", "app"], function (ko,store,app) {
     //console.log(app.name);
-
+    store.subscribe(() => console.log(store.getState()));
     ko.applyBindings(app);
 });

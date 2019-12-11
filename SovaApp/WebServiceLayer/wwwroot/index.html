@@ -6,14 +6,28 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFC04C;">
+        <a class="navbar-brand" href="#">SOVA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" data-bind="foreach: menuElements">
+                <li class="nav-item" data-bind="css: $parent.isSelected($data)">
+                    <a class="nav-link" href="#" data-bind="click: $parent.changeContent"><span data-bind="text: name"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <!--<login-component></login-component>-->
     <!--<search_history-component></search_history-component>
     <search-component></search-component>-->
-    <marked_questions-component></marked_questions-component>
+    <!--<marked_questions-component></marked_questions-component>-->
 
 
 
-    <!--<div data-bind='component: {name: currentComponent}'></div>-->
+    <div data-bind='component: {name: currentComp}'></div>
     <!--<userinfo-component></userinfo-component>-->
     <script data-main="js/main.js" src="lib/requirejs/require.js"></script>
 </body>
