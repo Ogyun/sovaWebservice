@@ -13,7 +13,7 @@
             <ul data-bind="foreach: markingList">
                 <li>
                     <span data-bind="text: $data.link, click: $parent.onMarkingClick" style="cursor: pointer"></span>
-                    <button class="btn-danger" data-bind="click: $parent.deleteSpecificMarking.bind($data)">Delete</button>
+                    <button class="btn-danger" data-bind="click: $parent.deleteSpecificMarking.bind($data,$data.link)">Delete</button>
                 </li>
             </ul>
         </div>

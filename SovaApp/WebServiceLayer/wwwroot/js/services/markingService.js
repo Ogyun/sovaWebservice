@@ -16,8 +16,8 @@
     }
 
 
-    var getSpecificMarking = async function (email,questionId, callback) {
-        var response = await fetch("http://localhost:5001/api/markings/" + email + "/" + questionId, {
+    var getSpecificMarking = async function (markingLink, callback) {
+        var response = await fetch(markingLink, {
             method: 'GET',
             headers: headers
         });
@@ -25,11 +25,11 @@
         callback(data);
     }
 
-    var deleteSpecificMarking = async function (email, questionId, callback) {
-        var response = await fetch("http://localhost:5001/api/markings/", {
+    var deleteSpecificMarking = async function (markingLink, callback) {
+        console.log(markingLink);
+        var response = await fetch(markingLink, {
             method: 'DELETE',
-            headers: headers,
-            body: JSON.stringify({ "userEmail": email, "questionId": questionId})
+            headers: headers
         });
         var data = await response.json();
         callback(data);

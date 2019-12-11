@@ -6,13 +6,12 @@
     //Get all Markings for specific user
     ms.getMarkings(userEmail, function (response) {
         markingList(response.items);
-        console.log(response.items[0])
     });
 
     return function () {
 
-        var deleteSpecificMarking = function (marking) {
-            ms.deleteSpecificMarking(marking.email,marking.questionId, function (response) {
+        var deleteSpecificMarking = function (markingLink) {
+            ms.deleteSpecificMarking(markingLink, function (response) {
                 if (response.status == 200) {
                     historyList.remove(history)
                 } else {
@@ -21,9 +20,11 @@
             });
         }
 
-        var onMarkingClick = function () {
-            console.log("onMarkinClicked");
-        }
+        var onMarkingClick = function (marking) {
+            ms.getSpecificMarking(marking.link, function (response) {
+                console.log(response)
+            });
+        };
 
         return {
             deleteSpecificMarking,

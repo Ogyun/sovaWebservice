@@ -65,7 +65,7 @@ namespace WebServiceLayer.Controllers
            
         }
         [Authorize]
-        [HttpDelete]
+        [HttpDelete("{userEmail}/{questionId}", Name = nameof(DeleteMarking))]
         public ActionResult DeleteMarking(string userEmail, int questionId)
         {
             var marking = new Marking
@@ -83,6 +83,7 @@ namespace WebServiceLayer.Controllers
                 return NotFound();
             }
         }
+
 
         [Authorize]
         [HttpGet("{userEmail}",Name = nameof(GetMarkingsByUserEmail))]
