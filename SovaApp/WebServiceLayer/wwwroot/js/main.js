@@ -5,7 +5,8 @@
         text: "../lib/requirejs-text/text",
         searchService: "services/searchService",
         loginService: "services/loginService",
-        signupService: "services/signupService"
+        signupService: "services/signupService",
+        markingService:"services/markingService"
 
     }
 });
@@ -26,6 +27,10 @@ require(["knockout"], function (ko) {
     ko.components.register('search_history-component', {
         viewModel: { require: "components/search_history-component/search_history" },
         template: { require: "text!components/search_history-component/search_history.html" }
+    });
+    ko.components.register('marked_questions-component', {
+        viewModel: { require: "components/marked_questions-component/marked_questions" },
+        template: { require: "text!components/marked_questions-component/marked_questions.html" }
     });
 });
 
