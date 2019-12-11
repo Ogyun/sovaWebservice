@@ -1,5 +1,6 @@
-﻿<div class="container">
+<div class="container">
     <div class="col col-sm-4 align-self-center">
+        <h1>Edit user information</h1>
         <form data-bind="submit: signupSubmit">
             <div class="form-group">
                 <label for="emailInput">Email address</label>
@@ -17,8 +18,8 @@
                 <label for="nameInput">Name</label>
                 <input type="text" data-bind="value: name" class="form-control" id="nameInput" placeholder="Enter name">
             </div>
-            <button type="submit" class="btn btn-primary">Sign up</button>
-            <button type="button" class="btn btn-danger" data-bind="click: $root.changeComponent">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-danger" data-bind="click: $root.changeComponent">Delete account</button>
         </form>
     </div>
 </div>

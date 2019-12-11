@@ -9,6 +9,8 @@
         markingService: "services/markingService",
         noteService: "services/noteService",
         questionService:"servicess/questionService"
+        signupService: "services/signupService",
+        updateService: "services/updateService"
 
     }
 });
@@ -25,6 +27,10 @@ require(["knockout"], function (ko) {
     ko.components.register('signup-component', {
         viewModel: { require: "components/signup-component/signup-component" },
         template: { require: "text!components/signup-component/signup-component.html" }
+    });
+    ko.components.register('userinfo-component', {
+        viewModel: { require: "components/userinfo-component/userinfo-component" },
+        template: { require: "text!components/userinfo-component/userinfo-component.html" }
     });
     ko.components.register('search_history-component', {
         viewModel: { require: "components/search_history-component/search_history" },
