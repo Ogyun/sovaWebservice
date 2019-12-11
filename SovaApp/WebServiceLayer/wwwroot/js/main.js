@@ -6,7 +6,9 @@
         searchService: "services/searchService",
         loginService: "services/loginService",
         signupService: "services/signupService",
-        markingService:"services/markingService"
+        markingService: "services/markingService",
+        noteService: "services/noteService",
+        questionService:"servicess/questionService"
 
     }
 });
