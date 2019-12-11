@@ -34,6 +34,14 @@ require(["knockout"], function (ko) {
         viewModel: { require: "components/marked_questions-component/marked_questions" },
         template: { require: "text!components/marked_questions-component/marked_questions.html" }
     });
+    ko.components.register('question-component', {
+        viewModel: { require: "components/question-component/question-component" },
+        template: { require: "text!components/question-component/question-component.html" }
+    });
+    ko.components.register('note-component', {
+        viewModel: { require: "components/note-component/note-component" },
+        template: { require: "text!components/note-component/note-component" }
+    });
 });
 
 require(["knockout", "app"], function (ko, app) {
