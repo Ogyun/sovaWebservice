@@ -10,10 +10,10 @@
 
     return function () {
 
-        var deleteSpecificMarking = function (markingLink) {
-            ms.deleteSpecificMarking(markingLink, function (response) {
+        var deleteSpecificMarking = function (marking) {
+            ms.deleteSpecificMarking(marking.link, function (response) {
                 if (response.status == 200) {
-                    historyList.remove(history)
+                    markingList.remove(marking)
                 } else {
                     alert("something went wrong");
                 }

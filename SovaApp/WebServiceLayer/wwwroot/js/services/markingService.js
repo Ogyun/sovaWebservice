@@ -26,12 +26,11 @@
     }
 
     var deleteSpecificMarking = async function (markingLink, callback) {
-        console.log(markingLink);
         var response = await fetch(markingLink, {
             method: 'DELETE',
             headers: headers
         });
-        var data = await response.json();
+        var data = await response;
         callback(data);
     }
 
