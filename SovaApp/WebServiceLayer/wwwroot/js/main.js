@@ -45,7 +45,7 @@ require(["knockout"], function (ko) {
     });
     ko.components.register('note-component', {
         viewModel: { require: "components/note-component/note-component" },
-        template: { require: "text!components/note-component/note-component" }
+        template: { require: "text!components/note-component/note-component.html" }
     });
 });
 

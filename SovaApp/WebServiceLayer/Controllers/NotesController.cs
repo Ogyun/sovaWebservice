@@ -73,18 +73,26 @@ namespace WebServiceLayer.Controllers
         }
 
         [Authorize]
-        [HttpDelete("{noteId}")]
-        public ActionResult DeleteNote(int noteId)
+        [HttpDelete("{userEmail}/{noteId}", Name = nameof(DeleteNote))]
+        public ActionResult DeleteNote(string userEmail,int noteId)
         {
-            if (_noteService.DeleteNoteById(noteId))
+            //check if note belongs to this user
+            var note = _noteService.GetNoteById(noteId);
+            if (note.UserEmail == userEmail)
             {
-               return Ok();
+                if (_noteService.DeleteNoteById(noteId))
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             else
             {
-                return NotFound();
-            }
-           
+                return BadRequest();
+            }          
         }
 
         [Authorize]

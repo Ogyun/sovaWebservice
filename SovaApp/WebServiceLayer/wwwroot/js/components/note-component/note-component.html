@@ -1,1 +1,19 @@
-﻿
+﻿<div class="container-fluid">
+    <h1 class="text-center">Notes</h1>
+
+    <div class="row">
+        <div class="list-group  col-lg-6">
+            Text
+            <ul data-bind="foreach: noteList">
+                <li data-bind="text: $data.notetext, click: $parent.onNoteClick" style="cursor: pointer"></li>
+            </ul>
+        </div>
+        <div class="list-group  col-lg-" 6>
+            <ul data-bind="foreach: noteList">
+                <li>
+                    <button class="btn-danger" data-bind="click: $parent.deleteSpecificNote.bind($data)">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,7 @@
         callback(data);
     }
 
-    var getAllNotesForQuestion = = async function (email,questionId, callback) {
+    var getAllNotesForQuestion = async function (email,questionId, callback) {
         var response = await fetch("http://localhost:5001/api/notes/"+ email +"/question/"+questionId, {
             method: 'GET',
             headers: headers
@@ -41,8 +41,8 @@
         callback(data);
     }
 
-    var deleteSpecificNote = async function (noteId, callback) {
-        var response = await fetch("http://localhost:5001/api/notes/"+noteId, {
+    var deleteSpecificNote = async function (noteLink, callback) {
+        var response = await fetch(noteLink, {
             method: 'DELETE',
             headers: headers
         });
