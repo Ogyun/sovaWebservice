@@ -1,6 +1,6 @@
-﻿define(['knockout', 'searchService'], function (ko, ss) {
+﻿define(['knockout', 'searchService','tokenService'], function (ko, ss,ts) {
 
-    var userEmail = localStorage.getItem('email');
+    var userEmail = ts.loadToken().email;
     var historyList = ko.observableArray([]);
 
     //Get all history for specific user

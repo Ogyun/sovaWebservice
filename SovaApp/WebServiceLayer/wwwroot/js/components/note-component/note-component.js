@@ -1,6 +1,6 @@
-﻿define(['knockout', 'noteService'], function (ko, ns) {
+﻿define(['knockout', 'noteService','tokenService'], function (ko, ns,ts) {
 
-    var userEmail = localStorage.getItem('email');
+    var userEmail = ts.loadToken().email;
     var noteList = ko.observableArray([]);
 
     //Get all Notes for specific user

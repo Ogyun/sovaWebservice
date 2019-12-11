@@ -10,7 +10,8 @@
         noteService: "services/noteService",
         questionService:"servicess/questionService",
         updateService: "services/updateService",
-        store: "services/store"
+        store: "services/store",
+        tokenService:"services/tokenService"
 
     }
 });

@@ -1,6 +1,6 @@
-﻿define(['knockout', 'markingService'], function (ko, ms) {
+﻿define(['knockout', 'markingService', "tokenService"], function (ko, ms,ts) {
 
-    var userEmail = localStorage.getItem('email');
+    var userEmail = ts.loadToken().email;
     var markingList = ko.observableArray([]);
 
     //Get all Markings for specific user

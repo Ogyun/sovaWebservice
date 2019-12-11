@@ -1,10 +1,6 @@
-﻿define([], function () {
-    //Create token service and load token function
-
-    var token = localStorage.getItem('token');
-    var headers = new Headers();
-    headers.append('Authorization', 'Bearer ' + token);
-
+﻿define(["tokenService"], function (ts) {
+  
+    var headers = ts.loadToken().headers;
 
     var getMarkings = async function (email, callback) {
         var response = await fetch("http://localhost:5001/api/markings/" + email, {

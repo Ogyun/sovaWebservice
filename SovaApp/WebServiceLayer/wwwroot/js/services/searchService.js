@@ -1,8 +1,6 @@
-﻿define([], function () {
+﻿define(["tokenServise"], function (ts) {
 
-    var token = localStorage.getItem('token');
-    var headers = new Headers();
-    headers.append('Authorization','Bearer ' + token);
+    var headers = ts.loadToken().headers;
 
 
     var searchByKeyword = async function (query, callback) {
