@@ -15,7 +15,7 @@
         callback(data);
     }
 
-
+    //This should be replaced with getQuestion
     var getSpecificMarking = async function (markingLink, callback) {
         var response = await fetch(markingLink, {
             method: 'GET',
@@ -34,6 +34,8 @@
         callback(data);
     }
 
+    //Haven't tested if it workds as intended
+    //Should be called from question page/component
     var createMarking = async function (email, questionId, callback) {
         var response = await fetch("http://localhost:5001/api/markings/", {
             method: 'POST',

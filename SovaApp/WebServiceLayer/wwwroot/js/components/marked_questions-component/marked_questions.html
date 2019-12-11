@@ -2,17 +2,15 @@
     <h1 class="text-center">Markings</h1>
 
     <div class="row">
-        <div class="list-group  col-lg-4">
+        <div class="list-group  col-lg-6">
             Title
             <ul data-bind="foreach: markingList">
                 <li data-bind="text: $data.title, click: $parent.onMarkingClick" style="cursor: pointer"></li>
             </ul>
         </div>
-        <div class="list-group  col-lg-4">
-            Link
+        <div class="list-group  col-lg-"6>
             <ul data-bind="foreach: markingList">
                 <li>
-                    <span data-bind="text: $data.link, click: $parent.onMarkingClick" style="cursor: pointer"></span>
                     <button class="btn-danger" data-bind="click: $parent.deleteSpecificMarking.bind($data)">Delete</button>
                 </li>
             </ul>
