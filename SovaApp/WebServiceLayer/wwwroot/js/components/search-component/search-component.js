@@ -1,4 +1,4 @@
-﻿define(['knockout', 'searchService'], function (ko, ss) {
+﻿define(['knockout', 'searchService','store'], function (ko, ss,store) {
     return function () {
     var posts = ko.observableArray([]);
 
@@ -45,10 +45,16 @@
         }
         }
 
+        //var onPostClick = function (data) {
+        //    //redirect to question component
+        //    console.log(data.type, data.questionId);
+        //}
+
         var onPostClick = function (data) {
-            //redirect to question component
-            console.log(data.type, data.questionId);
-        }
+            store.dispatch(store.actions.selectQuestion(data));
+            store.dispatch(store.actions.selectMenu("Question Overview"));
+            //postman.publish("selectperson", person);
+        };
 
     return {
         searchClick,

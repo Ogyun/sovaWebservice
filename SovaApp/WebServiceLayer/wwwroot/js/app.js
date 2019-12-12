@@ -30,7 +30,12 @@
         {
             name: "Profile",
             component: "userinfo-component"
+        },
+        {
+            name: "Question Overview",
+            component: "question-component"
         }
+    
     ];
 
     var currentMenu = ko.observable(menuElements[0]);

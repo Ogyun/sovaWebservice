@@ -1,6 +1,7 @@
 ﻿define([], function () {
 
     const selectMenu = "SELECT_MENU";
+    const selectQuestion = "SELECT_QUESTION";
 
     var subscribers = [];
 
@@ -20,6 +21,8 @@
         switch (action.type) {
             case selectMenu:
                 return Object.assign({}, state, { selectedMenu: action.selectedMenu });
+            case selectQuestion:
+                return Object.assign({}, state, { selectedQuestion: action.selectedQuestion });
             default:
                 return state;
         }
@@ -36,6 +39,12 @@
             return {
                 type: selectMenu,
                 selectedMenu: menu
+            };
+        },
+        selectQuestion: function (question) {
+            return {
+                type: selectQuestion,
+                selectedQuestion: question
             };
         }
     };
