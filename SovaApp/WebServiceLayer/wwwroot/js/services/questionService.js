@@ -27,7 +27,5 @@
         getSpecificQuestion,
         getQuestionAnswers
 
-
-
     };
 });

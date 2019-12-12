@@ -45,15 +45,9 @@
         }
         }
 
-        //var onPostClick = function (data) {
-        //    //redirect to question component
-        //    console.log(data.type, data.questionId);
-        //}
-
         var onPostClick = function (data) {
             store.dispatch(store.actions.selectQuestion(data));
             store.dispatch(store.actions.selectMenu("Question Overview"));
-            //postman.publish("selectperson", person);
         };
 
     return {

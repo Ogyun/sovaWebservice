@@ -3,7 +3,6 @@
     var userEmail = ts.loadToken().email;
     var historyList = ko.observableArray([]);
 
-    //Get all history for specific user
     ss.getSearchHistory(userEmail, function (response) {
         historyList(response);
     });
