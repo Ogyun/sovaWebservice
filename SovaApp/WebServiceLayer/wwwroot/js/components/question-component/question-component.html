@@ -7,6 +7,33 @@
 
 
 <!-- Display answers -->
-<div data-bind="foreach: answers">
+<!--<div data-bind="foreach: answers">
     <div data-bind="text: body"> </div>
+</div>-->
+
+<div class="container-fluid">
+    <h1 class="text-center">Question Details</h1>
+
+    <div class="row">
+        <div class="list-group  col-lg-6">
+            Question Body
+            <ul data-bind="with: question">
+                <li data-bind="text: $data.body"></li>
+            </ul>
+            Answers
+            <ul data-bind="foreach: answers">
+                <li>
+                    <span data-bind="text: body"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="list-group  col-lg-6">
+            Take notes
+            <div class="input-group">
+                <textarea class="form-control" aria-label="Write notes" rows="20" cols="50"></textarea>
+            </div>
+            <button class="btn-dark">Save note</button>
+            <input type="checkbox" name="markQuestionCheckBox" value="marked">Mark this question
+        </div>
+    </div>
 </div>
