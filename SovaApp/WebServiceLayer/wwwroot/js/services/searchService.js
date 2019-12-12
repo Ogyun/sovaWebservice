@@ -1,4 +1,4 @@
-﻿define(["tokenServise"], function (ts) {
+﻿define(["tokenService"], function (ts) {
 
     var headers = ts.loadToken().headers;
 
