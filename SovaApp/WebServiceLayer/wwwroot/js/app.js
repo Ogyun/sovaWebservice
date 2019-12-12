@@ -1,5 +1,7 @@
 ﻿define(["knockout", "store"], function (ko, store) {
     var currentComponent = ko.observable("login-component");
+    var navbarVisible = ko.observable(false);
+
     var changeComponent = () => {
         if (currentComponent() === "login-component") {
             currentComponent("signup-component");
@@ -57,6 +59,7 @@
         currentComp,
         menuElements,
         changeContent,
-        isSelected
+        isSelected,
+        navbarVisible
     };
 });

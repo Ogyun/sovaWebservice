@@ -40,7 +40,7 @@
         else {
             ss.searchByKeyword(query, function (response) {
                 posts(response);
-                //console.log(response[0])
+                console.log(response)
             });
         }
         }

@@ -5,7 +5,7 @@
 
     //Get all Notes for specific user
     ns.getNotesByUserEmail(userEmail, function (response) {
-       
+        console.log(response.items);
         noteList(response.items);
     });
 

@@ -1,4 +1,4 @@
-﻿define([], function () {
+﻿define(['app'], function (app) {
     var login = async function (email,password,callback) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -8,7 +8,8 @@
            headers: headers
        }).then(function (response) {
            if (response.status == 200) {
-
+               
+               app.navbarVisible(true);
            }
            else {
                alert("Incorrect credentials");
