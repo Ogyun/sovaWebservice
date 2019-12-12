@@ -8,7 +8,7 @@
         signupService: "services/signupService",
         markingService: "services/markingService",
         noteService: "services/noteService",
-        questionService:"servicess/questionService",
+        questionService:"services/questionService",
         updateService: "services/updateService",
         store: "services/store",
         tokenService:"services/tokenService"

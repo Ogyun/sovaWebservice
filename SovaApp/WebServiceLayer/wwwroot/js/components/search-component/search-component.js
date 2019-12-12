@@ -7,7 +7,7 @@
 
         if (query.startsWith("tag:")) {
             var tags = query.substr(4);
-            console.log(tags);
+            
             ss.searchByTag(tags, function (response) {
                 posts(response);
             });
@@ -40,7 +40,7 @@
         else {
             ss.searchByKeyword(query, function (response) {
                 posts(response);
-                console.log(response)
+
             });
         }
         }
