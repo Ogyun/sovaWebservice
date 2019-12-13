@@ -1,8 +1,16 @@
 ﻿define(['knockout', 'searchService','store'], function (ko, ss,store) {
     return function () {
-    var posts = ko.observableArray([]);
+        var posts = ko.observableArray([]);
 
-    var searchClick = function () {
+
+
+        var searchClick = function () {
+            //posts(
+            //    { "questionId": "1789945", "title": "title1", "body": "<p>How can I check if one string contains another …ethod, but there doesn't seem to be one.</p>&#xA;" },
+            //    { "questionId": 9329446, "title": "title2", "body": "<h2>For Actual Arrays</h2>&#xA;&#xA;<p><em>(See s important to test.</p>&#xA" },
+            //    { "questionId": 359494, "title": "title3", "body": "<p>The identity (<code>===</code>) operator behave…ational.org/ecma-262/5.1/#sec-11.9.3</a></p>&#xA;" },
+            //    { "questionId": 1995113, "title": "title4", "body": "<p>I'm using <a href=http://en.wikipedia.org/wiki…a performance gain over <code>==</code>?</p>&#xA, creationDate" }
+            //);
         var query = document.getElementById("searchInput").value;
 
         if (query.startsWith("tag:")) {
@@ -40,6 +48,7 @@
         else {
             ss.searchByKeyword(query, function (response) {
                 posts(response);
+                console.log(response)
 
             });
         }

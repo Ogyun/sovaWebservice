@@ -10,7 +10,9 @@
         var token = localStorage.getItem('token');
         var email = localStorage.getItem('email');
         var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Bearer ' + token);
+
 
         return {
             "email": email,
