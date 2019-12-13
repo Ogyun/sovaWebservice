@@ -17,10 +17,23 @@
             "headers": headers
         }
     }
- 
+
+    var checkToken = function () {
+        var token = localStorage.getItem('token');
+        if (token !== null) {
+            return true
+        }
+        else return false
+    }
+
+    var deleteToken = function () {
+        localStorage.clear();
+    }
+
     return {
         saveToken,
-        loadToken
-
+        loadToken,
+        checkToken,
+        deleteToken
     };
 });

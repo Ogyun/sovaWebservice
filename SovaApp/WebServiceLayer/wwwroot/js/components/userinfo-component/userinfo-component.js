@@ -1,4 +1,4 @@
-define(["knockout", "updateService"], function (ko, su) {
+define(["knockout", "updateService","tokenService"], function (ko, su, ts) {
     return function () {
         var email = ko.observable(localStorage.getItem("email"));
         var password = ko.observable("");
@@ -12,12 +12,17 @@ define(["knockout", "updateService"], function (ko, su) {
             }
             else alert("Passwords do not match!");
         }
+        var logout = function () {
+            ts.deleteToken();
+            location.reload();
+        }
         return {
             email,
             password,
             name,
             rpassword,
-            update
+            update,
+            logout
         }
     }
 

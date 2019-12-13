@@ -6,7 +6,7 @@
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFC04C;" <!--data-bind="visible: navbarVisible"-->>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFC04C;" data-bind="hidden: showLogin"> <!--data-bind="visible: navbarVisible"-->
         <a class="navbar-brand" href="#">SOVA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,7 +27,7 @@
 
 
 
-    <div data-bind='component: {name: currentComp}'></div>
+    <div data-bind='component: {name: currentComp},hidden: showLogin'></div>
     <!--<userinfo-component></userinfo-component>-->
     <script data-main="js/main.js" src="lib/requirejs/require.js"></script>
 </body>

@@ -1,4 +1,4 @@
-﻿<div class="container" data-bind="hidden:$root.navbarVisible">
+﻿<div class="container" data-bind="visible: $root.showLogin">
     <div class="col col-sm-4 align-self-center">
         <form data-bind="submit: loginSubmit">
             <div class="form-group">
@@ -10,7 +10,7 @@
                 <input type="password" data-bind="value: password" class="form-control" id="passInput" placeholder="Enter password">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
-            <button type="button" data-bind="click: $root.changeComponent" class="btn btn-success">Sign up</button>
+            <button type="button" data-bind="click: $root.changeComponent;" class="btn btn-success">Sign up</button>
         </form>
     </div>
 </div>

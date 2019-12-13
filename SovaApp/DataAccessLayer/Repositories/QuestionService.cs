@@ -52,7 +52,7 @@ namespace DataAccessLayer.Repositories
             var result = (from a in db.Answers
                 join q in db.Questions on a.QuestionId equals q.Id
                 where q.Id == questionid
-                select a).ToList();
+                select a).OrderByDescending(x => x.Score).ToList();
             return result;
         }
         public bool QuestionExcist(int questionId)

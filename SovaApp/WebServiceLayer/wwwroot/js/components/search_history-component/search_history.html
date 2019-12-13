@@ -2,20 +2,22 @@
         <h1 class="text-center">Search History</h1>
 
         <div class="row">
-            <div class="list-group  col-lg-4">
-                Date
-                <ul data-bind="foreach: historyList">
-                    <li data-bind="text: $data.searchDate, click: $parent.onHistoryClick" style="cursor: pointer"></li>
-                </ul>
-            </div>
-            <div class="list-group  col-lg-4">
-                Text
-                <ul data-bind="foreach: historyList">
-                    <li>
-                        <span data-bind="text: $data.searchText, click: $parent.onHistoryClick" style="cursor: pointer"></span>
-                        <button class="btn-danger" data-bind="click: $parent.deleteSpecificHistory.bind($data)">Delete</button>
-                    </li>
-                </ul>
+            <div class="col-lg-8">
+                <div class="list-group  col-lg-4">
+                    Date
+                    <ul data-bind="foreach: historyList">
+                        <li data-bind="text: $data.searchDate, click: $parent.onHistoryClick" style="cursor: pointer"></li>
+                    </ul>
+                </div>
+                <div class="list-group  col-lg-4">
+                    Text
+                    <ul data-bind="foreach: historyList">
+                        <li>
+                            <span data-bind="text: $data.searchText, click: $parent.onHistoryClick" style="cursor: pointer"></span>
+                            <button class="btn-danger" data-bind="click: $parent.deleteSpecificHistory.bind($data)">Delete</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <button class="btn-primary" data-bind="click: deleteAllHistory">DeleteAll</button>
         </div>

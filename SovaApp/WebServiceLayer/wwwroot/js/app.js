@@ -1,4 +1,4 @@
-﻿define(["knockout", "store"], function (ko, store) {
+﻿define(["knockout", "store", "tokenService"], function (ko, store, ts) {
     var currentComponent = ko.observable("login-component");
     var navbarVisible = ko.observable(false);
 
@@ -58,6 +58,12 @@
         return menu === currentMenu() ? "active" : "";
     };
 
+    var showLogin = ko.observable(true);
+    if (ts.checkToken() == false) {
+        showLogin = true;
+    }
+    else { showLogin = false; }
+
     return {
         currentComponent,
         changeComponent,
@@ -65,6 +71,7 @@
         menuElements,
         changeContent,
         isSelected,
-        navbarVisible
+        navbarVisible,
+        showLogin
     };
 });
