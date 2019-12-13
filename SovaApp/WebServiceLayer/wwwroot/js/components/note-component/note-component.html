@@ -2,18 +2,25 @@
     <h1 class="text-center">Notes</h1>
 
     <div class="row">
-        <div class="list-group  col-lg-6">
-            Text
+        <div class="list-group  col-lg-4">
+   
             <ul data-bind="foreach: noteList">
                 <li data-bind="text: $data.notetext, click: $parent.onNoteClick" style="cursor: pointer"></li>
             </ul>
         </div>
-        <div class="list-group  col-lg-" 6>
+        <div class="list-group  col-lg-4">
             <ul data-bind="foreach: noteList">
                 <li>
                     <button class="btn-danger" data-bind="click: $parent.deleteSpecificNote.bind($data)">Delete</button>
                 </li>
             </ul>
+        </div>
+        <div class="col-lg-4">
+            <h4>Edit note</h4>
+            <div class="input-group">
+                <textarea class="form-control" aria-label="Write notes" rows="10" cols="30" data-bind="value: noteText"></textarea>
+            </div>
+            <button class="btn-dark" data-bind="click:updateNote">Update note</button>
         </div>
     </div>
 </div>

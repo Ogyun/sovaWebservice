@@ -96,14 +96,15 @@ namespace WebServiceLayer.Controllers
         }
 
         [Authorize]
-        [HttpPut("{noteId}")]
-        public ActionResult UpdateNote(int noteId,[FromBody] Note note)
+        [HttpPut("{userEmail}/{noteId}", Name = nameof(UpdateNote))]
+        public ActionResult UpdateNote(int noteId,string userEmail,[FromBody] Note note)
         {
             if (!_noteService.NoteExcist(noteId))
             {
                 return NotFound();
             }
             note.Id = noteId;
+            note.UserEmail = userEmail;
             _noteService.UpdateNote(note);
             return Ok();
         }

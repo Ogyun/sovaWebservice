@@ -9,5 +9,6 @@ namespace WebServiceLayer.Models
     {
         public string Link { get; set; }
         public string Notetext { get; set; }
+        public int QuestionId { get; set; }
     }
 }

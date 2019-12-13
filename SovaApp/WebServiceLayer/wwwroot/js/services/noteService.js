@@ -51,12 +51,12 @@
     }
 
     var updateNote = async function (note, callback) {
-        var response = await fetch("http://localhost:5001/api/notes/" + note.id, {
+        var response = await fetch(note.link, {
             method: 'PUT',
             headers: headers,
-            body: JSON.stringify({ "Id":note.id, "UserEmail": note.email, "NoteText": note.noteText, "QuestionId": note.questionId })
+            body: JSON.stringify({"UserEmail": "", "NoteText": note.notetext, "QuestionId": note.questionId })
         });
-        var data = await response.json();
+        var data = await response;
         callback(data);
     }
 
