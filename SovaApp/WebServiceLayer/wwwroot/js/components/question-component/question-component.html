@@ -46,9 +46,9 @@
         <div class="list-group  col-lg-6">
             Take notes
             <div class="input-group">
-                <textarea class="form-control" aria-label="Write notes" rows="20" cols="50"></textarea>
+                <textarea class="form-control" aria-label="Write notes" rows="20" cols="50" data-bind="value: noteText"></textarea>
             </div>
-            <button class="btn-dark">Save note</button>
+            <button class="btn-dark" data-bind="click:saveNote">Save note</button>
             <input type="checkbox" name="markQuestionCheckBox" value="marked">Mark this question
         </div>
     </div>

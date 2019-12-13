@@ -35,8 +35,10 @@
             headers: headers,
             body: JSON.stringify({ "UserEmail": email, "NoteText": noteText, "QuestionId": questionId })
         });
+
         var data = await response.json();
-        callback(data);
+        //include response status
+        callback(data,response.status);
     }
 
     var deleteSpecificNote = async function (noteLink, callback) {
