@@ -57,7 +57,7 @@ namespace WebServiceLayer.Controllers
                         new { userEmail = marking.UserEmail, questionId = marking.QuestionId },
                         CreateQuestionDto(question));
                 }
-                return Content("The question is already marked");
+                return BadRequest("The question is already marked");
               
             }
             //User or question doesn't exist

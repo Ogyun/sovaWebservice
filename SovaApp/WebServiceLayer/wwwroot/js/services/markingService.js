@@ -30,13 +30,16 @@
         callback(data);
     }
 
-    //Haven't tested if it workds as intended
-    //Should be called from question page/component
     var createMarking = async function (email, questionId, callback) {
         var response = await fetch("http://localhost:5001/api/markings/", {
             method: 'POST',
             headers: headers,
             body: JSON.stringify({ "UserEmail": email, "QuestionId": questionId })
+        }).then(function (response) {
+            if (response.status == 400) {
+                alert("This question is already marked");
+            }
+            return response;
         });
         var data = await response.json();
         callback(data);

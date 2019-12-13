@@ -48,7 +48,6 @@
         else {
             ss.searchByKeyword(query, function (response) {
                 posts(response);
-                console.log(response)
 
             });
         }

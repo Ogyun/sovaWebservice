@@ -44,12 +44,14 @@
             </div>
         </div>
         <div class="list-group  col-lg-6">
-            Take notes
+            <h2>Take notes</h2>
             <div class="input-group">
                 <textarea class="form-control" aria-label="Write notes" rows="20" cols="50" data-bind="value: noteText"></textarea>
             </div>
             <button class="btn-dark" data-bind="click:saveNote">Save note</button>
-            <input type="checkbox" name="markQuestionCheckBox" value="marked">Mark this question
+            <h2>Question marking</h2>
+            <button class="btn-outline-primary" data-bind="hidden:marked, click:markQuestion">Mark</button>
+            <button class="btn-outline-danger" data-bind="visible:marked, click:unmarkQuestion">Unmark</button>
         </div>
     </div>
 </div>
