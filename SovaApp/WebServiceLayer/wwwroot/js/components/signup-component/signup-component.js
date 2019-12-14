@@ -1,4 +1,4 @@
-﻿define(["knockout", "userService"], function (ko, su) {
+﻿define(["knockout", "userService","app"], function (ko, su,app) {
     return function () {
         var email = ko.observable("");
         var password = ko.observable("");
@@ -7,8 +7,9 @@
         var signupSubmit = function () {
             if (password() === rpassword()) {
                 su.signup(email, password, name, function (response) {
-                    console.log(response)
                 });
+                app.changeComponent();
+                alert("User created successfully: " + name());
             }
             else alert("Passwords do not match!");
         }

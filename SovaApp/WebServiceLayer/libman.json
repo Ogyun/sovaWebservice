@@ -43,7 +43,13 @@
     },
     {
       "library": "jqcloud2@2.0.3",
-      "destination": "wwwroot/lib/jqcloud2/"
+      "destination": "wwwroot/lib/jqcloud2/",
+      "files": [
+        "dist/jqcloud.css",
+        "dist/jqcloud.js",
+        "dist/jqcloud.min.css",
+        "dist/jqcloud.min.js"
+      ]
     }
   ]
 }
