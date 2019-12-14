@@ -4,14 +4,13 @@
         knockout: "../lib/knockout/build/output/knockout-latest.debug",
         text: "../lib/requirejs-text/text",
         searchService: "services/searchService",
-        loginService: "services/loginService",
         signupService: "services/signupService",
         markingService: "services/markingService",
         noteService: "services/noteService",
         questionService:"services/questionService",
-        updateService: "services/updateService",
         store: "services/store",
-        tokenService:"services/tokenService"
+        tokenService: "services/tokenService",
+        userService:"services/userService"
 
     }
 });

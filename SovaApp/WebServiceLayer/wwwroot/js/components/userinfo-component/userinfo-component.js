@@ -1,4 +1,4 @@
-define(["knockout", "updateService","tokenService"], function (ko, su, ts) {
+define(["knockout", "userService","tokenService"], function (ko, us, ts) {
     return function () {
         var email = ko.observable(localStorage.getItem("email"));
         var password = ko.observable("");
@@ -6,7 +6,7 @@ define(["knockout", "updateService","tokenService"], function (ko, su, ts) {
         var rpassword = ko.observable("");
         var update = function () {
             if (password() === rpassword()) {
-                su.update(email, password, name, function (response) {
+                us.update(email, password, name, function (response) {
                     console.log(response)
                 });
             }

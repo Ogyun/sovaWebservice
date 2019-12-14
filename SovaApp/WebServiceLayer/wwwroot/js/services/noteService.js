@@ -29,6 +29,7 @@
         var data = await response.json();
         callback(data);
     }
+
     var createNote = async function (email,noteText, questionId, callback) {
         var response = await fetch("http://localhost:5001/api/notes/", {
             method: 'POST',

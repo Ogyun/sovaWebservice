@@ -1,4 +1,4 @@
-﻿define(["knockout", "signupService"], function (ko, su) {
+﻿define(["knockout", "userService"], function (ko, su) {
     return function () {
         var email = ko.observable("");
         var password = ko.observable("");
