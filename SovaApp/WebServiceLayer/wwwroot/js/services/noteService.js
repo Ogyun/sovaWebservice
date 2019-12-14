@@ -38,7 +38,6 @@
         });
 
         var data = await response.json();
-        //include response status
         callback(data,response.status);
     }
 

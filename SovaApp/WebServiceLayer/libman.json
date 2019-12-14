@@ -30,6 +30,10 @@
       "destination": "wwwroot/lib/bootstrap/"
     },
     {
+      "library": "requirejs@2.3.6",
+      "destination": "wwwroot/lib/requirejs/"
+    },
+    {
       "library": "jquery@3.4.1",
       "destination": "wwwroot/lib/jquery/",
       "files": [
@@ -38,8 +42,8 @@
       ]
     },
     {
-      "library": "requirejs@2.3.6",
-      "destination": "wwwroot/lib/requirejs/"
+      "library": "jqcloud2@2.0.3",
+      "destination": "wwwroot/lib/jqcloud2/"
     }
   ]
 }

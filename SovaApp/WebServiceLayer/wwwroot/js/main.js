@@ -1,6 +1,8 @@
 ﻿require.config({
     baseUrl: "js",
     paths: {
+        jquery: "../lib/jquery/dist/jquery",
+        jqcloud: "../lib/jqcloud2/dist/jqcloud",
         knockout: "../lib/knockout/build/output/knockout-latest.debug",
         text: "../lib/requirejs-text/text",
         searchService: "services/searchService",
@@ -12,6 +14,9 @@
         tokenService: "services/tokenService",
         userService:"services/userService"
 
+    },
+    shim: {
+        jqcloud: ["jquery"]
     }
 });
 
@@ -47,6 +52,10 @@ require(["knockout"], function (ko) {
     ko.components.register('note-component', {
         viewModel: { require: "components/note-component/note-component" },
         template: { require: "text!components/note-component/note-component.html" }
+    });
+    ko.components.register('word_cloud-component', {
+        viewModel: { require: "components/word_cloud-component/word_cloud" },
+        template: { require: "text!components/word_cloud-component/word_cloud.html" }
     });
 });
 

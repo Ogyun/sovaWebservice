@@ -34,6 +34,10 @@
         {
             name: "Question Overview",
             component: "question-component"
+        },
+        {
+            name: "Word Cloud",
+            component: "word_cloud-component"
         }
     
     ];
