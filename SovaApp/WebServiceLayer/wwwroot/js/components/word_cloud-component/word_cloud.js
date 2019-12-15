@@ -1,51 +1,19 @@
-﻿define(["jquery", "knockout", "jqcloud"], function ($, ko) {
+﻿define(["jquery", "knockout", "searchService", "tokenService", "jqcloud"], function ($, ko,ss,ts) {
+
     return function (params) {
 
         var width =  450;
         var height = 250;
-       // var words = [];
 
-        var word = ko.observable();
-        var weight = ko.observable();
-        var addWord = function () {
-            words.push({ text: word(), weight: weight() });
-            word("");
-            weight("");
-            $('#cloud').jQCloud('update', words);
-        };
-
-
-        var words = [
-            {
-                text: "tortor",
-                weight: 1.5
-            },
-            {
-                text: "dui",
-                weight: 2.75
-            },
-            {
-                text: "facilisis",
-                weight: 3.25
-            },
-            {
-                text: "nibh",
-                weight: 4
-            },
-            {
-                text: "Donec",
-                weight: 5
-            },
-            {
-                text: "massa",
-                weight: 6
-            },
-            {
-                text: "vitae",
-                weight: 7.75
+        var userEmail = ts.loadToken().email;
+        var words = [];
+        ss.getSearchHistoryWordCloud(userEmail, function (response,status) {
+            if (status==200) {
+                words = response;
+                console.log(status)
+            } else {
+                alert("Something went wrong"+status)
             }
-        ]
-
 
             $('#cloud').jQCloud(words,
                 {
@@ -53,12 +21,7 @@
                     autoResize: true,
                     height: height
                 });
-       
+        });
 
-        return {
-            word,
-            weight,
-            addWord
-        };
     };
 });

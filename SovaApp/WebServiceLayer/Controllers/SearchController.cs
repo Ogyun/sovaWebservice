@@ -69,10 +69,10 @@ namespace WebServiceLayer.Controllers
             public ActionResult GetSearchHistoryByUserEmail(string userEmail)
             {
                 var historyList = _searchService.GetSearchHistoryByUserEmail(userEmail);
+
                 if (historyList!=null)
                 {
-                    return CreatedAtAction(
-                     nameof(GetSearchHistoryByUserEmail),historyList);
+                    return Ok(historyList);
                 }
                 else
                 {
@@ -81,6 +81,25 @@ namespace WebServiceLayer.Controllers
             }
 
             [Authorize]
+            [HttpGet("history/wordCloud/{userEmail}")]
+            public ActionResult GetSearchHistoryWordCloud(string userEmail)
+            {
+                var historyList = _searchService.GetSearchHistoryByUserEmail(userEmail);
+
+                var wordCloudList = _searchService.CalculateWordWeight(historyList);
+
+                if (historyList != null)
+                {
+                    return Ok(wordCloudList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+
+        [Authorize]
             [HttpGet("score/{query}")]
             public ActionResult<IEnumerable<SearchResult>> SearchByScore(string query)
             {

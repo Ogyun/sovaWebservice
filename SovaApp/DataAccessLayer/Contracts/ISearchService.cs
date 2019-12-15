@@ -1,3 +1,4 @@
+using DataAccessLayer.QueryResultObjects;
 using System.Collections.Generic;
 
 namespace DataAccessLayer
@@ -12,5 +13,6 @@ namespace DataAccessLayer
         List<SearchResult> SearchByScore(string fromScore, string toScore);
         List<SearchResult> SearchByTag(params string[] keywords);
         List<SearchResult> SearchByAcceptedAnswer(bool accepted, params string[] keywords);
+        List<Word> CalculateWordWeight(List<SearchHistory> historyList);
     }
 }

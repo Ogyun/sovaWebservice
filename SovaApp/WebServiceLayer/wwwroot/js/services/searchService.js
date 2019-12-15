@@ -47,6 +47,15 @@
         callback(data);
     }
 
+    var getSearchHistoryWordCloud = async function (email, callback) {
+        var response = await fetch("http://localhost:5001/api/search/history/wordCloud/" + email, {
+            method: 'GET',
+            headers: headers
+        });
+        var data = await response.json();
+        callback(data,response.status);
+    }
+
     var deleteSearchHistoryById = async function (historyId, callback) {
         var response = await fetch("http://localhost:5001/api/search/history/" + historyId, {
             method: 'DELETE',
@@ -73,6 +82,7 @@
         searchByAcceptedAnswer,
         getSearchHistory,
         deleteSearchHistoryById,
-        deleteAllSearchHistory       
+        deleteAllSearchHistory,
+        getSearchHistoryWordCloud
     };
 });

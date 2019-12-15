@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccessLayer.QueryResultObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,15 @@ namespace DataAccessLayer
             return db.SearchHistories.Where(n => n.Email == userEmail).ToList();
         }
 
+        public List<Word> CalculateWordWeight(List<SearchHistory> historyList)
+        {
+            var wordCloudList = (from h in historyList
+                                 group h by h.SearchText into g
+                                 orderby g.Count() descending
+                                 select new Word{ Text = g.Key, Weight = g.Count() }).ToList();
+            return wordCloudList;
+                       
+        }
        
         public bool DeleteSearchHistoryByUserEmail(string userEmail)
         {
