@@ -7,31 +7,22 @@
           <div class="row">
               <h3> Posts</h3>
            </div>
-          <div class="row">
-              <div class="list-group col-lg-3">
-                  Title
-                  <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.title, click: $parent.onPostClick.bind($data)" ></li>
-                  </ul>
-
-              </div>
-              <div class="list-group col-lg-3">
-                  Type
-                  <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.type" ></li>
-                  </ul>
-              </div>
-              <div class="list-group col-lg-3">
-                  Score
-                  <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.score" ></li>
-                  </ul>
-              </div>
-              <div class="list-group col-lg-3">
-                  Tags
-                  <ul data-bind="foreach: posts">
-                      <li data-bind="text: $data.tags" ></li>
-                  </ul>
-              </div>
-          </div>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Score</th>
+                      <th scope="col">Tags</th>
+                  </tr>
+              </thead>
+              <tbody data-bind="foreach: posts">
+                  <tr>
+                      <td data-bind="text: $data.title, click: $parent.onPostClick.bind($data)"></td>
+                      <td data-bind="text: $data.type"></td>
+                      <td data-bind="text: $data.score"></td>
+                      <td data-bind="text: $data.tags"></td>
+                 </tr>
+              </tbody>
+          </table>
           </div>
