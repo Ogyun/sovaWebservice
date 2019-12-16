@@ -3,26 +3,27 @@
 &nbsp;<button class="btn-primary" data-bind="click: searchClick">Search</button>
 
 
-      <div class="container-fluid">
-          <div class="row">
-              <h3> Posts</h3>
-           </div>
-          <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th scope="col">Title</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Score</th>
-                      <th scope="col">Tags</th>
-                  </tr>
-              </thead>
-              <tbody data-bind="foreach: posts">
-                  <tr>
-                      <td data-bind="text: $data.title, click: $parent.onPostClick.bind($data)"></td>
-                      <td data-bind="text: $data.type"></td>
-                      <td data-bind="text: $data.score"></td>
-                      <td data-bind="text: $data.tags"></td>
-                 </tr>
-              </tbody>
-          </table>
-          </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <h3> Posts</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Type</th>
+                <th scope="col">Score</th>
+                <th scope="col">Tags</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: posts">
+            <tr>
+                <td data-bind="text: $data.title, click: $parent.onPostClick.bind($data)"></td>
+                <td data-bind="text: $data.type"></td>
+                <td data-bind="text: $data.score"></td>
+                <td data-bind="text: $data.tags"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

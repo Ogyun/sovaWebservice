@@ -1,4 +1,4 @@
-﻿define(['knockout', 'markingService', "tokenService"], function (ko, ms,ts) {
+﻿define(['knockout', 'markingService', "tokenService","questionService","store"], function (ko,ms,ts,qs,store) {
 
     var userEmail = ts.loadToken().email;
     var markingList = ko.observableArray([]);
@@ -22,8 +22,15 @@
 
         var onMarkingClick = function (marking) {
             ms.getSpecificMarking(marking.link, function (response) {
-                console.log(response)
+                console.log(response.id);
+                var qid = response.id;
+                qs.getSpecificQuestion(qid, function (data) {
+                    console.log(data);
+                    store.dispatch(store.actions.selectQuestion(data));
+                    store.dispatch(store.actions.selectMenu("Question Overview"));
+                });
             });
+            
         };
 
         return {

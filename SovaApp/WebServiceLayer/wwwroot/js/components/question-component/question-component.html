@@ -1,15 +1,4 @@
-﻿<!-- Display question details -->
-<!--<div data-bind="with:question">
-    <div>
-        Body <span data-bind="text: body"></span>
-    </div>
-</div>-->
-<!-- Display answers -->
-<!--<div data-bind="foreach: answers">
-    <div data-bind="text: body"> </div>
-</div>-->
-
-<div class="container-fluid">
+﻿<div class="container-fluid">
     <h1 class="text-center">Question Details</h1>
 
     <div class="row">
@@ -20,13 +9,11 @@
                     <div class="d-flex w-100 justify-content-center">
                         <h5 class="card-title" data-bind="text: $data.title"></h5>
                     </div>
-
                     <p class="card-text" data-bind="text: $data.body"></p>
+                    Tags:<p data-bind="text: $data.tags"></p>
+                    Created:<p data-bind="text: $data.creationDate"></p>
                 </div>
             </div>
-            <!--<ul data-bind="with: question">
-                <li data-bind="text: $data.body"></li>
-            </ul>-->
             <h2>Answers</h2>
             <div class="list-group" data-bind="foreach: answers">
                 <a href="#" class="list-group-item list-group-item-action">
@@ -36,11 +23,6 @@
                     </div>
                     <p class="mb-1" data-bind="text: body"></p>
                 </a>
-                <!--<ul data-bind="foreach: answers">
-                    <li>
-                        <span data-bind="text: body"></span>
-                    </li>
-                </ul>-->
             </div>
         </div>
         <div class="list-group  col-lg-6">

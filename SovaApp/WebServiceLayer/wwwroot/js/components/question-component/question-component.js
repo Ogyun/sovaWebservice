@@ -7,7 +7,9 @@
     var marked = ko.observable(false);
     var marking = ko.observable();
 
+
     qs.getQuestionAnswers(question().questionId, function (response) {
+        console.log("This is the question" + question().id);
         answers(response);
     });
 
