@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace WebServiceLayer
 {
+    //This is a test from second feature branch
     public class Program
     {
         public static void Main(string[] args)
